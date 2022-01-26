@@ -21,24 +21,24 @@
           </li>
         <li class="menu-header">HR</li>
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Employee</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Employees</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="#">Upload Staffs</a></li>
-              <li><a class="nav-link" href="#">Create Staff</a></li>
-              <li><a class="nav-link" href="#">Manage Staff</a></li>
-              <li><a class="nav-link" href="#">Resigned Staffs</a></li>
-              <li><a class="nav-link" href="#">Terminated Staffs</a></li>
+              <li><a class="nav-link" href="#">Upload </a></li>
+              <li><a class="nav-link" href="#">Create</a></li>
+              <li><a class="nav-link" href="#">Manage</a></li>
+              <li><a class="nav-link" href="#">Resigned </a></li>
+              <li><a class="nav-link" href="#">Terminated </a></li>
             </ul>
           </li>
         <li class="dropdown">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i><span>Payroll</span></a>
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-credit-card"></i><span>Payroll</span></a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="#">New Payroll Batch</a></li>
             <li><a class="nav-link" href="#">Payroll Batches</a></li>
           </ul>
         </li>
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-suitcase-rolling"></i><span>Leave</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-plane-departure"></i><span>Leave</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="#">Leave Applications</a></li>
               <li><a class="nav-link" href="#">Leave Settings</a></li>
@@ -46,12 +46,16 @@
         </li>
         <li class="menu-header">Settings</li>
         <li class="dropdown">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-settings"></i><span>Permissions</span></a>
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-cogs"></i><span>Permissions</span></a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="#">User Permission</a></li>
             <li><a class="nav-link" href="#">Role Permission</a></li>
           </ul>
         </li>
+        <li class="dropdown">
+            <a href="#" class="nav-link"><i class="fas fa-user"></i><span>Profile</span></a>
+        </li>
+        
           {{-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-graduation-cap"></i><span>Performance</span></a>
             <ul class="dropdown-menu">

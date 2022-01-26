@@ -48,7 +48,7 @@
             <div class="card-body card-type-3">
               <div class="row">
                 <div class="col">
-                  <h6 class="text-muted mb-0">Payroll Batches</h6>
+                  <h6 class="text-muted mb-0">Payroll</h6>
                   <span class="font-weight-bold mb-0">450</span>
                 </div>
                 <div class="col-auto">
