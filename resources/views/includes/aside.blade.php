@@ -27,7 +27,7 @@
               <li><a class="nav-link" href="#">Create</a></li>
               <li><a class="nav-link" href="#">Manage</a></li>
               <li><a class="nav-link" href="#">Resigned </a></li>
-              <li><a class="nav-link" href="#">Terminated </a></li>
+              <li><b><a class="nav-link" href="#" style="color: rgb(196, 60, 7)">Terminated </a></b></li>
             </ul>
           </li>
         <li class="dropdown">
@@ -43,6 +43,14 @@
               <li><a class="nav-link" href="#">Leave Applications</a></li>
               <li><a class="nav-link" href="#">Leave Settings</a></li>
             </ul>
+        </li>
+        <li class="menu-header">Logistics</li>
+        <li class="dropdown">
+          <a href="#" class="nav-link has-dropdown"><i class="far fa-list-alt"></i><span>Logistics</span></a>
+          <ul class="dropdown-menu">
+            <li><a class="nav-link" href="basic-form.html">Logistics Schedule</a></li>
+            <li><a class="nav-link" href="basic-form.html">Manage Logistics</a></li>
+          </ul>
         </li>
         <li class="menu-header">Settings</li>
         <li class="dropdown">
@@ -65,27 +73,6 @@
               <li><a class="nav-link" href="buttons.html">Buttons</a></li>
             </ul>
           </li> --}}
-        {{-- <li class="menu-header">Recruitment</li>
-        <li class="dropdown">
-          <a href="#" class="nav-link has-dropdown"><i class="far fa-list-alt"></i><span>Recruitment</span></a>
-          <ul class="dropdown-menu">
-            <li><a class="nav-link" href="basic-form.html">Basic Form</a></li>
-            <li><a class="nav-link" href="forms-advanced-form.html">Advanced Form</a></li>
-            <li><a class="nav-link" href="forms-editor.html">Editor</a></li>
-            <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
-            <li><a class="nav-link" href="form-wizard.html">Form Wizard</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="nav-link has-dropdown"><i class="fab fa-buromobelexperte"></i><span>Interviews</span></a>
-          <ul class="dropdown-menu">
-            <li><a class="nav-link" href="basic-table.html">Basic Tables</a></li>
-            <li><a class="nav-link" href="advance-table.html">Advanced Table</a></li>
-            <li><a class="nav-link" href="datatables.html">Datatable</a></li>
-            <li><a class="nav-link" href="export-table.html">Export Table</a></li>
-            <li><a class="nav-link" href="editable-table.html">Editable Table</a></li>
-          </ul>
-        </li> --}}
         {{-- <li class="menu-header">Media</li>
         <li class="dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-camera-retro"></i><span>Gallery</span></a>
