@@ -41,6 +41,11 @@ class RoleSeeder extends Seeder
                 'display_name' => 'General Manager',
                 'description' => 'Can access limited features!'
             ],
+            [
+                'name' => 'staff',
+                'display_name' => 'Staff',
+                'description' => 'Can access limited features!'
+            ],
         ];
 
         foreach ($roles as $key => $value) {

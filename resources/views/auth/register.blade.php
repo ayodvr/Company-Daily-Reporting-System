@@ -1,86 +1,106 @@
-@extends('layouts.auth')
-@section('content')
-<section class="section">
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h4>Register</h4>
-            </div>
-            <div class="text-center">
-                @if(session('error'))
-                    <div class="alert alert-danger" style="width:92px; margin:auto">
-                        <b>{{ session('error') }}</b>
-                    </div>
-                @endif
-            </div>
-            <div class="text-center">
-                @if(session('success'))
-                    <div class="alert alert-success" style="width:92px; margin:auto">
-                        <b>{{ session('success') }}</b>
-                    </div>
-                @endif
-            </div>
-            <div class="card-body">
-              <form method="POST" action="{{ route('register') }}">
-                @csrf
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="staff_id">Staff ID</label>
-                        <input id="staff_id" class="form-control" type="text" name="staff_id" required>
-                    </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-6">
-                    <label for="frist_name">FullName</label>
-                    <input id="name" class="form-control" type="text" name="name" required autofocus>
-                  </div>
-                  <div class="form-group col-6">
-                    <label for="email">Email</label>
-                    <input id="email" class="form-control" type="email" name="email" required>
-                    <div class="invalid-feedback">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-6">
-                    <label for="password" class="d-block">Password</label>
-                    <input id="password" class="form-control" type="password" name="password" required data-indicator="pwindicator"
-                      name="password">
-                    <div id="pwindicator" class="pwindicator">
-                      <div class="bar"></div>
-                      <div class="label"></div>
-                    </div>
-                  </div>
-                  <div class="form-group col-6">
-                    <label for="password_confirmation" class="d-block">Password Confirmation</label>
-                    <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required>
-                  </div>
-                </div>
-                {{-- <div class="form-group">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="agree" class="custom-control-input" id="agree">
-                    <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
-                  </div>
-                </div> --}}
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-lg btn-block">
-                    Register
-                  </button>
-                </div>
-              </form>
-            </div>
-            <div class="mb-4 text-muted text-center">
-              Already Registered? <a href="{{ route('login') }}">Login</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-@endsection
+<!DOCTYPE html>
+<html lang="en">
 
+<!-- Mirrored from brandio.io/envato/iofrm/html/register13.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:06:19 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iofrm</title>
+    <link rel="stylesheet" type="text/css" href="ioform/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="ioform/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="ioform/css/iofrm-style.css">
+    <link rel="stylesheet" type="text/css" href="ioform/css/iofrm-theme13.css">
+</head>
+<body>
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="index-2.html">
+                <div class="logo">
+                    <img class="logo-size" src="ioform/images/logo-light.svg" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <div class="page-links">
+                            <a href="{{ route('login') }}">Login</a><a href="{{ route('register') }}" class="active">Register</a>
+                        </div>
+                        <!-- <div class="text-center">
+                            @if(session('error'))
+                                <div class="alert alert-danger" style="width:92px; margin:auto">
+                                    <b>{{ session('error') }}</b>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="text-center">
+                            @if(session('success'))
+                                <div class="alert alert-success" style="width:92px; margin:auto">
+                                    <b>{{ session('success') }}</b>
+                                </div>
+                            @endif
+                        </div> -->
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4 text-danger" :errors="$errors" />
+
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
+                            <!-- Staff ID -->
+                            <div>
+                                <x-input id="staff_id" class="block mt-1 w-full" type="text" name="staff_id" :value="old('staff_id')" placeholder="Staff I.D" required autofocus />
+                            </div>
+                            <!-- Name -->
+                            <div>
+                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" placeholder="Fullname" required autofocus />
+                            </div>
+                            <!-- Email Address -->
+                            <div class="mt-1">
+                                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required />
+                            </div>
+                            <!-- Password -->
+                            <div class="mt-1">
+                                <x-input id="password" class="block mt-1 w-full"
+                                                type="password"
+                                                name="password"
+                                                placeholder="Password"
+                                                required autocomplete="new-password" />
+                            </div>
+                            <!-- Confirm Password -->
+                            <div class="mt-1">
+                                <x-input id="password_confirmation" class="block mt-1 w-full"
+                                                type="password"
+                                                name="password_confirmation" 
+                                                placeholder="Confirm Password"
+                                                required />
+                            </div>
+                            <div class="flex items-center justify-end mt-1">
+                                <span>Already Registered?</span><a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                                    {{ __('Login') }}
+                                </a>
+                                <div class="form-button">
+                                    <button id="submit" type="submit" class="ibtn">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="ioform/js/jquery.min.js"></script>
+<script src="ioform/js/popper.min.js"></script>
+<script src="ioform/js/bootstrap.min.js"></script>
+<script src="ioform/js/main.js"></script>
+</body>
+
+<!-- Mirrored from brandio.io/envato/iofrm/html/register13.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:06:19 GMT -->
+</html>
 
 {{-- <x-guest-layout>
     <x-auth-card>

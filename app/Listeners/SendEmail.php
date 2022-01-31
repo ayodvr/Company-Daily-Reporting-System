@@ -4,13 +4,12 @@ namespace App\Listeners;
 
 use Mail;
 
-use App\Events\RegisteredUsers;
+use App\Event\UserCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Mail\CreateUsers;
 
-use App\Mail\UserCreatedMail;
-
-class SendUserCredentials
+class SendEmail
 {
     /**
      * Create the event listener.
@@ -25,11 +24,11 @@ class SendUserCredentials
     /**
      * Handle the event.
      *
-     * @param  \App\Events\RegisteredUsers  $event
+     * @param  \App\Event\UserCreated  $event
      * @return void
      */
-    public function handle(RegisteredUsers $event)
+    public function handle(UserCreated $event)
     {
-        Mail::to($event->user->email)->send(new UserCreatedMail($event->user, $event->password));
+        Mail::to($event->user->email)->send( new CreateUsers($event->user));
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Models\User;
 
-class UserCreatedMail extends Mailable
+class CreateUsers extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,13 +19,13 @@ class UserCreatedMail extends Mailable
      * @return void
      */
 
-    public $user;
+     public $user;
 
-     public function __construct($user)
-     {
-         $this->user = $user;
-     }
- 
+    public function __construct($user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * Build the message.
      *
@@ -33,6 +33,6 @@ class UserCreatedMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.name')->subject("Human Resources Dept");
+        return $this->markdown('emails.userCreated')->subject('You have been registered on DreamHr');
     }
 }
