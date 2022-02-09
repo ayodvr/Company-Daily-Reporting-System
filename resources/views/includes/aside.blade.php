@@ -3,7 +3,7 @@
       <div class="sidebar-brand">
         <a href="index.html">
           {{-- <img alt="image" src="assets/img/logo.png" class="header-logo" /> --}}
-          <span class="logo-name">DreamHR</span>
+          <span class="logo-name">Dream-ERP</span>
         </a>
       </div>
       <ul class="sidebar-menu">

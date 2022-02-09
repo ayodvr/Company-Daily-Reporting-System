@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2022 at 06:16 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Feb 09, 2022 at 01:40 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,6 +24,40 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `activity_log`
+--
+
+CREATE TABLE `activity_log` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `log_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `causer_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `causer_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`properties`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `activity_log`
+--
+
+INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_type`, `subject_id`, `causer_type`, `causer_id`, `properties`, `created_at`, `updated_at`) VALUES
+(1, 'user', ' have created user', 'App\\Models\\User', 1, NULL, NULL, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(2, 'user', ' have created user', 'App\\Models\\User', 2, NULL, NULL, '{\"attributes\":{\"name\":\"Managing Director\",\"email\":\"md@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(3, 'user', ' have created user', 'App\\Models\\User', 3, NULL, NULL, '{\"attributes\":{\"name\":\"Human Resources\",\"email\":\"hr@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(4, 'user', ' have created user', 'App\\Models\\User', 4, NULL, NULL, '{\"attributes\":{\"name\":\"Finance\",\"email\":\"finance@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(5, 'user', ' have created user', 'App\\Models\\User', 5, NULL, NULL, '{\"attributes\":{\"name\":\"General Manager\",\"email\":\"gm@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(6, 'user', '{\"id\":1,\"name\":\"admin\",\"email\":\"admin@test.com\",\"staff_id\":\"1010\",\"verified\":\"1\",\"email_verified_at\":\"2022-02-01T16:30:04.000000Z\",\"created_at\":\"2022-02-01 16:30:04\",\"updated_at\":\"2022-02-01 16:30:04\"} have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:43:22', '2022-02-01 15:43:22'),
+(16, 'user', 'admin have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-08 15:09:50', '2022-02-08 15:09:50'),
+(17, 'user', 'admin have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-08 15:10:59', '2022-02-08 15:10:59'),
+(18, 'user', 'admin have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-08 15:16:50', '2022-02-08 15:16:50');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -35,7 +68,19 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leaves`
+--
+
+CREATE TABLE `leaves` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -59,7 +104,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2022_01_26_110157_laratrust_setup_tables', 1);
+(5, '2022_01_26_110157_laratrust_setup_tables', 1),
+(6, '2022_01_27_091215_create_activity_log_table', 1),
+(7, '2022_01_27_124814_create_leaves_table', 1),
+(8, '2022_01_27_124841_create_payrolls_table', 1),
+(9, '2022_01_27_124854_create_payslips_table', 1),
+(10, '2022_01_27_124908_create_staff_table', 1);
 
 -- --------------------------------------------------------
 
@@ -76,6 +126,30 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payrolls`
+--
+
+CREATE TABLE `payrolls` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payslips`
+--
+
+CREATE TABLE `payslips` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `permissions`
 --
 
@@ -87,28 +161,6 @@ CREATE TABLE `permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `permissions`
---
-
-INSERT INTO `permissions` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'user-permission', 'User Permission', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(2, 'role-permission', 'Role Permission', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(3, 'create-staffs', 'Create Staffs', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(4, 'manage-staffs', 'Manage Staffs', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(5, 'upload-staffs', 'Upload Staffs', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(6, 'edit-staffs', 'Edit Staffs', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(7, 'delete-staffs', 'Delete Staffs', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(8, 'Resigned-staffs', 'Resigned Staffs', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(9, 'terminated-staffs', 'Terminated Staffs', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(10, 'new-Payroll-batch', 'New payroll Batches', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(11, 'payroll-bacthes', 'Payroll Batches', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(12, 'delete-bacthes', 'Delete Batches', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(13, 'leave-applications', 'Leave Applications', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(14, 'edit-leave', 'Edit Leave', 'Check', '2022-01-26 15:42:33', '2022-01-26 15:42:33'),
-(15, 'delete-leave', 'Delete Leave', 'Check', '2022-01-26 15:42:34', '2022-01-26 15:42:34'),
-(16, 'leave-settings', 'Leave Settings', 'Check', '2022-01-26 15:42:34', '2022-01-26 15:42:34');
 
 -- --------------------------------------------------------
 
@@ -145,7 +197,7 @@ CREATE TABLE `personal_access_tokens` (
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -171,11 +223,12 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Admin', 'Can access all features!', '2022-01-26 15:42:27', '2022-01-26 15:42:27'),
-(2, 'md', 'Managing Director', 'Can access all features!', '2022-01-26 15:42:28', '2022-01-26 15:42:28'),
-(3, 'hr', 'Human Resources', 'Can access all features!', '2022-01-26 15:42:28', '2022-01-26 15:42:28'),
-(4, 'finance', 'Finance', 'Can access limited features!', '2022-01-26 15:42:28', '2022-01-26 15:42:28'),
-(5, 'gm', 'General Manager', 'Can access limited features!', '2022-01-26 15:42:28', '2022-01-26 15:42:28');
+(1, 'admin', 'Admin', 'Can access all features!', '2022-02-01 15:29:09', '2022-02-01 15:29:09'),
+(2, 'md', 'Managing Director', 'Can access all features!', '2022-02-01 15:29:09', '2022-02-01 15:29:09'),
+(3, 'hr', 'Human Resources', 'Can access all features!', '2022-02-01 15:29:09', '2022-02-01 15:29:09'),
+(4, 'finance', 'Finance', 'Can access limited features!', '2022-02-01 15:29:09', '2022-02-01 15:29:09'),
+(5, 'gm', 'General Manager', 'Can access limited features!', '2022-02-01 15:29:09', '2022-02-01 15:29:09'),
+(6, 'staff', 'Staff', 'Can access limited features!', '2022-02-01 15:29:09', '2022-02-01 15:29:09');
 
 -- --------------------------------------------------------
 
@@ -203,6 +256,18 @@ INSERT INTO `role_user` (`role_id`, `user_id`, `user_type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -224,15 +289,24 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `staff_id`, `verified`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@test.com', '1010', '1', '2022-01-26 15:42:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Wm6vOEkLIb', '2022-01-26 15:42:39', '2022-01-26 15:42:39'),
-(2, 'Managing Director', 'md@test.com', '1010', '1', '2022-01-26 15:42:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'CGpsgRhxMx', '2022-01-26 15:42:39', '2022-01-26 15:42:39'),
-(3, 'Human Resources', 'hr@test.com', '1010', '1', '2022-01-26 15:42:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6y6A9nRT0v', '2022-01-26 15:42:39', '2022-01-26 15:42:39'),
-(4, 'Finance', 'finance@test.com', '1010', '1', '2022-01-26 15:42:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Wc1KTdcAUC', '2022-01-26 15:42:39', '2022-01-26 15:42:39'),
-(5, 'General Manager', 'gm@test.com', '1010', '1', '2022-01-26 15:42:39', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '8OVAz8p8tC', '2022-01-26 15:42:39', '2022-01-26 15:42:39');
+(1, 'admin', 'admin@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'L8ATMHvn57DsLHxh62POUnZ8a3rvwZ1uAY2Nyn3l33KuRzdDZgqSjjkHB2S4', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(2, 'Managing Director', 'md@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6TMRByfDcc', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(3, 'Human Resources', 'hr@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Bv130ee51E', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(4, 'Finance', 'finance@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'iXcaisKxxs', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(5, 'General Manager', 'gm@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'mHlDYLFtrj', '2022-02-01 15:30:04', '2022-02-01 15:30:04');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `activity_log`
+--
+ALTER TABLE `activity_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subject` (`subject_type`,`subject_id`),
+  ADD KEY `causer` (`causer_type`,`causer_id`),
+  ADD KEY `activity_log_log_name_index` (`log_name`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -240,6 +314,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `staff_id`, `verified`, `email_verif
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `leaves`
+--
+ALTER TABLE `leaves`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -252,6 +332,18 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `payrolls`
+--
+ALTER TABLE `payrolls`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payslips`
+--
+ALTER TABLE `payslips`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `permissions`
@@ -297,6 +389,12 @@ ALTER TABLE `role_user`
   ADD KEY `role_user_role_id_foreign` (`role_id`);
 
 --
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -308,22 +406,46 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `activity_log`
+--
+ALTER TABLE `activity_log`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `leaves`
+--
+ALTER TABLE `leaves`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `payrolls`
+--
+ALTER TABLE `payrolls`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payslips`
+--
+ALTER TABLE `payslips`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -335,7 +457,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -12,7 +12,7 @@
           <div class="card-body card-type-3">
             <div class="row">
               <div class="col">
-                <h6 class="text-muted mb-0">Staffs</h6>
+                <h6 class="text-muted mb-0">Employees</h6>
                 <span class="font-weight-bold mb-0">450</span>
               </div>
               <div class="col-auto">
@@ -100,8 +100,7 @@
                               <span class="text-job">1 hour ago</span>
                               <span class="bullet"></span>
                             </div>
-                            <p>Moved the task "<a href="#">Fix some features that are bugs in the master module</a>" from
-                              Progress to Finish.</p>
+                            <p>Moved the task "Fix some features that are bugs in the master module" from Progress to Finish.</p>
                           </div>
                         </div>
                       </div>

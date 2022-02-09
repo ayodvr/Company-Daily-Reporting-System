@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Event\UserCreated' => [
             'App\Listeners\SendEmail'
+        ],
+          'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LoginSuccessful'
           ]
     ];
 
