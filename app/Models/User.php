@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function getDescriptionForEvent(string $eventName): string
     {
-        $user = auth()->user()->name;
+        $user = "Ayo";
         
         return "{$user} have {$eventName} user";
     }
