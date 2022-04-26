@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 // use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Codexshaper\WooCommerce\Facades\Coupon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;

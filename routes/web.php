@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Route::get('/dash', function () {
-//     return view('admin.admindash');
-// });
+Route::resource('/student-biodata', StudentRegisterController::class);
 
 Route::get('/dashboard', function () {
     return view('admin.admindash');
