@@ -4,12 +4,12 @@ namespace App\Listeners;
 
 use Mail;
 
-use App\Event\UserCreated;
+use App\Event\StudentCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Mail\CreateUsers;
+use App\Mail\SendCouponCode;
 
-class SendEmail
+class SendCouponCodeNotification
 {
     /**
      * Create the event listener.
@@ -24,12 +24,13 @@ class SendEmail
     /**
      * Handle the event.
      *
-     * @param  \App\Event\UserCreated  $event
+     * @param  \App\Event\StudentCreated  $event
      * @return void
      */
-    public function handle(UserCreated $event)
+    public function handle(StudentCreated $event)
     {
         dd($event);
-        Mail::to($event->user->email)->send( new CreateUsers($event->user));
+        
+        Mail::to($event->coupon['email_restrictions'])->send( new SendCouponCode($event->coupon));
     }
 }

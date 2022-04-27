@@ -14,6 +14,7 @@ class StudentRegister extends Model
         'lastname',
         'matric_no',
         'image',
+        'email',
         'id_card'
     ];
 

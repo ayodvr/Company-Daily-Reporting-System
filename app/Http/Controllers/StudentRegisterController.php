@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Event\StudentCreated;
 use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Facades\Coupon;
 use App\Models\StudentRegister;
+
 
 class StudentRegisterController extends Controller
 {
@@ -15,7 +17,9 @@ class StudentRegisterController extends Controller
      */
     public function index()
     {
-        //
+        $coupons = Coupon::all();
+        //dd($coupons);
+        return view('student.index')->with('coupons', $coupons);
     }
 
     /**
@@ -51,6 +55,7 @@ class StudentRegisterController extends Controller
             'lastname'      => $request->get('lastname'),
             'matric_no'     => $request->get('matric_no'),
             'image'         => $request->get('image'),
+            'email'         => $request->get('email'),
             'id_card'       => $request->get('id_card')
         ];
 
@@ -72,20 +77,25 @@ class StudentRegisterController extends Controller
 
         $Register = StudentRegister::create($data);
 
-        return redirect()->back()->with('success','Registration Successful');
+        if($Register){
 
-        // if($Register){
+            $random = random_int(1000, 9999);
 
-        //     $Coupon = [
-        //         'code' => '10off',
-        //         'discount_type' => 'percent',
-        //         'amount' => '10',
-        //         'individual_use' => true,
-        //         'exclude_sale_items' => true
-        //     ];
+            $Coupon = [
+                'code' => 'DW' . $random,
+                'discount_type' => 'percent',
+                'amount' => '5',
+                'individual_use' => true,
+                'email_restrictions' => $Register->email,
+                'exclude_sale_items' => true
+            ];
             
-        //     $coupon = Coupon::create($data);
-        // }
+            $coupon = Coupon::create($Coupon);
+
+            //dd($coupon);
+
+            event (new StudentCreated($coupon));
+        }
 
         return back()->with('success', 'Registration Successfull');
 

@@ -33,6 +33,16 @@
                     <div class="form-items">
                         <form method="POST" action="{{ route('student-biodata.store') }}" enctype="multipart/form-data">
                             @csrf
+                            <div class="text-center">
+                                @if(session('success'))
+                                   <div class="alert alert-success" style="width:100%; margin:auto">
+                                  <b>{{session('success')}}</b></div>
+                               @elseif(session('error'))
+                                   <div class="alert alert-danger" style="width:100%; margin:auto">
+                                  <b>{{session('error')}}</b></div>
+                               @endif
+                           </div>
+                           <br>
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <input type="text" class="form-control" name="firstname" placeholder="First name">
@@ -46,25 +56,22 @@
                                     <input type="text" class="form-control" name="matric_no" placeholder="Matric No">
                                 </div>
                                 <div class="col-12 col-sm-6">
+                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
                                     <div class="custom-file">
                                         <input type="file" name="image" class="custom-file-input" id="validatedCustomFile">
                                         <label class="custom-file-label" for="validatedCustomFile">Photo</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-12">
+                                <div class="col-12 col-sm-6">
                                     <div class="custom-file">
                                         <input type="file" name="id_card" class="custom-file-input" id="validatedCustomFile">
                                         <label class="custom-file-label" for="validatedCustomFile">Student ID / Course Form</label>
                                     </div>
                                 </div>
-                                {{-- <div class="col-12 col-sm-6">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="validatedCustomFile">
-                                        <label class="custom-file-label" for="validatedCustomFile">Course Form</label>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="row top-padding">
                                 <div class="col-12 col-sm-6">
