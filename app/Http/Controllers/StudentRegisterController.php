@@ -40,7 +40,6 @@ class StudentRegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
 
         $request->validate([
             'firstname'   => 'required',
@@ -91,8 +90,6 @@ class StudentRegisterController extends Controller
             ];
             
             $coupon = Coupon::create($Coupon);
-
-            //dd($coupon);
 
             event (new StudentCreated($coupon));
         }

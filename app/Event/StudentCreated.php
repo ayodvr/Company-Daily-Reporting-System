@@ -23,7 +23,7 @@ class StudentCreated
      */
     public function __construct($coupon)
     {
-        $this->$coupon = $coupon;
+        $this->coupon = $coupon;
     }
 
     /**

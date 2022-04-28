@@ -15,7 +15,7 @@
         <div class="website-logo">
             <a href="index-2.html">
                 <div class="logo">
-                    <img class="logo-size" src="{{ asset('ioform/images/logo-light.svg') }}" alt="">
+                    {{-- <img class="logo-size" src="{{ asset('ioform/images/logo-light.svg') }}" alt=""> --}}
                 </div>
             </a>
         </div>
