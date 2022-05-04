@@ -86,6 +86,7 @@ class StudentRegisterController extends Controller
                 'amount' => '5',
                 'individual_use' => true,
                 'email_restrictions' => $Register->email,
+                'description' => $Register->firstname,
                 'exclude_sale_items' => true
             ];
             

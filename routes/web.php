@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentRegisterController;
+use App\Http\Controllers\RetailController;
+use App\Http\Controllers\FacilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,8 @@ Route::get('/', function () {
 });
 
 Route::resource('/student-biodata', StudentRegisterController::class);
+Route::resource('/retail-report', RetailController::class);
+Route::resource('/facility-report', FacilityController::class);
 
 Route::get('/dashboard', function () {
     return view('admin.admindash');
