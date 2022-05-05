@@ -84,7 +84,7 @@
                             </div>
                             <div class="row top-padding">
                                 <div class="col-12 col-sm-6">
-                                    <input type="checkbox" id="chk1" required><label for="chk1">I agree on <a href="#">terms & conditions</a> of iofrm</label>
+                                    <input type="checkbox" id="chk1" required><label for="chk1">I agree on <a href="#">terms & conditions</a></label>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-button text-right">
@@ -93,6 +93,10 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="other-links text-center">
+                            <!--<span><b>Ensure to follow us</b></span>-->
+                            <a href="https://www.facebook.com/dreamworksnig/"><i class="fab fa-facebook-f"></i></a><a href="https://www.twitter.com/dreamworksnig/"><i class="fab fa-twitter"></i></a><a href="https://www.instagram.com/dreamworksnig/"><i class="fab fa-instagram"></i></a><a href="https://www.linkedin.com/company/dreamworksnig/"><i class="fab fa-linkedin-in"></i></a><a href="https://www.youtube.com/dreamworksnig/"><i class="fab fa-youtube"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
