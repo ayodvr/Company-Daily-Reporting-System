@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from brandio.io/envato/iofrm/html/job-app1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:44 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,22 +12,22 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/iofrm-theme24.css') }}">
 </head>
 <body>
-    <div class="form-body on-top">
+    <div class="form-body on-top-mobile">
         <div class="website-logo">
             <a href="index-2.html">
                 <div class="logo">
-                    {{-- <img class="logo-size" src="{{ asset('ioform/images/logo-light.svg') }}" alt=""> --}}
+                    <!-- <img class="logo-size" src="images/logo-light.svg" alt=""> -->
                 </div>
             </a>
         </div>
         <div class="row">
             <div class="img-holder">
                 <div class="bg"></div>
-                <div class="info-holder simple-info">
-                    <div><img src="{{ asset('ioform/images/graphic6.svg') }}" alt=""></div>
+                <!-- <div class="info-holder simple-info">
+                    <div><img src="images/graphic6.svg" alt=""></div>
                     <div><h3>We’re Accepting applications!</h3></div>
-                    <div><p>Fill the form to apply.</p></div>
-                </div>
+                    <div><p>Fill the form, attach your  latest CV <br>and portfolio to get listed.</p></div>
+                </div> -->
             </div>
             <div class="form-holder">
                 <div class="form-content">
@@ -41,6 +42,9 @@
                                    <div class="alert alert-danger" style="width:100%; margin:auto">
                                   <b>{{session('error')}}</b></div>
                                @endif
+                           </div>
+                           <div>
+                               {{-- <h3 class="text-center">Fill in the form</h3> --}}
                            </div>
                            <br>
                             <div class="row">
@@ -73,6 +77,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12">
+                                    <input type="text" class="form-control" name="school" placeholder="School Name">
+                                </div>
+                            </div>
                             <div class="row top-padding">
                                 <div class="col-12 col-sm-6">
                                     <input type="checkbox" id="chk1" required><label for="chk1">I agree on <a href="#">terms & conditions</a> of iofrm</label>
@@ -89,10 +98,11 @@
             </div>
         </div>
     </div>
-<script src="{{ asset('ioform/js/jquery.min.js') }}"></script>
-<script src="{{ asset('ioform/js/popper.min.js') }}"></script>
-<script src="{{ asset('ioform/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('ioform/js/main.js') }}"></script>
+    <script src="{{ asset('ioform/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('ioform/js/popper.min.js') }}"></script>
+    <script src="{{ asset('ioform/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('ioform/js/main.js') }}"></script>
 </body>
 
+<!-- Mirrored from brandio.io/envato/iofrm/html/job-app1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:45 GMT -->
 </html>

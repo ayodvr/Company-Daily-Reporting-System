@@ -17,6 +17,7 @@ class CreateStudentRegistersTable extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('school');
             $table->string('matric_no');
             $table->string('image');
             $table->string('email')->unique();

@@ -45,6 +45,7 @@ class StudentRegisterController extends Controller
             'firstname'   => 'required',
             'lastname'    => 'required',
             'matric_no'   => 'required',
+            'school'      => 'required',
             'image'       => 'required',
             'id_card'     => 'required'
         ]);
@@ -53,6 +54,7 @@ class StudentRegisterController extends Controller
             'firstname'     => $request->get('firstname'),
             'lastname'      => $request->get('lastname'),
             'matric_no'     => $request->get('matric_no'),
+            'school'        => $request->get('school'),
             'image'         => $request->get('image'),
             'email'         => $request->get('email'),
             'id_card'       => $request->get('id_card')

@@ -52,7 +52,7 @@
 
 .img-holder {
     width: 550px;
-    background-color: #1592E6;
+    /* background-color: #1592E6; */
 }
 
 .img-holder .info-holder h3 {
@@ -80,7 +80,7 @@
 
 .img-holder .bg {
     opacity: 1;
-    background-image: url('../images/STUDENT-ID_New_WB.png');
+    /* background-image: url('../images/STUDENT-ID_New_WB.png'); */
 }
 
 .form-holder {

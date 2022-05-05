@@ -65,12 +65,12 @@
                 <!-- / PERSONALIZED NAME CODED -->
 						<p style="text-align:left; font-size: 1.01rem; color: #000000;">Dear {{ $coupon['description'] }},<br />
 						<br />
-						I can give you Free delivery and discounts up to 2% on these Receerified Computers.<br />
+						Please find your coupon code below<br />
 						<br />
 						Coupon code: {{ $coupon['code'] }}<br />
 	
 						<br />
-						Expecting you!</p>
+						Happy shopping!</p>
 						</td>
 					</tr>
 					<tr>
