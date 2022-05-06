@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event\StudentCreated;
 use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Facades\Coupon;
+use Codexshaper\WooCommerce\Facades\Product;
 use App\Models\StudentRegister;
 
 
@@ -17,8 +18,11 @@ class StudentRegisterController extends Controller
      */
     public function index()
     {
-        $coupons = Coupon::all();
+        // $coupons = Coupon::all();
         //dd($coupons);
+        
+        $products = Product::orderBy('id','desc')->paginate(20);
+        dd($products);
         return view('student.index')->with('coupons', $coupons);
     }
 

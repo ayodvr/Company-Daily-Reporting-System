@@ -19,42 +19,92 @@
               </div> --}}
               <div class="card-body">
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail4">Customer Name</label>
+                    <input type="email" class="form-control" id="inputEmail4">
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Phone</label>
+                    <input type="password" class="form-control" id="inputPassword4">
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputAddress">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                </div>
-                <div class="form-group">
-                  <label for="inputAddress2">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2"
-                    placeholder="Apartment, studio, or floor">
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Email</label>
+                    <input type="password" class="form-control" id="inputPassword4">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Date Of Birth</label>
+                    <input type="password" class="form-control" id="inputPassword4">
+                  </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
+                  <div class="form-group col-md-2">
+                    <label for="inputEmail4">Invoice No</label>
+                    <input type="email" class="form-control" id="inputEmail4">
                   </div>
                   <div class="form-group col-md-4">
+                    <label for="inputPassword4">Product Details</label>
+                    <input type="password" class="form-control" id="inputPassword4">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputPassword4">Units</label>
+                    <input type="password" class="form-control" id="inputPassword4">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Store Location</label>
+                    <input type="text" class="form-control" id="inputZip">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Type Of Customer</label>
+                    <input type="text" class="form-control" id="inputZip">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="inputCity">Address</label>
+                    <input type="text" class="form-control" id="inputCity">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputCity">Mode Of Payment</label>
+                    <input type="text" class="form-control" id="inputCity">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Confirm By</label>
+                    <input type="text" class="form-control" id="inputZip">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputZip">Amount</label>
+                    <input type="text" class="form-control" id="inputZip">
+                  </div>
+                  {{-- <div class="form-group col-md-4">
                     <label for="inputState">State</label>
                     <select id="inputState" class="form-control">
                       <option selected>Choose...</option>
                       <option>...</option>
                     </select>
-                  </div>
+                  </div> --}}
+                </div>
+                <div class="form-row">
                   <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
+                    <label for="inputCity">Visited Our Website ?</label>
+                    <input type="text" class="form-control" id="inputCity">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputCity">How Did You Find Us ?</label>
+                    <input type="text" class="form-control" id="inputCity">
                   </div>
                 </div>
               </div>
+              {{-- <div class="form-row">
+                <table class="table table-bordered" id="dynamicTable">  
+                    <tr>
+                        <th>Question</th>
+                    </tr>
+                    <tr>  
+                        <td><input type="text" class="form-control" name="question[]" id="inputCity"/></td>   
+                        <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>  
+                    </tr>  
+                </table>
+            </div> --}}
               <div class="card-footer">
                 <button class="btn btn-primary">Submit</button>
               </div>

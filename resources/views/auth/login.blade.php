@@ -1,7 +1,5 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from brandio.io/envato/iofrm/html/job-app1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:44 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +43,7 @@
                            </div>
                            <div>
                                {{-- <h3 class="text-center">Fill in the form</h3> --}}
-                           </div>
+                           {{-- </div>
                            <br>
                             <div class="row">
                                 <div class="col-12 col-sm-6">
@@ -107,12 +105,10 @@
     <script src="{{ asset('ioform/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('ioform/js/main.js') }}"></script>
 </body>
-
-<!-- Mirrored from brandio.io/envato/iofrm/html/job-app1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:45 GMT -->
-</html>
+</html> --}} --}}
 
 
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from brandio.io/envato/iofrm/html/login13.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:05 GMT -->
@@ -198,4 +194,4 @@
 </body>
 
 <!-- Mirrored from brandio.io/envato/iofrm/html/login13.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:14 GMT -->
-</html> --}}
+</html>
