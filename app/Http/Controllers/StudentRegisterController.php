@@ -87,6 +87,13 @@ class StudentRegisterController extends Controller
             $data['id_card'] = $path;
         }
 
+        $check_user = StudentRegister::where('email', $request->email)->exists();
+    
+        if($check_user){
+            
+            return back()->with('error', 'You have already registered!');
+        }
+
         $Register = StudentRegister::create($data);
 
         if($Register){

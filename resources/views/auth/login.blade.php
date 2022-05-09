@@ -80,6 +80,10 @@
                                         {{$error}}</div>
                                     @endforeach
                                 @endif
+                                @if(session('error'))
+                                <div class="alert alert-danger" style="width:92%; margin:auto">
+                                {{session('error')}}</div>
+                                @endif
                            </div>
                            <div>
                                {{-- <h3 class="text-center">Fill in the form</h3> --}}
@@ -135,15 +139,15 @@
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="custom-file">
-                                        <label class="custom-file-label" for="validatedCustomFile">Passport Photograph</label><span style="color: red">*</span>
-                                        <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                        <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" accept="passport/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                        <label class="custom-file-label" for="validatedCustomFile">Passport Photograph</label>
                                     </div>
                                     <div><img id="output" style="width:100px;"></div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="custom-file">
-                                        <label class="custom-file-label" for="validatedCustomFile">Student ID / Course Form</label><span style="color: red">*</span>
                                         <input type="file" name="id_card" class="custom-file-input" id="validatedCustomFile">
+                                        <label class="custom-file-label" for="validatedCustomFile">Student ID / Course Form</label>
                                     </div>
                                 </div>
                             </div>
