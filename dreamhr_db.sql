@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2022 at 01:40 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- Generation Time: May 09, 2022 at 03:04 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -35,7 +36,7 @@ CREATE TABLE `activity_log` (
   `subject_id` bigint(20) UNSIGNED DEFAULT NULL,
   `causer_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `causer_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`properties`)),
+  `properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -51,9 +52,33 @@ INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_type`, `su
 (4, 'user', ' have created user', 'App\\Models\\User', 4, NULL, NULL, '{\"attributes\":{\"name\":\"Finance\",\"email\":\"finance@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
 (5, 'user', ' have created user', 'App\\Models\\User', 5, NULL, NULL, '{\"attributes\":{\"name\":\"General Manager\",\"email\":\"gm@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
 (6, 'user', '{\"id\":1,\"name\":\"admin\",\"email\":\"admin@test.com\",\"staff_id\":\"1010\",\"verified\":\"1\",\"email_verified_at\":\"2022-02-01T16:30:04.000000Z\",\"created_at\":\"2022-02-01 16:30:04\",\"updated_at\":\"2022-02-01 16:30:04\"} have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-01 15:43:22', '2022-02-01 15:43:22'),
-(16, 'user', 'admin have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-08 15:09:50', '2022-02-08 15:09:50'),
-(17, 'user', 'admin have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-08 15:10:59', '2022-02-08 15:10:59'),
-(18, 'user', 'admin have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-08 15:16:50', '2022-02-08 15:16:50');
+(7, 'user', '{\"id\":1,\"name\":\"admin\",\"email\":\"admin@test.com\",\"staff_id\":\"1010\",\"verified\":\"1\",\"email_verified_at\":\"2022-02-01T16:30:04.000000Z\",\"created_at\":\"2022-02-01 16:30:04\",\"updated_at\":\"2022-02-01 16:30:04\"} have updated user', 'App\\Models\\User', 1, 'App\\Models\\User', 1, '{\"attributes\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"},\"old\":{\"name\":\"admin\",\"email\":\"admin@test.com\",\"password\":\"$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\\/.og\\/at2.uheWG\\/igi\"}}', '2022-02-05 08:27:16', '2022-02-05 08:27:16'),
+(8, 'user', ' have created user', 'App\\Models\\User', 6, NULL, NULL, '{\"attributes\":{\"name\":\"Modele Fatoyinbo\",\"email\":\"modele@test.com\",\"password\":\"$2y$10$1pWrNr9jxB5YRC92qlI3ouNge9wzNCEOeMayonmDK9Mm5dqEGMuVy\"}}', '2022-02-05 08:27:46', '2022-02-05 08:27:46'),
+(9, 'user', ' have created user', 'App\\Models\\User', 7, NULL, NULL, '{\"attributes\":{\"name\":\"Modele Fatoyinbo\",\"email\":\"mode.le@test.com\",\"password\":\"$2y$10$WswYDlwUkQcYoPb.ELntfuiP\\/CPTnOYwRI8TMImhrZEQhS.pSMleG\"}}', '2022-02-05 08:30:32', '2022-02-05 08:30:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `facilities`
+--
+
+CREATE TABLE `facilities` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -68,7 +93,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -109,7 +134,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2022_01_27_124814_create_leaves_table', 1),
 (8, '2022_01_27_124841_create_payrolls_table', 1),
 (9, '2022_01_27_124854_create_payslips_table', 1),
-(10, '2022_01_27_124908_create_staff_table', 1);
+(10, '2022_01_27_124908_create_staff_table', 1),
+(11, '2022_04_26_065647_create_coupons_table', 2),
+(14, '2022_05_04_125920_create_retails_table', 3),
+(15, '2022_05_04_130000_create_facilities_table', 3),
+(16, '2022_04_26_114840_create_student_registers_table', 4);
 
 -- --------------------------------------------------------
 
@@ -197,8 +226,20 @@ CREATE TABLE `personal_access_tokens` (
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `retails`
+--
+
+CREATE TABLE `retails` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -251,7 +292,9 @@ INSERT INTO `role_user` (`role_id`, `user_id`, `user_type`) VALUES
 (2, 2, 'App\\Models\\User'),
 (3, 3, 'App\\Models\\User'),
 (4, 4, 'App\\Models\\User'),
-(5, 5, 'App\\Models\\User');
+(5, 5, 'App\\Models\\User'),
+(6, 6, 'App\\Models\\User'),
+(6, 7, 'App\\Models\\User');
 
 -- --------------------------------------------------------
 
@@ -264,6 +307,36 @@ CREATE TABLE `staff` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_registers`
+--
+
+CREATE TABLE `student_registers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `firstname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `school` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `handle` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_Card` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student_registers`
+--
+
+INSERT INTO `student_registers` (`id`, `firstname`, `lastname`, `school`, `phone`, `date`, `handle`, `location`, `image`, `email`, `id_Card`, `created_at`, `updated_at`) VALUES
+(1, 'Ayodeji', 'Adekunle', 'Redeemers Uni', '+2347037949021', '2022-05-10', '@venmo', 'Enugu', '/StudentImages/1652056866STUDENT-ID_New_SM.png', 'ayodejiadekunle@gmail.com', '/StudentImages/1652056866download.png', '2022-05-08 23:41:06', '2022-05-08 23:41:06'),
+(2, 'Ayodeji', 'Adekunle', 'Redeemers Uni', '+2347037949021', '2022-05-10', '@venmo', 'Ebonyi', '/StudentImages/1652056950download.png', 'ayodejiadekunl.e@gmail.com', '/StudentImages/1652056950STUDENT-ID_New_SM.png', '2022-05-08 23:42:30', '2022-05-08 23:42:30');
 
 -- --------------------------------------------------------
 
@@ -289,11 +362,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `staff_id`, `verified`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'L8ATMHvn57DsLHxh62POUnZ8a3rvwZ1uAY2Nyn3l33KuRzdDZgqSjjkHB2S4', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(1, 'admin', 'admin@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'HuhJURRDQ3fgrGhkgwg0kpQDqbTkhJBNyEqnkjfhJQyUqWgGNPtQRCr4RvHG', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
 (2, 'Managing Director', 'md@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6TMRByfDcc', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
 (3, 'Human Resources', 'hr@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Bv130ee51E', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
 (4, 'Finance', 'finance@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'iXcaisKxxs', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
-(5, 'General Manager', 'gm@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'mHlDYLFtrj', '2022-02-01 15:30:04', '2022-02-01 15:30:04');
+(5, 'General Manager', 'gm@test.com', '1010', '1', '2022-02-01 15:30:04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'mHlDYLFtrj', '2022-02-01 15:30:04', '2022-02-01 15:30:04'),
+(6, 'Modele Fatoyinbo', 'modele@test.com', '1133', '0', NULL, '$2y$10$1pWrNr9jxB5YRC92qlI3ouNge9wzNCEOeMayonmDK9Mm5dqEGMuVy', NULL, '2022-02-05 08:27:46', '2022-02-05 08:27:46'),
+(7, 'Modele Fatoyinbo', 'mode.le@test.com', '1133', '0', NULL, '$2y$10$WswYDlwUkQcYoPb.ELntfuiP/CPTnOYwRI8TMImhrZEQhS.pSMleG', NULL, '2022-02-05 08:30:32', '2022-02-05 08:30:32');
 
 --
 -- Indexes for dumped tables
@@ -307,6 +382,18 @@ ALTER TABLE `activity_log`
   ADD KEY `subject` (`subject_type`,`subject_id`),
   ADD KEY `causer` (`causer_type`,`causer_id`),
   ADD KEY `activity_log_log_name_index` (`log_name`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `facilities`
+--
+ALTER TABLE `facilities`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -375,6 +462,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `retails`
+--
+ALTER TABLE `retails`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -395,6 +488,13 @@ ALTER TABLE `staff`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `student_registers`
+--
+ALTER TABLE `student_registers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `student_registers_email_unique` (`email`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -409,7 +509,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `facilities`
+--
+ALTER TABLE `facilities`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -427,7 +539,7 @@ ALTER TABLE `leaves`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `payrolls`
@@ -454,6 +566,12 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `retails`
+--
+ALTER TABLE `retails`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
@@ -466,10 +584,16 @@ ALTER TABLE `staff`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `student_registers`
+--
+ALTER TABLE `student_registers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
