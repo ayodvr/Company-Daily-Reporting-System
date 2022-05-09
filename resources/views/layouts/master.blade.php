@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Ality - Admin Dashboard Template</title>
+  <title>Dreamworks Integrated Systems</title>
   <!-- General CSS Files -->
+  {{-- <link rel="icon" type="image/png" sizes="32x32" href="{{asset('ioform/images/favicon-32x32.png')}}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('ioform/images/apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('ioform/images/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('ioform/images/favicon-16x16.png') }}">
+  <link rel="manifest" href="/site.webmanifest"> --}}
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">

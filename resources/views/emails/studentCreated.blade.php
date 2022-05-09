@@ -53,7 +53,7 @@
 					<!-- TOP BANNER -->
 					<tr>
 						<td style="background-color: #ffffff;">
-						<center><a href="https://www.dreamworksdirect.com/stores/?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=distribution-2021"><img alt="Dreamworks Ibadan" src="https://dreamworksnewsletter.s3.amazonaws.com/banner/2021/october/king+of+electronics+newsletter.jpg" style="max-width: 100%;" /> </a></center>
+						<center><a href="https://www.dreamworksdirect.com/stores/?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=distribution-2021"><img alt="Dreamworks Ibadan" src="{{ asset('ioform/images/student_email.png') }}" style="max-width: 100%;" /> </a></center>
 						</td>
 					</tr>
 					<!-- / TOP BANNER --><!-- BODY MESSAGE -->
@@ -63,6 +63,7 @@
                   Dear [Name],
                 </p> 
                 <!-- / PERSONALIZED NAME CODED -->
+				<br />
 						<p style="text-align:left; font-size: 1.01rem; color: #000000;">Dear {{ $coupon['description'] }},<br />
 						<br />
 						Please find your coupon code below<br />

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iofrm</title>
+    <title>Dreamworks Direct - 5 % Student Campaign</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/fontawesome-all.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/iofrm-style.css') }}">
@@ -62,11 +62,11 @@
         <div class="row">
             <div class="img-holder">
                 <div class="bg"></div>
-                <!-- <div class="info-holder simple-info">
+                <div class="info-holder simple-info">
                     <div><img src="images/graphic6.svg" alt=""></div>
-                    <div><h3>We’re Accepting applications!</h3></div>
-                    <div><p>Fill the form, attach your  latest CV <br>and portfolio to get listed.</p></div>
-                </div> -->
+                    <div><h3>*</h3></div>
+                    <div><p>*</p></div>
+                </div> 
             </div>
             <div class="form-holder">
                 <div class="form-content">
