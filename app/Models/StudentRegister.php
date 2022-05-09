@@ -12,8 +12,11 @@ class StudentRegister extends Model
     Protected $fillable = [
         'firstname',
         'lastname',
-        'matric_no',
         'school',
+        'phone',
+        'handle',
+        'date',
+        'location',
         'image',
         'email',
         'id_card'

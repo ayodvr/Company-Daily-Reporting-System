@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,47 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/iofrm-theme24.css') }}">
 </head>
 <body>
+    <script>
+        var states = [
+            "Abia",
+            "Adamawa",
+            "Akwa Ibom",
+            "Anambra",
+            "Bauchi",
+            "Bayelsa",
+            "Benue",
+            "Borno",
+            "Cross River",
+            "Delta",
+            "Ebonyi",
+            "Edo",
+            "Ekiti",
+            "Enugu",
+            "FCT - Abuja",
+            "Gombe",
+            "Imo",
+            "Jigawa",
+            "Kaduna",
+            "Kano",
+            "Katsina",
+            "Kebbi",
+            "Kogi",
+            "Kwara",
+            "Lagos",
+            "Nasarawa",
+            "Niger",
+            "Ogun",
+            "Ondo",
+            "Osun",
+            "Oyo",
+            "Plateau",
+            "Rivers",
+            "Sokoto",
+            "Taraba",
+            "Yobe",
+            "Zamfara"
+    ]
+    </script>
     <div class="form-body on-top-mobile">
         <div class="website-logo">
             <a href="index-2.html">
@@ -33,51 +74,77 @@
                         <form method="POST" action="{{ route('student-biodata.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="text-center">
-                                @if(session('success'))
-                                   <div class="alert alert-success" style="width:100%; margin:auto">
-                                  <b>{{session('success')}}</b></div>
-                               @elseif(session('error'))
-                                   <div class="alert alert-danger" style="width:100%; margin:auto">
-                                  <b>{{session('error')}}</b></div>
-                               @endif
+                                @if(count($errors) > 0)
+                                    @foreach($errors->all() as $error)
+                                    <div class="alert alert-danger" style="width:92%; margin:auto">
+                                        {{$error}}</div>
+                                    @endforeach
+                                @endif
                            </div>
                            <div>
                                {{-- <h3 class="text-center">Fill in the form</h3> --}}
-                           {{-- </div>
+                           </div>
                            <br>
                             <div class="row">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control" name="firstname" placeholder="First name">
+                                    <label for="date">Firstname</label><span style="color: red">*</span>
+                                    <input type="text" class="form-control" name="firstname">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control" name="lastname" placeholder="Last name">
+                                    <label for="date">Lastname</label><span style="color: red">*</span>
+                                    <input type="text" class="form-control" name="lastname">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control" name="matric_no" placeholder="Matric No">
+                                    <label for="date">Phone Number</label><span style="color: red">*</span>
+                                    <input type="text" class="form-control" name="phone">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                    <label for="date">Email</label><span style="color: red">*</span>
+                                    <input type="email" class="form-control" name="email">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <label for="date">Date of birth</label><span style="color: red">*</span>
+                                    <input type="date" class="form-control" name="date">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="date">School Name</label><span style="color: red">*</span>
+                                    <input type="text" class="form-control" name="school">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <label for="date">School Location</label><span style="color: red">*</span>
+                                    <select class="custom-select" name="location">
+                                        <option selected>--choose a location--</option>
+                                        <script>
+                                            const capital = states.map( chars => {   
+                                              document.write("<option value="+ chars +">"+ chars +"</option>") 
+                                            })
+                                          </script>
+                                      </select>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="date">Instagram Handle</label><span style="color: red">*</span>
+                                    <input type="text" class="form-control" name="handle">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="custom-file">
-                                        <input type="file" name="image" class="custom-file-input" id="validatedCustomFile">
-                                        <label class="custom-file-label" for="validatedCustomFile">Photo</label>
+                                        <label class="custom-file-label" for="validatedCustomFile">Passport Photograph</label><span style="color: red">*</span>
+                                        <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
                                     </div>
+                                    <div><img id="output" style="width:100px;"></div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="custom-file">
+                                        <label class="custom-file-label" for="validatedCustomFile">Student ID / Course Form</label><span style="color: red">*</span>
                                         <input type="file" name="id_card" class="custom-file-input" id="validatedCustomFile">
-                                        <label class="custom-file-label" for="validatedCustomFile">Student ID / Course Form</label>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-12">
-                                    <input type="text" class="form-control" name="school" placeholder="School Name">
                                 </div>
                             </div>
                             <div class="row top-padding">
@@ -92,7 +159,7 @@
                             </div>
                         </form>
                         <div class="other-links text-center">
-                            <!--<span><b>Ensure to follow us</b></span>-->
+                            <span><b>Ensure to follow us</b></span>
                             <a href="https://www.facebook.com/dreamworksnig/"><i class="fab fa-facebook-f"></i></a><a href="https://www.twitter.com/dreamworksnig/"><i class="fab fa-twitter"></i></a><a href="https://www.instagram.com/dreamworksnig/"><i class="fab fa-instagram"></i></a><a href="https://www.linkedin.com/company/dreamworksnig/"><i class="fab fa-linkedin-in"></i></a><a href="https://www.youtube.com/dreamworksnig/"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
@@ -105,10 +172,10 @@
     <script src="{{ asset('ioform/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('ioform/js/main.js') }}"></script>
 </body>
-</html> --}} --}}
+</html>
 
 
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from brandio.io/envato/iofrm/html/login13.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:05 GMT -->
@@ -194,4 +261,4 @@
 </body>
 
 <!-- Mirrored from brandio.io/envato/iofrm/html/login13.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:14 GMT -->
-</html>
+</html> --}}

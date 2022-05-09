@@ -48,17 +48,24 @@ class StudentRegisterController extends Controller
         $request->validate([
             'firstname'   => 'required',
             'lastname'    => 'required',
-            'matric_no'   => 'required',
             'school'      => 'required',
             'image'       => 'required',
-            'id_card'     => 'required'
+            'email'       => 'required',
+            'id_card'     => 'required',
+            'phone'       => 'required',
+            'date'        => 'required',
+            'handle'      => 'required',
+            'location'    => 'required'
         ]);
 
         $data = [
             'firstname'     => $request->get('firstname'),
             'lastname'      => $request->get('lastname'),
-            'matric_no'     => $request->get('matric_no'),
             'school'        => $request->get('school'),
+            'phone'         => $request->get('phone'),
+            'date'          => $request->get('date'),
+            'handle'        => $request->get('handle'),
+            'location'      => $request->get('location'),
             'image'         => $request->get('image'),
             'email'         => $request->get('email'),
             'id_card'       => $request->get('id_card')
@@ -101,7 +108,7 @@ class StudentRegisterController extends Controller
             event (new StudentCreated($coupon));
         }
 
-        return back()->with('success', 'Registration Successfull');
+        return view('student.thankyou')->with('success', 'Registration Successfull');
 
     }
 
