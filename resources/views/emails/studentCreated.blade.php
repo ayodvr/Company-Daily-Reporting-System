@@ -53,7 +53,7 @@
 					<!-- TOP BANNER -->
 					<tr>
 						<td style="background-color: #ffffff;">
-						<center><a href="https://www.dreamworksdirect.com/stores/?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=distribution-2021"><img alt="Dreamworks Ibadan" src="{{ asset('ioform/images/student_email.png') }}" style="max-width: 100%;" /> </a></center>
+						<center><a href="#"><img alt="Dreamworks Ibadan" src="{{asset('ioform/images/student_banner.png')}}" style="max-width: 100%;" /> </a></center>
 						</td>
 					</tr>
 					<!-- / TOP BANNER --><!-- BODY MESSAGE -->
@@ -63,15 +63,18 @@
                   Dear [Name],
                 </p> 
                 <!-- / PERSONALIZED NAME CODED -->
-				<br />
-						<p style="text-align:left; font-size: 1.01rem; color: #000000;">Dear {{ $coupon['description'] }},<br />
+				<br /><br />
+						<p style="text-align:left; font-size: 1.01rem; color: #000000;">Hello {{ $coupon['description'] }},<br />
 						<br />
-						Please find your coupon code below<br />
+					You’re all set up to start enjoying exclusive discounted offers on the finest selection of Mobile Phones, Computers, Gadgets, Electronics, and Accessories from premium brands<br />
 						<br />
-						Coupon code: {{ $coupon['code'] }}<br />
-	
+						Your unique code is: <h3><b>{{ $coupon['code'] }}</b></h3><br />
 						<br />
-						Happy shopping!</p>
+                        You can use it anytime you shop with Dreamworks Direct for a 5% discount on your favorite products.<br />
+                        
+                        Shop with us online at www.dreamworksdirect.com or at our Lagos, Abuja, Ibadan, Portharcourt, and Asaba retail stores.<br />
+						<br />
+						If you require any further information kindly visit our FAQ Page or call 09070402009.</p>
 						</td>
 					</tr>
 					<tr>

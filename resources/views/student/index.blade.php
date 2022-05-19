@@ -1,44 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iofrm</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/fontawesome-all.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/iofrm-style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/iofrm-theme24.css') }}">
-</head>
-<body>
-    <div class="form-body on-top">
-        <div class="website-logo">
-            <a href="index-2.html">
-                <div class="logo">
-                    <img class="logo-size" src="{{ asset('ioform/images/logo-light.svg') }}" alt="">
+@extends('layouts.master')
+@section('content')
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Students List</h1>
+            {{-- <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="#">Components</a></div>
+              <div class="breadcrumb-item">Students Table</div>
+            </div> --}}
+          </div>
+          <div class="section-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    {{-- <h4>Advanced Table</h4> --}}
+                    <div class="card-header-form">
+                      <form>
+                        <div class="input-group">
+                          {{-- <input type="text" class="form-control" placeholder="Search"> --}}
+                          {{-- <div class="input-group-btn">
+                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                          </div> --}}
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <tr>
+                          <!-- <th>
+                            <div class="custom-checkbox custom-control">
+                              <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                class="custom-control-input" id="checkbox-all">
+                              <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                            </div>
+                          </th> -->
+                          <th class="text-center">
+                            <div class="custom-checkbox custom-checkbox-table custom-control">
+                              <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                class="custom-control-input" id="checkbox-all">
+                              <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                            </div>
+                          </th>
+                          <th>Image</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>School</th>
+                          <th>Instagram</th>
+                          <th>Phone</th>
+                          <th>Date Registered</th>
+                          {{-- <th>Action</th> --}}
+                        </tr>
+                        @foreach ($students as $student )
+                        <tr>
+                            <td class="p-0 text-center">
+                              <div class="custom-checkbox custom-control">
+                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                  id="checkbox-2">
+                                <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
+                              </div>
+                            </td>
+                            <td>
+                                <img alt="image" src="{{ $student->image }}" class="rounded-circle" width="35"
+                                  data-toggle="tooltip" title="Nur Alpiana">
+                              </td>
+                            <td>{{ $student->firstname }}</td>
+                            <td>{{ $student->lastname }}</td>
+                            <td>{{ $student->school }}</td>
+                            <td>
+                                <div class="badge badge-info">{{ $student->handle }}</div>
+                              </td>
+                              <td>{{ $student->phone }}</td>
+                            <td>{{ $student['created_at']->diffForHumans() }}</td>
+                            {{-- <td><a href="#" class="btn btn-primary">View</a></td> --}}
+                          </tr> 
+                        @endforeach
+                        
+                      </table>
+                    </div>
+                  </div>
                 </div>
-            </a>
-        </div>
-        <div class="row">
-            <div class="img-holder">
-                <div class="bg"></div>
-                <div class="info-holder simple-info">
-                    <div><img src="{{ asset('ioform/images/graphic6.svg') }}" alt=""></div>
-                    <div><h3>We’re Accepting applications!</h3></div>
-                    <div><p>Fill the form to apply.</p></div>
-                </div>
+              </div>
             </div>
-            <div class="form-holder">
-                @foreach ($coupons as $coupon)
-                   <li>{{ $coupon }}</li> 
-                @endforeach
-            </div>
-        </div>
-    </div>
-<script src="{{ asset('ioform/js/jquery.min.js') }}"></script>
-<script src="{{ asset('ioform/js/popper.min.js') }}"></script>
-<script src="{{ asset('ioform/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('ioform/js/main.js') }}"></script>
-</body>
-
-</html>
+          </div>
+        </section>
+      </div>
+      @endsection

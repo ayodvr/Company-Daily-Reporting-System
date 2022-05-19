@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="text-center">
-        @if(session('success'))
+      @if(session('success'))
            <div class="alert alert-success" style="width:100%; margin:auto">
           <b>{{session('success')}}</b></div>
        @elseif(session('error'))

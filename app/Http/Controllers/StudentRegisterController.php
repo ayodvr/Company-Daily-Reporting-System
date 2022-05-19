@@ -17,13 +17,9 @@ class StudentRegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // $coupons = Coupon::all();
-        //dd($coupons);
-        
-        $products = Product::orderBy('id','desc')->paginate(20);
-        dd($products);
-        return view('student.index')->with('coupons', $coupons);
+    {    
+        $students = StudentRegister::orderBy('id','desc')->paginate(10);
+        return view('student.index')->with('students', $students);
     }
 
     /**
@@ -49,9 +45,9 @@ class StudentRegisterController extends Controller
             'firstname'   => 'required',
             'lastname'    => 'required',
             'school'      => 'required',
-            'image'       => 'required',
+            'image'       => 'image|required|max:1999',
             'email'       => 'required',
-            'id_card'     => 'required',
+            'id_card'     => 'nullable',
             'phone'       => 'required',
             'date'        => 'required',
             'handle'      => 'required',

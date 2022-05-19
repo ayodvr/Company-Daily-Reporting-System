@@ -3,11 +3,11 @@
       <div class="sidebar-brand">
         <a href="index.html">
           {{-- <img alt="image" src="assets/img/logo.png" class="header-logo" /> --}}
-          <span class="logo-name">DW</span>
+          {{-- <span class="logo-name">Students</span> --}}
         </a>
       </div>
       <ul class="sidebar-menu">
-        <li class="menu-header text-center">Retail</li>
+        {{-- <li class="menu-header text-center">Retail</li> --}}
         <br>
         <li class="dropdown">
             {{-- <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Employee</span></a>
@@ -19,20 +19,20 @@
               <li><a class="nav-link" href="#">Terminated Staffs</a></li>
             </ul> --}}
           </li>
-        <li class="menu-header">STUDENTS</li>
+        {{-- <li class="menu-header">STUDENTS</li>
         <li class="dropdown">
           <a href="#" class="nav-link"><i class="fas fa-user"></i><span>Manage Students</span></a>
           <a href="#" class="nav-link"><i class="fas fa-download"></i><span>Export</span></a>
-            {{-- <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Students</span></a> --}}
-            {{-- <ul class="dropdown-menu">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Students</span></a>
+            <ul class="dropdown-menu">
               <li><a class="nav-link" href="#">Upload </a></li>
               <li><a class="nav-link" href="#">Create</a></li>
               <li><a class="nav-link" href="#">Manage Students</a></li>
               <li><a class="nav-link" href="#">Export</a></li>
               <li><a class="nav-link" href="#">Resigned </a></li>
               <li><b><a class="nav-link" href="#" style="color: rgb(196, 60, 7)">Terminated </a></b></li>
-            </ul> --}}
-          </li>
+            </ul>
+          </li> --}}
         {{-- <li class="dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-credit-card"></i><span>Payroll</span></a>
           <ul class="dropdown-menu">

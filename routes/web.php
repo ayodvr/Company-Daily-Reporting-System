@@ -17,7 +17,7 @@ use App\Http\Controllers\FacilityController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('student.create');
 });
 
 Route::resource('/student-biodata', StudentRegisterController::class);
