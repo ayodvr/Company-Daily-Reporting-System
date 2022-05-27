@@ -46,8 +46,9 @@ class StudentRegisterController extends Controller
             'lastname'    => 'required',
             'school'      => 'required',
             'image'       => 'image|required|max:1999',
+            'photo'       => 'image|nullable|max:1999',
             'email'       => 'required',
-            'id_card'     => 'nullable',
+            'id_card'     => 'image|nullable|max:1999',
             'phone'       => 'required',
             'date'        => 'required',
             'handle'      => 'required',
@@ -63,6 +64,7 @@ class StudentRegisterController extends Controller
             'handle'        => $request->get('handle'),
             'location'      => $request->get('location'),
             'image'         => $request->get('image'),
+            'photo'         => $request->get('photo'),
             'email'         => $request->get('email'),
             'id_card'       => $request->get('id_card')
         ];
@@ -83,6 +85,14 @@ class StudentRegisterController extends Controller
             $data['id_card'] = $path;
         }
 
+        if ($request->has(['photo'])) {
+            $name = time().$request->file('photo')->getClientOriginalName();
+            $destination = public_path().'/StudentImages';
+            $path='/StudentImages/'.$name;
+            $request->file('photo')->move($destination, $name);
+            $data['photo'] = $path;
+        }
+
         $check_user = StudentRegister::where('email', $request->email)->exists();
     
         if($check_user){
@@ -100,6 +110,7 @@ class StudentRegisterController extends Controller
                 'code' => 'DW' . $random,
                 'discount_type' => 'percent',
                 'amount' => '5',
+                'date_expires' => '2025-01-01',
                 'individual_use' => true,
                 'email_restrictions' => $Register->email,
                 'description' => $Register->firstname,

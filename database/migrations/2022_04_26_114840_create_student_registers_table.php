@@ -23,6 +23,7 @@ class CreateStudentRegistersTable extends Migration
             $table->string('handle');
             $table->string('location');
             $table->string('image');
+            $table->string('photo')->nullable();
             $table->string('email')->unique();
             $table->string('id_Card')->nullable();
             $table->timestamps();

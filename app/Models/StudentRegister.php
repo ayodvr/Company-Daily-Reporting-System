@@ -18,6 +18,7 @@ class StudentRegister extends Model
         'date',
         'location',
         'image',
+        'photo',
         'email',
         'id_card'
     ];
