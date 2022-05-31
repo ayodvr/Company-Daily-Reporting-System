@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa0c43317d55aa737380e45737a4f664",
+    "content-hash": "ba3ca026ef059ec20e4d206b039ea3a1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -255,6 +255,84 @@
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.223.0"
             },
             "time": "2022-05-26T18:18:03+00:00"
+        },
+        {
+            "name": "barryvdh/laravel-snappy",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-snappy.git",
+                "reference": "2c18a3602981bc6f25b32908cf8aaa05952ab2f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-snappy/zipball/2c18a3602981bc6f25b32908cf8aaa05952ab2f7",
+                "reference": "2c18a3602981bc6f25b32908cf8aaa05952ab2f7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "^6|^7|^8|^9",
+                "illuminate/support": "^6|^7|^8|^9",
+                "knplabs/knp-snappy": "^1",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4|^5|^6|^7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\Snappy\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "PDF": "Barryvdh\\Snappy\\Facades\\SnappyPdf",
+                        "SnappyImage": "Barryvdh\\Snappy\\Facades\\SnappyImage"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Snappy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Snappy PDF/Image for Laravel",
+            "keywords": [
+                "image",
+                "laravel",
+                "pdf",
+                "snappy",
+                "wkhtmltoimage",
+                "wkhtmltopdf"
+            ],
+            "support": {
+                "issues": "https://github.com/barryvdh/laravel-snappy/issues",
+                "source": "https://github.com/barryvdh/laravel-snappy/tree/v1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://fruitcake.nl",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/barryvdh",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-29T19:36:49+00:00"
         },
         {
             "name": "brick/math",
@@ -1214,6 +1292,68 @@
             "time": "2022-03-20T21:55:58+00:00"
         },
         {
+            "name": "jimmyjs/laravel-report-generator",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jimmy-JS/laravel-report-generator.git",
+                "reference": "2e39ea8b328981ae62c89a810989a73734d28019"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jimmy-JS/laravel-report-generator/zipball/2e39ea8b328981ae62c89a810989a73734d28019",
+                "reference": "2e39ea8b328981ae62c89a810989a73734d28019",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.0",
+                "maatwebsite/excel": "^3.1",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jimmyjs\\ReportGenerator\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "PdfReport": "Jimmyjs\\ReportGenerator\\Facades\\PdfReportFacade",
+                        "ExcelReport": "Jimmyjs\\ReportGenerator\\Facades\\ExcelReportFacade",
+                        "CSVReport": "Jimmyjs\\ReportGenerator\\Facades\\CSVReportFacade::class"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jimmyjs\\ReportGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jimmy Setiawan",
+                    "email": "jimmysetiawan.js@gmail.com"
+                }
+            ],
+            "description": "Rapidly Generate Simple Pdf & Excel Report on Laravel 5 (Using Barryvdh/DomPdf or Barryvdh/laravel-snappy & maatwebsite/excel)",
+            "keywords": [
+                "excel",
+                "excel report",
+                "laravel",
+                "pdf",
+                "pdf report",
+                "report"
+            ],
+            "support": {
+                "issues": "https://github.com/Jimmy-JS/laravel-report-generator/issues",
+                "source": "https://github.com/Jimmy-JS/laravel-report-generator/tree/2.2.0"
+            },
+            "time": "2022-04-23T05:59:12+00:00"
+        },
+        {
             "name": "kkszymanowski/traitor",
             "version": "0.2.5",
             "source": {
@@ -1262,6 +1402,80 @@
                 "source": "https://github.com/kkszymanowski/traitor"
             },
             "time": "2018-04-19T12:24:36+00:00"
+        },
+        {
+            "name": "knplabs/knp-snappy",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/snappy.git",
+                "reference": "5126fb5b335ec929a226314d40cd8dad497c3d67"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/5126fb5b335ec929a226314d40cd8dad497c3d67",
+                "reference": "5126fb5b335ec929a226314d40cd8dad497c3d67",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "psr/log": "^1.0||^2.0||^3.0",
+                "symfony/process": "~3.4||~4.3||~5.0||~6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16||^3.0",
+                "pedrotroller/php-cs-custom-fixer": "^2.19",
+                "phpstan/phpstan": "^0.12.7",
+                "phpstan/phpstan-phpunit": "^0.12.6",
+                "phpunit/phpunit": "~7.4||~8.5"
+            },
+            "suggest": {
+                "h4cc/wkhtmltoimage-amd64": "Provides wkhtmltoimage-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
+                "h4cc/wkhtmltoimage-i386": "Provides wkhtmltoimage-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
+                "h4cc/wkhtmltopdf-amd64": "Provides wkhtmltopdf-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
+                "h4cc/wkhtmltopdf-i386": "Provides wkhtmltopdf-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
+                "wemersonjanuario/wkhtmltopdf-windows": "Provides wkhtmltopdf executable for Windows, use version `~0.12` as dependency"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Knp\\Snappy\\": "src/Knp/Snappy"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KNP Labs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
+                }
+            ],
+            "description": "PHP library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
+            "homepage": "http://github.com/KnpLabs/snappy",
+            "keywords": [
+                "knp",
+                "knplabs",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "support": {
+                "issues": "https://github.com/KnpLabs/snappy/issues",
+                "source": "https://github.com/KnpLabs/snappy/tree/v1.4.1"
+            },
+            "time": "2022-01-07T13:03:38+00:00"
         },
         {
             "name": "laravel/framework",
