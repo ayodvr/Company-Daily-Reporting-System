@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'admin',
             'email' => 'admin@test.com',
-            'staff_id'=>    1010,
+            'store'=>    'DW Experience Center',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'Managing Director',
             'email' => 'md@test.com',
-            'staff_id'=>    1010,
+            'store'=>    'DW Experience Center',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'Human Resources',
             'email' => 'hr@test.com',
-            'staff_id'=>    1010,
+            'store'=>    'DW Experience Center',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'Finance',
             'email' => 'finance@test.com',
-            'staff_id'=>    1010,
+            'store'=>    'DW Experience Center',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -60,7 +60,7 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'General Manager',
             'email' => 'gm@test.com',
-            'staff_id'=>    1010,
+            'store'=>    'DW Experience Center',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

@@ -24,7 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'staff_id',
+        'store',
         'verified',
         'password',
     ];
@@ -50,18 +50,21 @@ class User extends Authenticatable
 
     protected static $ignoreChangedAttributes = ['password', 'updated_at'];
 
-    protected static $logAttributes = ['name', 'email', 'password'];
+    protected static $logAttributes = ['name', 'email'];
 
-    protected static $recordEvents = ['created', 'updated'];
+    protected static $recordEvents = ['created'];
 
     // protected static $logOnlyDirty = true;
 
     protected static $logName = 'user';
 
     public function getDescriptionForEvent(string $eventName): string
-    {
-        $user = "Ayo";
-        
-        return "{$user} have {$eventName} user";
+    {        
+        return "A new user has been {$eventName}";
+    }
+
+    public function stores(){
+
+       return $this->belongsTo('App/Models/Store');
     }
 }

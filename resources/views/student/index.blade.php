@@ -40,33 +40,29 @@
                             </div>
                           </th> -->
                           <th class="text-center">
-                            <div class="custom-checkbox custom-checkbox-table custom-control">
-                              <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                class="custom-control-input" id="checkbox-all">
-                              <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                            </div>
+                            <th class="text-center">
+                              <i class="fas fa-th"></i>
+                            </th>
                           </th>
                           <th>Image</th>
                           <th>First Name</th>
                           <th>Last Name</th>
                           <th>School</th>
-                          <th>Instagram</th>
+                          <th>Instagram Handle</th>
                           <th>Phone</th>
                           <th>Date Registered</th>
-                          {{-- <th>Action</th> --}}
+                          <th>Action</th>
                         </tr>
                         @foreach ($students as $student )
                         <tr>
                             <td class="p-0 text-center">
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                  id="checkbox-2">
-                                <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
-                              </div>
+                              <th class="text-center">
+                                <i class="fas fa-th"></i>
+                              </th>
                             </td>
                             <td>
-                                <img alt="image" src="{{ $student->image }}" class="rounded-circle" width="35"
-                                  data-toggle="tooltip" title="Nur Alpiana">
+                                <img alt="image" src="{{ $student->image }}" class="circle" width="35"
+                                  data-toggle="tooltip" title="{{ $student->firstname }}">
                               </td>
                             <td>{{ $student->firstname }}</td>
                             <td>{{ $student->lastname }}</td>
@@ -75,11 +71,10 @@
                                 <div class="badge badge-info">{{ $student->handle }}</div>
                               </td>
                               <td>{{ $student->phone }}</td>
-                            <td>{{ $student['created_at']->diffForHumans() }}</td>
-                            {{-- <td><a href="#" class="btn btn-primary">View</a></td> --}}
+                            <td>{{ $student['created_at']->toFormattedDateString() }}</td>
+                            <td><a href="{{ route('student-biodata.show', $student->id) }}" class="btn btn-primary">View</a></td>
                           </tr> 
                         @endforeach
-                        
                       </table>
                     </div>
                   </div>
@@ -88,5 +83,6 @@
             </div>
           </div>
         </section>
+        {{ $students->links('pagination::bootstrap-4') }}
       </div>
       @endsection

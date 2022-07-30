@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+use App\Models\Facility;
+use App\Models\Store;
+use Illuminate\Support\Facades\Auth;
+
 class FacilityController extends Controller
 {
     /**
@@ -13,7 +18,67 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+        $sales = Facility::all()->groupBy(function ($store_name) {
+            $all_stores = $store_name->store_id;
+                return $all_stores;
+        })->map(function ($item) {
+            return [
+                "records" => $item->toArray(),
+                "stores"   => $item[0]['store_id'],
+              ];
+        });
+
+            $store_arr = [];
+            $staff_arr = [];
+            foreach($sales as $key => $value){
+                if(Auth::user()->hasRole('admin')){
+                    array_push($store_arr,$key);
+                }if(Auth::user()->hasRole('staff') && $value['records'][0]['user_id'] == $user_id){
+                    array_push($staff_arr,$key);
+                }
+            }
+
+
+        return view("facility.report")->with('store_arr', $store_arr)
+                                    ->with('staff_arr', $staff_arr);
+    }
+
+    public function store_report($store_report)
+    {
+        $report_arr = Facility::where('store_id', str_replace('_', ' ', $store_report))->get()->groupBy(function ($date) {
+                return $date->created_at->format('Y-m-d');
+        })->map(function ($item) {
+            return $item;
+        });
+
+        //dd($sales_arr->toArray());
+         
+        return view("facility.daily_report")->with('report_arr', $report_arr)
+                                            ->with('store_report', $store_report);
+    }
+
+    public function fetch_records($date_created, $store_location)
+    {
+        $sales_arr = Facility::where('today_date', $date_created)->get();
+        //dd($sales_arr);
+        $report_arr = [];
+        $report_key = [];
+        
+        foreach($sales_arr as $key => $value){
+            if(str_replace(' ','_', $value['store_id']) == $store_location){
+                array_push($report_arr, $value);
+                array_push($report_key, $key);
+            }
+        }
+    
+        //dd($report_arr);
+        
+        return view("facility.report_detail")->with('record_arr', $report_arr)
+                                             ->with('t_date', $report_arr[0]['today_date'])
+                                             ->with('t_store', $report_arr[0]['store_id'])
+                                             ->with('report_id', $report_arr[0]['id']);
+        
     }
 
     /**
@@ -23,7 +88,7 @@ class FacilityController extends Controller
      */
     public function create()
     {
-        //
+        return view('facility.create');
     }
 
     /**
@@ -34,7 +99,83 @@ class FacilityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [            
+            'item_details' => $request->get('details'),
+            'availability' => $request->get('availability'),
+            'condition'    => $request->get('condition'),
+            'comments'     => $request->get('comments')
+        ];
+
+        $array_length = is_array($data["item_details"]) ? count($data["item_details"]) : 1;
+        $array_length = is_array($data["availability"]) ? count($data["availability"]) : 1;
+        $array_length = is_array($data["condition"])    ? count($data["condition"])    : 1;
+        $array_length = is_array($data["comments"])     ? count($data["comments"])     : 1;
+
+        $anytime = Carbon::now();
+        $today_date = $anytime->format('Y-m-d');
+
+        $serial = random_int(1000, 9999);
+        $store_name = Store::where('store_name', auth()->user()->store)->first();
+        $store_abrv = substr($store_name['store_name'], 3, 3);
+        $store_isbn = 'DW' . strtoupper($store_abrv) . $serial . 'FC';
+       
+        if($array_length ==  1){
+            $save_one_rec = array();
+            for($x = 0; $x < $array_length; $x++ ){
+                $arr_item = array(
+                    "item_details" => $data["item_details"][$x],
+                    "availability" => $data["availability"][$x],
+                    "condition"    => $data["condition"][$x],
+                    "comments"     => $data["comments"][$x],
+                );
+
+                array_push($save_one_rec ,$arr_item);
+
+                $facility = new Facility;
+                $facility->item_details = $save_one_rec[0]['item_details'];
+                $facility->availability = $save_one_rec[0]['availability'];
+                $facility->condition    = $save_one_rec[0]['condition'];
+                $facility->comments     = $save_one_rec[0]['comments'];
+                $facility->user_id      = auth()->user()->id;
+                $facility->store_id     = auth()->user()->store;
+                $facility->today_date   = $today_date;
+                $facility->store_serial = $store_isbn;
+
+                $facility->save();
+            } 
+
+        }else if($array_length >  1){
+            $save_rec = array();
+            for($x = 0; $x < $array_length; $x++ ){
+                $arr_item = array(
+                    "item_details" => $data["item_details"][$x],
+                    "availability" => $data["availability"][$x],
+                    "condition"    => $data["condition"][$x],
+                    "comments"     => $data["comments"][$x]
+                );
+                    array_push($save_rec ,$arr_item);
+            }
+
+            //dd($save_rec);
+            foreach($save_rec as $facility){
+                $facility = new Facility;
+                $facility->item_details = $save_rec[0]['item_details'];
+                $facility->availability = $save_rec[0]['availability'];
+                $facility->condition    = $save_rec[0]['condition'];
+                $facility->comments     = $save_rec[0]['comments'];
+                $facility->user_id      = auth()->user()->id;
+                $facility->store_id     = auth()->user()->store;
+                $facility->today_date   = $today_date;
+                $facility->store_serial = $store_isbn;
+
+                $facility->save();
+            }
+        }
+
+        notify()->success("Report Created!","");
+
+        return back();
+        
     }
 
     /**
@@ -56,7 +197,9 @@ class FacilityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $report = Facility::findOrFail($id);
+        dd($report);
+        return view('facility.edit')->with('report', $report);
     }
 
     /**
