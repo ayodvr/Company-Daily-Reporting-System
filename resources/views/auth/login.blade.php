@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from brandio.io/envato/iofrm/html/login17.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:25 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dreamworks Reporting System</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/fontawesome-all.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/iofrm-style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ioform/css/iofrm-theme17.css') }}">
+    <title>iofrm</title>
+    <link rel="stylesheet" type="text/css" href="ioform/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="ioform/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="ioform/css/iofrm-style.css">
+    <link rel="stylesheet" type="text/css" href="ioform/css/iofrm-theme3.css">
 </head>
 <body>
-    <div class="form-body without-side">
+    <div class="form-body">
         <div class="website-logo">
             <a href="index-2.html">
-                <div class="logo">
-                    <img class="logo-size" src="{{ asset('assets/img/android-chrome.svg') }}" alt="">
-                </div>
+              <div class="logo">
+                <img class="logo-size" src="ioform/images/logo-light.svg" alt="">
+            </div>
             </a>
         </div>
         <div class="row">
             <div class="img-holder">
                 <div class="bg"></div>
                 <div class="info-holder">
-                    <img src="{{ asset('ioform/images/graphic3.svg') }}" alt="">
+           
                 </div>
             </div>
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
+                        <div class="page-links">
+                            <a href="{{ route('login') }}" class="active">Login</a><a href="{{ route('register') }}">Register</a>
+                        </div>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group">
@@ -67,18 +69,17 @@
                             </div>
                         </form>
                         <div class="other-links">
-                            <a href="{{ route('register') }}">Register new account</a>
+                            <span>Don't have an account?</span><a href="{{ route('register') }}">Create one</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<script src="{{ asset('ioform/js/jquery.min.js') }}"></script>
-<script src="{{ asset('ioform/js/popper.min.js') }}"></script>
-<script src="{{ asset('ioform/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('ioform/js/main.js') }}"></script>
+<script src="ioform/js/jquery.min.js"></script>
+<script src="ioform/js/popper.min.js"></script>
+<script src="ioform/js/bootstrap.min.js"></script>
+<script src="ioform/js/main.js"></script>
 </body>
 
-<!-- Mirrored from brandio.io/envato/iofrm/html/login17.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 31 Jan 2022 08:05:29 GMT -->
 </html>

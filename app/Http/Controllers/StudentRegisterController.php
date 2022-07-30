@@ -18,7 +18,7 @@ class StudentRegisterController extends Controller
      */
     public function index()
     {    
-        $students = StudentRegister::orderBy('id','desc')->paginate(5);
+        $students = StudentRegister::orderBy('id','desc')->paginate(10);
         return view('student.index')->with('students', $students);
     }
 
@@ -134,8 +134,7 @@ class StudentRegisterController extends Controller
      */
     public function show($id)
     {
-        $student = StudentRegister::findorfail($id);
-        return view('student.show')->with('student', $student);
+        //
     }
 
     /**

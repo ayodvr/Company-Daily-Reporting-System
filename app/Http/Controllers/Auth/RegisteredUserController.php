@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Event\UserCreated;
 use App\Models\User;
-use App\Models\Store;
 use App\Providers\RouteServiceProvider;
 // use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -25,8 +24,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        $stores = Store::orderBy('id','asc')->get();
-        return view('auth.register')->with('stores', $stores);
+        return view('auth.register');
     }
 
     /**
@@ -40,23 +38,23 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'store'    => ['required', 'string', 'max:255'],
+            'staff_id' => ['required', 'string', 'max:255'],
         ]);
         
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
-            'store'    => $request->store,
+            'staff_id' => $request->staff_id,
             'password' => Hash::make($request->password),
             'verified' => 0
         ]);
 
         $user->attachRole('staff');
 
-        // event (new UserCreated($user));
+        event (new UserCreated($user));
 
         Auth::login($user);
 
