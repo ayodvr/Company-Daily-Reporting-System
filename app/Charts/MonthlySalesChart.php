@@ -35,7 +35,7 @@ class MonthlySalesChart
             }
         }
         return $this->chart->areaChart()
-        ->setTitle('Monthly Sales')
+        ->setTitle('Monthly Sales Chart')
         // ->setSubtitle('Monthly Sales')
         ->addData('Sales', array_reverse($total_amt_arr))
         // ->addData('Online sales', [70, 29, 77, 28, 55, 45])

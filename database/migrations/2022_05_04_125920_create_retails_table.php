@@ -22,6 +22,7 @@ class CreateRetailsTable extends Migration
             $table->string('invoice')->nullable();
             $table->string('product')->nullable();
             $table->string('unit')->nullable();
+            $table->string('price')->nullable();
             $table->string('store')->nullable();
             $table->string('customer')->nullable();
             $table->string('address')->nullable();

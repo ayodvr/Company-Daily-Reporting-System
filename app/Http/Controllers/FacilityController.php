@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use PDF;
+use App;
 use Carbon\Carbon;
 use App\Models\Facility;
 use App\Models\Store;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 class FacilityController extends Controller
 {
@@ -18,6 +21,7 @@ class FacilityController extends Controller
      */
     public function index()
     {
+        $activities =  Activity::orderBy('created_at','DESC')->paginate(7);
         $user_id = auth()->user()->id;
         $sales = Facility::all()->groupBy(function ($store_name) {
             $all_stores = $store_name->store_id;
@@ -41,11 +45,13 @@ class FacilityController extends Controller
 
 
         return view("facility.report")->with('store_arr', $store_arr)
-                                    ->with('staff_arr', $staff_arr);
+                                    ->with('staff_arr', $staff_arr)
+                                    ->with('activities', $activities);
     }
 
     public function store_report($store_report)
     {
+        $activities =  Activity::orderBy('created_at','DESC')->paginate(7);
         $report_arr = Facility::where('store_id', str_replace('_', ' ', $store_report))->get()->groupBy(function ($date) {
                 return $date->created_at->format('Y-m-d');
         })->map(function ($item) {
@@ -55,11 +61,13 @@ class FacilityController extends Controller
         //dd($sales_arr->toArray());
          
         return view("facility.daily_report")->with('report_arr', $report_arr)
-                                            ->with('store_report', $store_report);
+                                            ->with('store_report', $store_report)
+                                            ->with('activities', $activities);
     }
 
     public function fetch_records($date_created, $store_location)
     {
+        $activities =  Activity::orderBy('created_at','DESC')->paginate(7);
         $sales_arr = Facility::where('today_date', $date_created)->get();
         //dd($sales_arr);
         $report_arr = [];
@@ -77,8 +85,43 @@ class FacilityController extends Controller
         return view("facility.report_detail")->with('record_arr', $report_arr)
                                              ->with('t_date', $report_arr[0]['today_date'])
                                              ->with('t_store', $report_arr[0]['store_id'])
-                                             ->with('report_id', $report_arr[0]['id']);
+                                             ->with('report_id', $report_arr[0]['id'])
+                                             ->with('fac_Serial', $report_arr[0]['store_serial'])
+                                             ->with('activities', $activities);
         
+    }
+
+    public function generate_pdf($report_key, $store_location)
+    {
+        $sales_arr = Facility::where('today_date', $report_key)->get();
+         
+        $report_arr = [];
+        $report_key = [];
+        
+        foreach($sales_arr as $key => $value){
+            if(str_replace(' ','_', $value['store_id']) == $store_location){
+                array_push($report_arr, $value);
+                array_push($report_key, $key);
+            }
+        }
+
+        //dd($report_arr);
+
+        $filename = 'facility_report.pdf';
+        
+        $mpdf = new \Mpdf\Mpdf();
+        
+        $html = \View::make('facility.pdf')->with('record_arr', $report_arr)
+                                           ->with('t_date', $report_arr[0]['created_at'])
+                                           ->with('t_store', $report_arr[0]['store_id'])
+                                           ->with('fac_Serial', $report_arr[0]['store_serial']);
+        $html = $html->render();
+
+        $mpdf->setFooter('Dreamworks Integrated Systems');
+        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($filename,'I');
     }
 
     /**
@@ -88,7 +131,8 @@ class FacilityController extends Controller
      */
     public function create()
     {
-        return view('facility.create');
+        $activities =  Activity::orderBy('created_at','DESC')->paginate(7);
+        return view('facility.create')->with('activities', $activities);
     }
 
     /**
@@ -117,7 +161,7 @@ class FacilityController extends Controller
         $serial = random_int(1000, 9999);
         $store_name = Store::where('store_name', auth()->user()->store)->first();
         $store_abrv = substr($store_name['store_name'], 3, 3);
-        $store_isbn = 'DW' . strtoupper($store_abrv) . $serial . 'FC';
+        $store_isbn = 'DW' . strtoupper($store_abrv) . $serial . 'FAC';
        
         if($array_length ==  1){
             $save_one_rec = array();
@@ -198,7 +242,7 @@ class FacilityController extends Controller
     public function edit($id)
     {
         $report = Facility::findOrFail($id);
-        dd($report);
+        //dd($report);
         return view('facility.edit')->with('report', $report);
     }
 
@@ -211,7 +255,20 @@ class FacilityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = [
+                'item_details' => $request->details,
+                'availability' => $request->availability,
+                'condition'    => $request->condition,
+                'comments'     => $request->comments
+            ];
+
+        $facility = Facility::find($id);
+
+        $facility->update($data);
+     
+        notify()->success("Report Updated!","");
+
+        return back();
     }
 
     /**

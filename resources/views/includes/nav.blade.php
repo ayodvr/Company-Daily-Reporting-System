@@ -11,6 +11,29 @@
           </ul>
         </div>
         <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+            class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+          <div class="dropdown-menu dropdown-list dropdown-menu-right">
+            <div class="dropdown-header">Notifications
+            </div>
+            <div class="dropdown-list-content dropdown-list-icons">
+              @foreach ($activities as $activity)
+              <a href="#" class="dropdown-item">
+                <span class="dropdown-item-icon bg-primary text-white">
+                  <i class="far fa-bell"></i>
+                </span>
+                <span class="dropdown-item-desc">
+                  <p>{{ $activity->description }}</p>
+                  <span class="time">{{ $activity['created_at']->diffForHumans() }}</span>
+                </span>
+              </a>
+              @endforeach
+            </div>
+            <div class="dropdown-footer text-center">
+              <a href="{{ route('retail-report.timeline') }}">View All <i class="fas fa-chevron-right"></i></a>
+            </div>
+          </div>
+        </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown"
               class="nav-link dropdown-toggle nav-link-lg nav-link-user">
               <img alt="image" src="{{ asset('assets/img/favicon.ico') }}" class="user-img-radious-style">

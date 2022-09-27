@@ -32,7 +32,7 @@ class RetailController extends Controller
      */
     public function dashboard(MonthlySalesChart $chart)
     {
-        $activities =  Activity::orderBy('created_at','DESC')->take(3)->get();
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $anytime = Carbon::now();
         $daily_date = $anytime->toFormattedDateString();
         return view('admin.admindash')->with('activities', $activities)
@@ -42,7 +42,7 @@ class RetailController extends Controller
 
     public function timeline()
     {
-        $activities =  Activity::orderBy('created_at','DESC')->paginate(7);
+        $activities =  Activity::orderBy('created_at','DESC')->paginate(4);
         $anytime = Carbon::now();
         $daily_date = $anytime->toFormattedDateString();
         return view('retail.timeline')->with('activities', $activities)
@@ -51,6 +51,7 @@ class RetailController extends Controller
 
     public function index()
     {
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $user_id = auth()->user()->id;
         $sales = Retail::all()->groupBy(function ($store_name) {
             $all_stores = $store_name->store;
@@ -73,11 +74,13 @@ class RetailController extends Controller
             }
 
         return view("retail.report")->with('store_arr', $store_arr)
+                                    ->with('activities', $activities)
                                     ->with('staff_arr', $staff_arr);
     }
 
     public function store_sale($store_sale)
     {
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $sales_arr = Retail::where('store', str_replace('_', ' ', $store_sale))->get()->groupBy(function ($date) {
                 return $date->created_at->format('Y-m-d');
         })->map(function ($item) {
@@ -87,11 +90,13 @@ class RetailController extends Controller
         //dd($sales_arr->toArray());
          
         return view("retail.daily_sale")->with('sales_arr', $sales_arr)
+                                        ->with('activities', $activities)
                                         ->with('store_sale', $store_sale);
     }
 
     public function fetch_records($date_created, $store_location)
     {
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $sales_arr = Retail::where('today_date', $date_created)->get();
          
         $report_arr = [];
@@ -114,13 +119,13 @@ class RetailController extends Controller
         //dd($report_arr);
         
         return view("retail.report_detail")->with('record_arr', $report_arr)
+                                           ->with('activities', $activities)
                                            ->with('t_sum', $t_sum)
                                            ->with('t_count', $t_count)
                                            ->with('t_date', $report_arr[0]['today_date'])
                                            ->with('t_store', $report_arr[0]['store']);
         
     }
-
 
     public function generate_pdf($report_key, $store_location)
     {
@@ -154,8 +159,48 @@ class RetailController extends Controller
         $mpdf->setFooter('Dreamworks Integrated Systems');
         $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
         $mpdf->showWatermarkImage = true;
-        $mpdf->WriteHTML($html);
+        $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output($filename,'I');
+    }
+
+
+    public function send_pdf($report_key, $store_location)
+    {
+        $sales_arr = Retail::where('today_date', $report_key)->get();
+         
+        $report_arr = [];
+        $report_key = [];
+        
+        foreach($sales_arr as $key => $value){
+            if(str_replace(' ','_', $value['store']) == $store_location){
+                array_push($report_arr, $value);
+                array_push($report_key, $key);
+            }
+        }
+
+        //dd($report_arr);
+
+        $total_amount = array_column($report_arr, 'amount');
+        $t_sum = array_sum($total_amount);
+
+        $filename = 'retail-report.pdf';
+        
+        $mpdf = new \Mpdf\Mpdf();
+        
+        $html = \View::make('retail.pdf')->with('record_arr', $report_arr)
+                                         ->with('t_sum', $t_sum)
+                                         ->with('t_date', $report_arr[0]['created_at'])
+                                         ->with('t_store', $report_arr[0]['store']);;
+        $html = $html->render();
+
+        $mpdf->setFooter('Dreamworks Integrated Systems');
+        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->WriteHTML(utf8_encode($html));
+        $mpdf->Output($filename,'I');
+        $content = $mpdf->Output($filename,'S');
+
+        event (new SendReport($content));
     }
 
     /**
@@ -165,14 +210,17 @@ class RetailController extends Controller
      */
     public function create()
     {
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $anytime = Carbon::now();
         $daily_date = $anytime->format('Y-m-d');
-        return view('retail.create')->with('daily_date', $daily_date);
+        return view('retail.create')->with('daily_date', $daily_date)
+                                    ->with('activities', $activities);
     }
 
     public function store_locations()
     {
-        return view('retail.stores');
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
+        return view('retail.stores')->with('activities', $activities);
     }
 
     /**
@@ -185,13 +233,14 @@ class RetailController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'name'       => 'required',
+            'name'       => 'nullable',
             'phone'      => 'nullable',
             'email'      => 'nullable',
             'dob'        => 'nullable',
             'invoice'    => 'nullable',
             'product'    => 'nullable',
             'unit'       => 'nullable',
+            'price'      => 'nullable',
             'store'      => 'nullable',
             'customer'   => 'nullable',
             'address'    => 'nullable',
@@ -225,41 +274,44 @@ class RetailController extends Controller
             $data['payslips'] = $path;
         }
 
-        $retails = new Retail;
-        $retails->name           = $request->name;
-        $retails->phone          = $request->phone;
-        $retails->email          = $request->email;
-        $retails->dob            = $request->dob;
-        $retails->invoice        = $request->invoice;
-        $retails->product        = $request->product;
-        $retails->unit           = $request->unit;
-        $retails->store          = $request->store;
-        $retails->customer       = $request->customer;
-        $retails->address        = $request->address;
-        $retails->payment        = $request->payment;
-        $retails->confirm        = $request->confirm;
-        $retails->amount         = $request->amount;
-        $retails->visited        = $request->visited;
-        $retails->found          = $request->found;
-        $retails->cash_hand      = $request->cash_hand;
-        $retails->cash_bank      = $request->cash_bank;
-        $retails->bank_paid      = $request->bank_paid;
-        $retails->payslips       = $request->payslips;
-        $retails->serial_no      = $request->serial_no;
-        $retails->sys_qty        = $request->sys_qty;
-        $retails->phy_qty        = $request->phy_qty;
-        $retails->user_id        = auth()->user()->id;
-        $retails->store_serial   = $store_isbn;
-        $retails->sold_by        = $request->sold_by;
-        $retails->today_date     = $request->today_date;
+        // !empty($request->except('_token'))
 
-        $retails->save();
+            $retails = new Retail;
+            $retails->name           = $request->name;
+            $retails->phone          = $request->phone;
+            $retails->email          = $request->email;
+            $retails->dob            = $request->dob;
+            $retails->invoice        = $request->invoice;
+            $retails->product        = $request->product;
+            $retails->unit           = $request->unit;
+            $retails->price          = $request->price;
+            $retails->store          = $request->store;
+            $retails->customer       = $request->customer;
+            $retails->address        = $request->address;
+            $retails->payment        = $request->payment;
+            $retails->confirm        = $request->confirm;
+            $retails->amount         = $request->amount;
+            $retails->visited        = $request->visited;
+            $retails->found          = $request->found;
+            $retails->cash_hand      = $request->cash_hand;
+            $retails->cash_bank      = $request->cash_bank;
+            $retails->bank_paid      = $request->bank_paid;
+            $retails->payslips       = $request->payslips;
+            $retails->serial_no      = $request->serial_no;
+            $retails->sys_qty        = $request->sys_qty;
+            $retails->phy_qty        = $request->phy_qty;
+            $retails->user_id        = auth()->user()->id;
+            $retails->store_serial   = $store_isbn;
+            $retails->sold_by        = $request->sold_by;
+            $retails->today_date     = $request->today_date;
+    
+            $retails->save();
 
-        $customer_data = [
-            'customer_name' => $retails->name,
-            'customer_phone' => $retails->phone,
-            'customer_email' => $retails->email
-        ];
+            $customer_data = [
+                'customer_name' => $retails->name,
+                'customer_phone' => $retails->phone,
+                'customer_email' => $retails->email
+            ];
 
         Customer::create($customer_data);
 
@@ -287,8 +339,10 @@ class RetailController extends Controller
      */
     public function edit($id)
     {
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $report = Retail::findOrFail($id);
-        return view('retail.edit')->with('report', $report);
+        return view('retail.edit')->with('report', $report)
+                                  ->with('activities', $activities);
     }
 
     /**

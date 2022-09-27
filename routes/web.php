@@ -24,7 +24,6 @@ Route::get('/', function () {
 
 
 Route ::group(['middleware' => ['auth']],function(){
-    Route::get('customer/export/', [CustomerController::class, 'downloadGroupTemplate'])->name('customer.template');;
     Route::get('/dashboard', [RetailController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [KserController::class, 'index'])->name('ksers.index');
     Route::get('/retail-report/store_locations', [RetailController::class, 'store_locations'])->name('retail-report.store_locations');
@@ -32,8 +31,10 @@ Route ::group(['middleware' => ['auth']],function(){
     Route::get('/retail-report/generate_pdf/{report_key}/{store}', [RetailController::class, 'generate_pdf']);
     Route::get('/retail-report/store_sale/{store_sale}', [RetailController::class, 'store_sale'])->name('retail-report.store_sale');
     Route::get('/retail-report/fetch_records/{date_created}/{store}', [RetailController::class, 'fetch_records']);
+    Route::get('/facility-report/generate_pdf/{report_key}/{store}', [FacilityController::class, 'generate_pdf']);
     Route::get('/facility-report/store_report/{store_report}', [FacilityController::class, 'store_report'])->name('facility-report.store_report');
     Route::get('/facility-report/fetch_records/{date_created}/{store}', [FacilityController::class, 'fetch_records']);
+    Route::get('/retail-customers/export/', [CustomerController::class, 'downloadGroupTemplate'])->name('customer.template');
     Route::resource('/retail-report', RetailController::class);
     Route::resource('/facility-report', FacilityController::class);
     Route::resource('/retail-customers', CustomerController::class);

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.partials')
 @section('content')
       <!-- Main Content -->
       <div class="main-content">
@@ -104,7 +104,7 @@
                           <th>Email</th>
                           <th>Address</th>
                           <th>Invoice No</th>
-                          <th>Other</th>
+                          <th>Sold By</th>
                         </tr>
                         <tr>
                             {{-- <td class="p-0 text-center">
@@ -117,23 +117,23 @@
                             <td>{{ $report['email']}}</td>
                             <td>{{ $report['address']}}</td>
                             <td>{{ $report['invoice']}}</td>
-                            <td>other</td>
+                            <td>{{ $report['sold_by']}}</td>
                           </tr>                         
                       </table>
                       <table class="table table-striped">
                         <tr>
                           <th>Product Details</th>
                           <th>Units</th>
+                          <th>Price</th>
                           <th>Mode Of Payment</th>
-                          <th>Sold By</th>
                           <th>Confirm By</th>
-                          <th>Amount</th>
+                          <th>Total Amount</th>
                         </tr>
                         <tr>
                             <td>{{ $report['product']}}</td>
                             <td>{{ $report['unit']}}</td>
+                            <td>{{ $report['price']}}</td>
                             <td>{{ $report['payment']}}</td>
-                            <td>{{ $report['sold_by']}}</td>
                             <td>{{ $report['confirm']}}</td>
                             <td><b><span style="color: green">&#x20A6;</span>@money($report['amount'])</b></td>
                         </tr>                         

@@ -15,13 +15,11 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Advanced Table</h4>
+                    <h4>Customer Table</h4>
                     <div class="card-header-form">
-                      <form>
-                        <div class="input-group">
-                         <a href="{{ route('customer.template') }}"><button class="btn btn-outline-secondary"><i class="fas fa-download"></i>&nbsp;Download Excel</button></a> 
+                        <div>
+                          <a href="{{ route('customer.template') }}"><button class="btn btn-outline-secondary"><i class="fas fa-download"></i>&nbsp;Download CSV</button></a> 
                         </div>
-                      </form>
                     </div>
                   </div>
                   <div class="card-body p-0">

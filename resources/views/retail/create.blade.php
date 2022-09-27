@@ -16,7 +16,7 @@
           <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="text-center">Daily Report Form</h3>
+                <h4 class="text-center">Daily Report Form</h4>
               </div>
             <form method="POST" action="{{ route('retail-report.store') }}" enctype="multipart/form-data" class="register-form" id="register-form">
                 @csrf
@@ -60,18 +60,19 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="">Product Details</label>
-                    <select class="form-select" id="basic-product" data-placeholder="Select Product" name="product">
+                    <input type="text" name="product" class="form-control" id="inputCity">
+                    {{-- <select class="form-select" id="basic-product" data-placeholder="Select Product" name="product">
                       <option></option>
                       <option>Reactive</option>
                       <option>Solution</option>
                       <option>Conglomeration</option>
                       <option>Algoritm</option>
                       <option>Holistic</option>
-                    </select>
+                    </select> --}}
                   </div>
                   <div class="form-group col-md-2">
                     <label for="">Units</label>
-                    <input type="number" name="unit" class="form-control" id="">
+                    <input type="number" name="unit" class="form-control" id="unit">
                   </div>
                   <div class="form-group col-md-2">
                     <label for="inputZip">Store Location</label>
@@ -93,7 +94,11 @@
                   </div>
                   <div class="form-group col-md-2">
                     <label for="inputCity">Mode Of Payment</label>
-                    <input type="text" name="payment" class="form-control" id="inputCity">
+                    <select id="inputState" name="payment" class="form-control">
+                      <option selected disabled>--Select Answer--</option>
+                      <option value="Bank Transfer">Bank Transfer</option> 
+                      <option value="POS">POS</option> 
+                    </select>
                   </div>
                   <div class="form-group col-md-2">
                     <label for="inputCity">Sold By</label>
@@ -105,7 +110,9 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="inputZip">Amount</label>
-                    <input type="text" name="amount" class="form-control" id="inputZip">
+                    <input type="text" onkeyup="myFunction_sell()" class="form-control" name="price" id="price">
+                    <p style="color: red" class="text:right"><b><span id="ShowSell"></span></b></p>
+                    <input type="text" id="InputSell" hidden="hidden" name="amount"/>
                   </div>
                 </div>
                 <div class="form-row">
@@ -175,4 +182,16 @@
     </section>
   </div>
   @endsection
-  
+  <script>
+  function myFunction_sell() {
+  first = Number($('#unit').val());
+  second = Number($('#price').val());
+  if(first && second && !isNaN(first) && !isNaN(second)){
+      $('span#ShowSell').text( "Total Amount: " + first * second + ".00"+ " NGN" );
+      $('input#InputSell').val(first * second);
+  }
+  else {
+      $('span#ShowSell').text(" ");
+  }
+}
+</script>

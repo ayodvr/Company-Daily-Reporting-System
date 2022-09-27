@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CustomerTemplateExport;
+use Spatie\Activitylog\Models\Activity;
 
 class CustomerController extends Controller
 {
@@ -15,13 +17,15 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $customers = Customer::orderBy('created_at', 'DESC')->paginate(10);
-        return view('customer.index')->with('customers', $customers);
+        return view('customer.index')->with('customers', $customers)
+                                     ->with('activities', $activities);
     }
 
     public function downloadGroupTemplate()
     {
-        return Excel::download(new CustomerTemplateExport(), 'Customer.xlsx');
+        return Excel::download(new CustomerTemplateExport(), 'Customer.csv',\Maatwebsite\Excel\Excel::CSV);
     }
 
     /**
