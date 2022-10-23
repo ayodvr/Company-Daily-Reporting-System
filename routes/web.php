@@ -29,6 +29,7 @@ Route ::group(['middleware' => ['auth']],function(){
     Route::get('/retail-report/store_locations', [RetailController::class, 'store_locations'])->name('retail-report.store_locations');
     Route::get('/retail-report/timeline', [RetailController::class, 'timeline'])->name('retail-report.timeline');
     Route::get('/retail-report/generate_pdf/{report_key}/{store}', [RetailController::class, 'generate_pdf']);
+    Route::get('/retail-report/send_pdf/{report_key}/{store}', [RetailController::class, 'send_pdf']);
     Route::get('/retail-report/store_sale/{store_sale}', [RetailController::class, 'store_sale'])->name('retail-report.store_sale');
     Route::get('/retail-report/fetch_records/{date_created}/{store}', [RetailController::class, 'fetch_records']);
     Route::get('/facility-report/generate_pdf/{report_key}/{store}', [FacilityController::class, 'generate_pdf']);

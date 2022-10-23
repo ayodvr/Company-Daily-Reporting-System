@@ -29,7 +29,7 @@ class SendEmail
      */
     public function handle(UserCreated $event)
     {
-        dd($event);
+        //dd($event);
         Mail::to($event->user->email)->send( new CreateUsers($event->user));
     }
 }

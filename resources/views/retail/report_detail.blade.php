@@ -8,16 +8,16 @@
             <div class="row">
               <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
-                  <div class="card-icon l-bg-cyan">
-                    <i class="fas fa-cart-plus"></i>
-                  </div>
+                  {{-- <div class="card-icon l-bg-cyan" style="width: 50px;height:50px">
+                    <i class="fas fa-cart-plus mt-3"></i>
+                  </div> --}}
                   <div class="card-wrap">
                     <div class="padding-20">
                       <div class="text-right">
                         <h3 class="font-light mb-0">
                           <i class="ti-arrow-up text-success"></i><span> &#x20A6;</span>@money($t_sum)
                         </h3>
-                        <span class="text-muted">Todays Income</span>
+                        <span class="text-muted">Todays Revenue</span>
                       </div>
                     </div>
                   </div>
@@ -52,6 +52,9 @@
                           <a href="#"><button style="margin-left: auto" data-toggle="modal" data-target="#exampleModalCenter"
                              class="btn btn-success"><i class="fas fa-check-double"></i> Send Report</button></a>
                         </h3>
+                        {{-- <h3 class="font-light mb-0">
+                          <a href="/retail-report/send_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><button style="margin-left: auto" class="btn btn-success"><i class="fas fa-check-double"></i> Send Report</button></a>
+                        </h3> --}}
                         {{-- <span class="text-muted">Send Report</span> --}}
                       </div>
                     </div>
@@ -77,19 +80,27 @@
               </div>
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
-                    {{-- <h4>Advanced Table</h4> --}}
+                  <div class="card-header mr-3">
+                    <a href="{{ route('retail-report.store_sale', str_replace(' ', '_', strtolower($t_store))) }}"><button class="btn btn-outline-dark"><i class="fa fa-arrow-left"></i>&nbsp;Back</button></a>
                   </div>
-                  {{-- <div class="text-right mr-5">
+                  {{-- <div class="text-center mr-5">
                     <a href="/retail-report/generate_pdf" class="btn btn-primary">Send Report</a>
                   </div> --}}
+                  <div class="text-center">
+                    @if(session('success'))
+                          <div class="alert alert-success" style="width:92%; margin:auto">
+                          {{session('success')}}</div>
+                    @endif
+               </div>
                   <div class="card-body p-0">
                     <div class="table-responsive">
                     @foreach ($record_arr as $report)
                     <div class="col-12 d-flex justify-content-between mb-2">
-                      <div><h4>S/N: {{ $report['store_serial'] }}</h4></div>
                       <div>
-                        <a href="{{ route('retail-report.edit', $report['id']) }}"><button class="btn btn-outline-info"><i class="far fa-edit"></i>&nbsp;Edit Sale</button></a>
+                        {{-- <h4>S/N: {{ $report['store_serial'] }}</h4></div> --}}
+                        <h4>Sale: {{ $loop->iteration }}</h4></div>
+                      <div>
+                        <a href="{{ route('retail-report.edit', $report['id']) }}"><button class="btn btn-outline-info"><i class="far fa-edit"></i>&nbsp;Edit Report</button></a>
                       </div>
                     </div>
                       <table class="table table-striped">
@@ -123,19 +134,25 @@
                       <table class="table table-striped">
                         <tr>
                           <th>Product Details</th>
-                          <th>Units</th>
-                          <th>Price</th>
                           <th>Mode Of Payment</th>
                           <th>Confirm By</th>
+                          <th>Units</th>
+                          <th>Price</th>
                           <th>Total Amount</th>
+                          <th>Payslip</th>
                         </tr>
                         <tr>
                             <td>{{ $report['product']}}</td>
-                            <td>{{ $report['unit']}}</td>
-                            <td>{{ $report['price']}}</td>
                             <td>{{ $report['payment']}}</td>
                             <td>{{ $report['confirm']}}</td>
+                            <td>{{ $report['unit']}}</td>
+                            <td><span>&#x20A6;</span>@money($report['price'])</td>
                             <td><b><span style="color: green">&#x20A6;</span>@money($report['amount'])</b></td>
+                            @if (isset($report['payslips']))
+                            <td><img src="{{ $report['payslips']}}" alt="payslip" style="width: 100px;height:100px" class="myImg"></td> 
+                            @else
+                            <td>No Payslip Found</td>
+                            @endif
                         </tr>                         
                       </table>
                       @endforeach
@@ -146,48 +163,93 @@
             </div>
           </div>
         </section>
+        
         {{-- {{ $students->links('pagination::bootstrap-4') }} --}}
             <!-- Modal -->
           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">New Message</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">New Mail</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-auto">
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <form class="composeForm">
-                              <div class="form-group">
-                                <div class="form-line">
-                                  <input type="text" id="email_address" class="form-control" placeholder="To">
+                  <form action="/retail-report/send_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}" method="GET">
+                    @csrf
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-auto">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <form class="composeForm">
+                            <div class="form-group">
+                              <div class="form-line">
+                              <label>To:</label>
+                                <select class="form-control selectric" name="email[]" multiple="multiple">
+                                  <option></option>
+                                  <option value="ayodejiadekunle@gmail.com">Ayodeji Adekunle</option>
+                                  <option value="adekunle.s@dreamworksdirect.com">Adekunle Sherif</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="form-line">
+                                <label>Subject:</label>
+                                <input type="text" name="subject" id="subject" class="form-control">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="form-line">
+                              <label>Message:</label>
+                              <textarea class="form-control" name="body"></textarea>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="m-l-8 m-b-20 text-center">
+                                  <button type="submit" class="btn btn-primary btn-border-radius waves-effect">Send Mail</button>
                                 </div>
-                              </div>
-                              <div class="form-group">
-                                <div class="form-line">
-                                  <input type="text" id="subject" class="form-control" placeholder="Subject">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <textarea class="form-control"></textarea>
-                              </div>
-                              <div class="form-group">
-                                  <div class="m-l-8 m-b-20">
-                                    <button type="button" class="btn btn-primary btn-border-radius waves-effect">Send</button>
-                                  </div>
-                              </div>
-                            </form>
-                          </div>
-                    </div>
+                            </div>
+                          </form>
+                        </div>
                   </div>
+                </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
+          <!-- The Modal -->
+           <div id="myModal" class="modals">
+          {{-- <button class="close">&times;</button> --}}
+          <button type="button" class="btn-close btn btn-danger" aria-label="Close">&times;</button>
+         <img class="modal-content" id="img01">
+        <div id="caption"></div>
       </div>
-      @endsection
+    </div>
+    <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+      
+      // Get the image and insert it inside the modal - use its "alt" text as a caption
+      var img = document.getElementsByClassName("myImg");
+        for(var i=0; i<img.length; i++){
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img[i].addEventListener('click',function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+      })
+    }
+      
+      // Get the <span> element that closes the modal
+      var button = document.getElementsByClassName("btn-close")[0];
+      
+      // When the user clicks on <span> (x), close the modal
+      button.onclick = function() { 
+        modal.style.display = "none";
+      }
+    </script>
+@endsection
+      
       

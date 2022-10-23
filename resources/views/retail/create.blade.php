@@ -16,7 +16,12 @@
           <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="text-center">Daily Report Form</h4>
+                <div class="col-12 d-flex justify-content-between mb-2">
+                  <div><h4 class="text-center">Daily Report Form</h4></div>
+                  <div>
+                    <a href="/retail-report"><button class="btn btn-outline-secondary"><i class="far fa-eye"></i>&nbsp;Manage Report</button></a>
+                  </div>
+                </div>
               </div>
             <form method="POST" action="{{ route('retail-report.store') }}" enctype="multipart/form-data" class="register-form" id="register-form">
                 @csrf
@@ -40,7 +45,7 @@
                     <label for="inputEmail4">Customer Name</label>
                     <input type="text" name="name" class="form-control" id="inputEmail4">
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-2">
                     <label for="">Phone</label>
                     <input type="text" name="phone" class="form-control" id="">
                   </div>
@@ -48,9 +53,17 @@
                     <label for="">Email</label>
                     <input type="text" name="email" class="form-control" id="">
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-2">
                     <label for="">Date Of Birth</label>
                     <input type="date" name="dob" class="form-control" id="">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Type Of Customer</label>
+                    <select id="inputState" name="customer" class="form-control">
+                      <option selected disabled>--Select Answer--</option>
+                      <option value="Yes">New</option> 
+                      <option value="No">Old</option> 
+                    </select>
                   </div>
                 </div>
                 <div class="form-row">
@@ -58,7 +71,7 @@
                     <label for="inputEmail4">Invoice No</label>
                     <input type="text" name="invoice" class="form-control" id="inputEmail4">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-5">
                     <label for="">Product Details</label>
                     <input type="text" name="product" class="form-control" id="inputCity">
                     {{-- <select class="form-select" id="basic-product" data-placeholder="Select Product" name="product">
@@ -72,23 +85,17 @@
                   </div>
                   <div class="form-group col-md-2">
                     <label for="">Units</label>
-                    <input type="number" name="unit" class="form-control" id="unit">
+                    <input type="number" onclick="myFunction_sell()" name="unit" class="form-control" id="unit">
                   </div>
-                  <div class="form-group col-md-2">
-                    <label for="inputZip">Store Location</label>
-                    <input type="text" name="store" value="{{ auth()->user()['store'] }}" class="form-control" readonly>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="inputZip">Type Of Customer</label>
-                    <select id="inputState" name="customer" class="form-control">
-                      <option selected disabled>--Select Answer--</option>
-                      <option value="Yes">New</option> 
-                      <option value="No">Old</option> 
-                    </select>
-                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputZip">Price</label>
+                    <input type="text" onkeyup="myFunction_sell()" class="form-control" name="price" id="price">
+                    <p style="color: red" class="text:right"><b><span id="ShowSell"></span></b></p>
+                    <input type="text" id="InputSell" hidden="hidden" name="amount"/>
+                  </div> 
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="inputCity">Address</label>
                     <input type="text" name="address" class="form-control" id="inputCity">
                   </div>
@@ -108,11 +115,9 @@
                     <label for="inputZip">Confirm By</label>
                     <input type="text" name="confirm" class="form-control" id="inputZip">
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="inputZip">Amount</label>
-                    <input type="text" onkeyup="myFunction_sell()" class="form-control" name="price" id="price">
-                    <p style="color: red" class="text:right"><b><span id="ShowSell"></span></b></p>
-                    <input type="text" id="InputSell" hidden="hidden" name="amount"/>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Store Location</label>
+                    <input type="text" name="store" value="{{ auth()->user()['store'] }}" class="form-control" readonly>
                   </div>
                 </div>
                 <div class="form-row">

@@ -51,16 +51,17 @@
                     <div class="order-summary">
                         <div class="table-responsive">
                             @foreach ($record_arr as $date => $report)
-                            <h4 class="text-4 mt-2"> <span>S/N: {{ $report['store_serial'] }}</span></h4>
+                            {{-- <h4 class="text-4 mt-2"> <span>Sale: {{ $report['store_serial'] }}</span></h4> --}}
+                            <h4 class="text-4 mt-2"> <span>Sale: {{ $loop->iteration }}</span></h4>
                             <table class="table invoice-table">
                                 <thead class="bg-active">
                                     <tr>
-                                      <th style="font-family: sans-serif">Customer Name</th>
-                                      <th style="font-family: sans-serif">Phone</th>
-                                      <th style="font-family: sans-serif">Email</th>
-                                      <th style="font-family: sans-serif">Address</th>
-                                      <th style="font-family: sans-serif">Invoice No</th>
-                                      <th style="font-family: sans-serif">Other</th>
+                                      <th style="font-family: sans-serif;font-weight:bold">Customer Name</th>
+                                      <th style="font-family: sans-serif;font-weight:bold">Phone</th>
+                                      <th style="font-family: sans-serif;font-weight:bold">Email</th>
+                                      <th style="font-family: sans-serif;font-weight:bold">Address</th>
+                                      <th style="font-family: sans-serif;font-weight:bold">Invoice No</th>
+                                      <th style="font-family: sans-serif;font-weight:bold">Product Details</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -70,23 +71,22 @@
                                       <td style="font-family: sans-serif">{{ $report['email']}}</td>
                                       <td style="font-family: sans-serif">{{ $report['address']}}</td>
                                       <td style="font-family: sans-serif">{{ $report['invoice']}}</td>
-                                      <td style="font-family: sans-serif">other</td>
+                                      <td style="font-family: sans-serif">{{ $report['product']}}</td>
                                     </tr>
                                   </tbody>
                                   <thead class="bg-active">
                                   <tr>
-                                    <th style="font-family: sans-serif">Product Details</th>
-                                    <th style="font-family: sans-serif">Units</th>
-                                    <th style="font-family: sans-serif">Mode Of Payment</th>
-                                    <th style="font-family: sans-serif">Sold By</th>
-                                    <th style="font-family: sans-serif">Confirm By</th>
-                                    <th style="font-family: sans-serif">Amount</th>
+                                    <th style="font-family: sans-serif;font-weight:bold">Price</th>
+                                    <th style="font-family: sans-serif;font-weight:bold">Units</th>
+                                    <th style="font-family: sans-serif;font-weight:bold">Mode Of Payment</th>
+                                    <th style="font-family: sans-serif;font-weight:bold">Sold By</th>
+                                    <th style="font-family: sans-serif;font-weight:bold">Confirmed By</th>
+                                    <th style="font-family: sans-serif;font-weight:bold">Total</th>
                                   </tr>
                                   </thead>
                                   <tbody>
                                   <tr>
-                                    {{-- <td>{{ $report['product']}}</td> --}}
-                                    <td style="font-family: sans-serif">XXXXXXXXXXXX</td>
+                                    <td style="font-family: sans-serif"><span style="color: #000">&#x20A6;</span>@money($report['price'])</td>
                                     <td style="font-family: sans-serif">{{ $report['unit']}}</td>
                                     <td style="font-family: sans-serif">{{ $report['payment']}}</td>
                                     <td style="font-family: sans-serif">{{ $report['sold_by']}}</td>

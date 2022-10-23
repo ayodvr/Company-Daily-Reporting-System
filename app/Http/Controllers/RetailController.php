@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 
 use DB;
-use PDF;
-use App;
+use Mail;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Store;
 use App\Models\Retail;
 use App\Models\Customer;
 use App\Reports\MyReport;
+use App\Event\ReportSender;
 use Illuminate\Http\Request;
 use App\Charts\MonthlySalesChart;
 use Illuminate\Support\Facades\Auth;
@@ -153,7 +153,7 @@ class RetailController extends Controller
         $html = \View::make('retail.pdf')->with('record_arr', $report_arr)
                                          ->with('t_sum', $t_sum)
                                          ->with('t_date', $report_arr[0]['created_at'])
-                                         ->with('t_store', $report_arr[0]['store']);;
+                                         ->with('t_store', $report_arr[0]['store']);
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
@@ -164,8 +164,15 @@ class RetailController extends Controller
     }
 
 
-    public function send_pdf($report_key, $store_location)
+    public function send_pdf(Request $request, $report_key, $store_location)
     {
+
+        $data = [
+            'email'     => $request->get('email'),
+            'subject'   => $request->get('subject'),
+            'body'      => $request->get('body')
+        ];
+
         $sales_arr = Retail::where('today_date', $report_key)->get();
          
         $report_arr = [];
@@ -183,25 +190,39 @@ class RetailController extends Controller
         $total_amount = array_column($report_arr, 'amount');
         $t_sum = array_sum($total_amount);
 
-        $filename = 'retail-report.pdf';
+        $serial = random_int(10, 99);
+        $filename = 'DW'.'-'. $serial .'-'. 'retail-report.pdf';
         
         $mpdf = new \Mpdf\Mpdf();
         
         $html = \View::make('retail.pdf')->with('record_arr', $report_arr)
                                          ->with('t_sum', $t_sum)
                                          ->with('t_date', $report_arr[0]['created_at'])
-                                         ->with('t_store', $report_arr[0]['store']);;
+                                         ->with('t_store', $report_arr[0]['store']);
         $html = $html->render();
+        
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
         $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML(utf8_encode($html));
-        $mpdf->Output($filename,'I');
-        $content = $mpdf->Output($filename,'S');
+        $mpdf->Output('Reports'.'/'.$filename,'F');
 
-        event (new SendReport($content));
+        $file = public_path().'/'.'Reports'.'/' . $filename;
+
+            \Mail::send('emails.sendReport',array(
+                'body' => $data['body']
+            ),function($message) use ($data, $file) { 
+                foreach($data['email'] as $email){
+                    $message->to($email)
+                        ->subject($data["subject"])
+                        ->attach($file); 
+                }      
+            });
+
+            return back()->with('success', 'Report successfully sent!');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -296,7 +317,7 @@ class RetailController extends Controller
             $retails->cash_hand      = $request->cash_hand;
             $retails->cash_bank      = $request->cash_bank;
             $retails->bank_paid      = $request->bank_paid;
-            $retails->payslips       = $request->payslips;
+            $retails->payslips       = $data['payslips'];
             $retails->serial_no      = $request->serial_no;
             $retails->sys_qty        = $request->sys_qty;
             $retails->phy_qty        = $request->phy_qty;
@@ -315,7 +336,7 @@ class RetailController extends Controller
 
         Customer::create($customer_data);
 
-        notify()->success("Sale Recorded!","");
+        notify()->success("Report Created!","");
         
         return back();
     }
@@ -341,8 +362,11 @@ class RetailController extends Controller
     {
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $report = Retail::findOrFail($id);
+        $anytime = Carbon::now();
+        $daily_date = $anytime->format('Y-m-d');
         return view('retail.edit')->with('report', $report)
-                                  ->with('activities', $activities);
+                                  ->with('activities', $activities)
+                                  ->with('daily_date', $daily_date);
     }
 
     /**
@@ -416,7 +440,7 @@ class RetailController extends Controller
         $retail->cash_hand      = $request->cash_hand;
         $retail->cash_bank      = $request->cash_bank;
         $retail->bank_paid      = $request->bank_paid;
-        $retail->payslips       = $request->payslips;
+        $retail->payslips       = $data['payslips'];
         $retail->serial_no      = $request->serial_no;
         $retail->qty_sold        = $request->qty_sold;
         $retail->sys_qty        = $request->sys_qty;
@@ -424,7 +448,7 @@ class RetailController extends Controller
         $retail->user_id        = auth()->user()->id;
         $retail->store_serial   = $store_isbn;
         $retail->sold_by        = $request->sold_by;
-        $retail->today_date     = $request->today_date;
+        // $retail->today_date     = $request->today_date;
         
         if($retail->save()){
 

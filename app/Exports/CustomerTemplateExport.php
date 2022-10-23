@@ -14,7 +14,8 @@ class CustomerTemplateExport implements FromCollection, WithHeadings,ShouldAutoS
     */
     public function collection()
     {
-        return Customer::all();
+        return Customer::Select('id','customer_name','customer_phone','customer_email','created_at')->get();
+        
     }
 
     public function headings(): array

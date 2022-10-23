@@ -92,7 +92,6 @@
    theme: "bootstrap-5",
 });
  </script>
-
 <script src="{{ asset('js/iziToast.js') }}"></script>
 @include('vendor.lara-izitoast.toast')
   <script src="{{ asset('assets/js/app.min.js') }}"></script>
@@ -109,10 +108,10 @@
   <script src="{{ asset('assets/bundles/jquery-pwstrength/jquery.pwstrength.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
-  <script src="{{ asset('assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
-  <script src="{{ asset('assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script>
   <script src="{{ asset('assets/bundles/summernote/summernote-bs4.js') }}"></script>

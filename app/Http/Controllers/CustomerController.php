@@ -25,7 +25,7 @@ class CustomerController extends Controller
 
     public function downloadGroupTemplate()
     {
-        return Excel::download(new CustomerTemplateExport(), 'Customer.csv',\Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new CustomerTemplateExport(), 'Customer-Export.csv',\Maatwebsite\Excel\Excel::CSV);
     }
 
     /**

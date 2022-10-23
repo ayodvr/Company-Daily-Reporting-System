@@ -13,6 +13,8 @@
             <form method="POST" action="{{ route('retail-report.update', $report->id) }}" enctype="multipart/form-data" class="register-form" id="register-form">
               {{method_field('PUT')}}
               @csrf
+                <input type="text" name="store_code" value="{{ auth()->user()->store_code }}" class="form-control" hidden>
+                <input type="text" name="today_date" value="{{ $daily_date }}" class="form-control" hidden>
                 <input type="text" name="store_name" value="{{ auth()->user()->store }}" class="form-control" hidden>
                 <div class="text-center">
                   @if(count($errors) > 0)
