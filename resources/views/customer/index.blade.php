@@ -6,7 +6,7 @@
           <div class="section-header">
             <h1>Customers</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>
               <div class="breadcrumb-item">Customers Table</div>
             </div>
           </div>
@@ -16,9 +16,22 @@
                 <div class="card">
                   <div class="card-header">
                     <h4>Customer Table</h4>
-                    <div class="card-header-form">
-                        <div>
-                          <a href="{{ route('customer.template') }}"><button class="btn btn-outline-secondary"><i class="fas fa-download"></i>&nbsp;Download CSV</button></a> 
+                    <div class="card-header-form d-flex">
+                        <div class="mr-3">
+                            <a href="#"><button class="btn btn-outline-info"><i class="fas fa-plus"></i>&nbsp;Add Customer</button></a>
+                          </div>
+                        <div class="mr-3">
+                          <a href="{{ route('customer.template') }}"><button class="btn btn-outline-success"><i class="fas fa-download"></i>&nbsp;Export CSV</button></a>
+                        </div>
+                        <div class="card-header-action">
+                            <form>
+                              <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <div class="input-group-btn">
+                                  <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                              </div>
+                            </form>
                         </div>
                     </div>
                   </div>
@@ -54,7 +67,7 @@
                             <td>{{ $customer->customer_phone }}</td>
                             <td>{{ $customer->customer_email }}</td>
                             <td>{{ $customer['created_at']->toDayDateTimeString() }}</td>
-                          </tr> 
+                          </tr>
                         @endforeach
                       </table>
                     </div>

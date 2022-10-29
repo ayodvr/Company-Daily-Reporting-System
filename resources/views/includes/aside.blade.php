@@ -27,17 +27,25 @@
               <li><a class="nav-link" href="/facility-report">Manage Reports</a></li>
             </ul>
         </li>
-        <li class="menu-header">Customers</li>
+        <li class="menu-header">Directory</li>
         <li class="dropdown">
-          <a href="{{ route('retail-customers.index') }}" class="nav-link"><i class="fas fa-users"></i><span>View Customers</span></a>
-       </li>
-        <li class="menu-header">Stores</li>
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-friends"></i><span>Staffs</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="nav-link">Manage Staffs</a></li>
+          </ul>
+       <li class="dropdown">
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-book"></i><span>Customers</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ route('retail-customers.index') }}" class="nav-link">Manage Customers</a></li>
+          </ul>
+        </li>
+        {{-- <li class="menu-header">Stores</li>
         <li class="dropdown">
           <a href="{{ route('retail-report.store_locations') }}" class="nav-link"><i class="fas fa-map-marker"></i><span>Locations</span></a>
-          {{-- <ul class="dropdown-menu">
+          <ul class="dropdown-menu">
             <li><a href="{{ route('retail-report.store_locations') }}">Vector Map</a></li>
-          </ul> --}}
-       </li>
+          </ul>
+       </li> --}}
       </ul>
     </aside>
   </div>

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{ asset('assets/bundles/jquery-selectric/selectric.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
@@ -62,7 +63,7 @@
   width: 100%;
   /* height: 500px; */
   max-width: 700px;
-} 
+}
 
 .btn-close {
   float: right;
@@ -83,7 +84,7 @@
 }
 
 /* Add Animation */
-.modal-content, #caption {  
+.modal-content, #caption {
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
   animation-name: zoom;
@@ -91,12 +92,12 @@
 }
 
 @-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)} 
+  from {-webkit-transform:scale(0)}
   to {-webkit-transform:scale(1)}
 }
 
 @keyframes zoom {
-  from {transform:scale(0)} 
+  from {transform:scale(0)}
   to {transform:scale(1)}
 }
 
@@ -134,7 +135,7 @@
         @include('includes.aside')
         @yield('content')
         @include('includes.footer')
-        @include('facility.edit') 
+        @include('facility.edit')
     </div>
   </div>
   <script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>
@@ -146,10 +147,87 @@
   <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+  {{-- <script type="text/javascript">
+    $('#summernote').summernote({
+        height: 400
+    });
+</script> --}}
+<script>
+    $('#summernote').summernote({
+      placeholder: 'Compose your message',
+      tabsize: 2,
+      height: 120,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+  </script>
   <!-- Page Specific JS File -->
   <!-- Template JS File -->
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <!-- Custom JS File -->
   <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+  <script type="text/javascript">
+    function editFunc(id){
+     $.ajax({
+        type:"GET",
+        url: "{{ url('facility-report') }}" + '/' + id +'/'+ 'edit',
+        data: {id : id},
+        dataType: 'json',
+        success: function(res){
+            $('#company-modal').modal('show');
+            $('#id').val(res.id);
+            $('#item_details').val(res.item_details);
+            $('#availability').val(res.availability);
+            $('#condition').val(res.condition);
+            $('#comments').val(res.comments);
+        }
+        // console.log(res);
+     });
+    }
+
+
+    $('#CompanyForm').submit(function(e) {
+        e.preventDefault();
+        let id           = $("#id").val();
+        let item_details = $("#item_details").val();
+        let availability = $("#availability").val();
+        let condition    = $("#condition").val();
+        let comments     = $("#comments").val();
+        let _token       = $("input[name=_token]").val();
+
+     $.ajax({
+        url: "{{ url('facility-report')}}" + '/' + id,
+        type:'PUT',
+        data: {
+            id:id,
+            item_details:item_details,
+            availability:availability,
+            condition:condition,
+            comments:comments,
+            _token:_token
+        },
+        success:function(response){
+            $('#rid' + response.id +' td:nth-child(2)').text(response.item_details);
+            $('#rid' + response.id +' td:nth-child(3)').text(response.availability);
+            $('#rid' + response.id +' td:nth-child(4)').text(response.condition);
+            $('#rid' + response.id +' td:nth-child(5)').text(response.comments);
+            $("#company-modal").modal('toggle');
+            $("#CompanyForm")[0].reset();
+        },
+            error: function(data){
+            console.log(data);
+          }
+      });
+    });
+    </script>
 </body>
 </html>

@@ -13,8 +13,8 @@ class MonthlySalesChart
     public function __construct(LarapexChart $chart)
     {
         $this->chart = $chart;
-    } 
-   
+    }
+
     public function build()
     {
         $visitors = Retail::select(
@@ -24,10 +24,10 @@ class MonthlySalesChart
             ->whereYear('created_at',date('Y'))
             ->groupBy('month_name')
             ->get();
-        //dd($visitors); 
+        //dd($visitors);
         $total_amt_arr = [];
         $month_arr = [];
-        
+
         if(isset($visitors)){
             foreach($visitors as $key => $value){
                 array_push($total_amt_arr, $value->total_amount);
@@ -35,11 +35,11 @@ class MonthlySalesChart
             }
         }
         return $this->chart->areaChart()
-        ->setTitle('Monthly Sales Chart')
+        // ->setTitle('Monthly Sales Chart')
         // ->setSubtitle('Monthly Sales')
-        ->addData('Sales', array_reverse($total_amt_arr))
+        ->addData('Sales',$total_amt_arr)
         // ->addData('Online sales', [70, 29, 77, 28, 55, 45])
-        ->setXAxis(array_reverse($month_arr))
+        ->setXAxis($month_arr)
         ->setGrid(false, '#3F51B5', 0.1)
         ->setMarkers(['#FF5722', '#E040FB'], 7, 10);
     }

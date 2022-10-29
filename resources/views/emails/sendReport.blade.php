@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h5>{{ $body }}</h5>
+    <h5>{!! $body !!}</h5>
 </body>
 </html>

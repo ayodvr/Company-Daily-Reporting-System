@@ -4,26 +4,26 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Daily Reports</h1>
-            {{-- <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item"><a href="#">Components</a></div>
-              <div class="breadcrumb-item">Students Table</div>
-            </div> --}}
+            <h1></h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="/retail-report">Manage Reports</a></div>
+              <div class="breadcrumb-item">Reports Table</div>
+            </div>
           </div>
           <div class="section-body">
             <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    {{-- <h4>Advanced Table</h4> --}}
+                    <h4>Daily Reports</h4>
                     <div class="card-header-form">
                       <form>
                         <div class="input-group">
-                          {{-- <input type="text" class="form-control" placeholder="Search"> --}}
-                          {{-- <div class="input-group-btn">
+                          <input type="text" class="form-control" placeholder="Filter by date">
+                          <div class="input-group-btn">
                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                          </div> --}}
+                          </div>
                         </div>
                       </form>
                     </div>
@@ -49,12 +49,12 @@
                               </th>
                             </td>
                             @if (isset($key))
-                            <td>{{ $date[0]['created_at']->toDayDateTimeString() }}</td>  
+                            <td>{{ $date[0]['created_at']->toDayDateTimeString() }}</td>
                             @else
-                            <td>No Record!</td> 
+                            <td>No Record!</td>
                             @endif
                             <td>
-                            <a href="/retail-report/fetch_records/{{ $date[0]['today_date'] }}/{{ str_replace(' ','_', $date[0]['store']) }}/"><button name="submit" class="btn btn-outline-dark"><i class="far fa-eye"></i>&nbsp;Details</button></a>  
+                            <a href="/retail-report/fetch_records/{{ $date[0]['today_date'] }}/{{ str_replace(' ','_', $date[0]['store']) }}/"><button name="submit" class="btn btn-outline-dark"><i class="far fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                           </tr>
                         @endforeach

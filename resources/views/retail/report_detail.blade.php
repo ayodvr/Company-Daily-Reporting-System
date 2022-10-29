@@ -6,86 +6,91 @@
           <br>
           <div class="section-body">
             <div class="row">
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                  {{-- <div class="card-icon l-bg-cyan" style="width: 50px;height:50px">
-                    <i class="fas fa-cart-plus mt-3"></i>
-                  </div> --}}
-                  <div class="card-wrap">
-                    <div class="padding-20">
-                      <div class="text-right">
-                        <h3 class="font-light mb-0">
-                          <i class="ti-arrow-up text-success"></i><span> &#x20A6;</span>@money($t_sum)
-                        </h3>
-                        <span class="text-muted">Todays Revenue</span>
+            <div class="col-xl-3 col-lg-6">
+                <div class="card">
+                    <div class="card-body card-type-3">
+                    <div class="row">
+                        <div class="col">
+                        <h6 class="text-muted mb-0">Today's Revenue</h6>
+                        <span class="font-weight-bold mb-0">&#x20A6;</span>@money($t_sum)</span>
+                        </div>
+                        <div class="col-auto">
+                        <div class="card-circle l-bg-green text-white">
+                            <i class="fas fa-cart-plus"></i>
+                        </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        {{-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 10%</span> --}}
+                        {{-- <span class="text-nowrap">Todays Revenue</span> --}}
+                    </p>
+                    </div>
+                </div>
+                  </div>
+              <div class="col-xl-3 col-lg-6">
+                <div class="card">
+                  <div class="card-body card-type-3">
+                    <div class="row">
+                      <div class="col">
+                        <h6 class="text-muted mb-0">Todays Customers</h6>
+                        <span class="font-weight-bold mb-0">{{ $t_count }}</span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card-circle l-bg-cyan text-white">
+                          <i class="fas fa-users"></i>
+                        </div>
                       </div>
                     </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      {{-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 7.8%</span>
+                      <span class="text-nowrap">Since last month</span> --}}
+                    </p>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                  <div class="card-icon l-bg-purple">
-                    <i class="fas fa-users"></i>
-                  </div>
-                  <div class="card-wrap">
-                    <div class="padding-20">
-                      <div class="text-right">
-                        <h3 class="font-light mb-0">
-                          <i class="ti-arrow-up text-success"></i> {{ $t_count }}
-                        </h3>
-                        <span class="text-muted">Todays Customers</span>
+              <div class="col-xl-4 col-lg-4">
+                <div class="card">
+                  <div class="card-body card-type-3">
+                    <div class="row">
+                        <div class="col-auto">
+                            <a href="#"><button style="margin-left: auto" data-toggle="modal" data-target="#exampleModalCenter"
+                                class="btn btn-outline-success"><i class="fa fa-inbox"></i>&nbsp;Send Report</button></a>
+                          </div>
+                      <div class="col">
+                        <a href="/retail-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}">
+                        <button style="margin-left: auto" class="btn btn-outline-info"><i class="fa fa-eye"></i>&nbsp;View Report</button></a>
                       </div>
                     </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        {{-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
+                        <span class="text-nowrap">Since last month</span> --}}
+                    </p>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                  <div class="card-icon l-bg-green">
-                    <i class="fas fa-envelope"></i>
-                  </div>
-                  <div class="card-wrap">
-                    <div class="padding-20">
-                      <div class="text-right">
-                        <h3 class="font-light mb-0">
-                          <a href="#"><button style="margin-left: auto" data-toggle="modal" data-target="#exampleModalCenter"
-                             class="btn btn-success"><i class="fas fa-check-double"></i> Send Report</button></a>
-                        </h3>
-                        {{-- <h3 class="font-light mb-0">
-                          <a href="/retail-report/send_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><button style="margin-left: auto" class="btn btn-success"><i class="fas fa-check-double"></i> Send Report</button></a>
-                        </h3> --}}
-                        {{-- <span class="text-muted">Send Report</span> --}}
-                      </div>
+              <div class="col-xl-2 col-lg-6">
+                <div class="card">
+                  <div class="card-body card-type-3">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div>
+                                <span class="text-success mr-2"><i class="fa fa-plus"></i></span>
+                                <a href="{{ route('retail-report.create') }}"><span class="text-success">Create Report</span></a>
+                            </div>
+                          </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                  <div class="card-icon l-bg-orange">
-                    <i class="fas fa-download"></i>
-                  </div>
-                  <div class="card-wrap">
-                    <div class="padding-20">
-                      <div class="text-right">
-                        <h3 class="font-light mb-0">
-                          <a href="/retail-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><button style="margin-left: auto" class="btn btn-warning"><i class="fas fa-download"></i> Download Report</button></a>
-                        </h3>
-                        {{-- <span class="text-muted">Send Report</span> --}}
-                      </div>
-                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        <span class="text-info mr-2"><i class="fa fa-tasks"></i></span>
+                        <a href="{{ route('retail-report.store_sale', str_replace(' ', '_', strtolower($t_store))) }}"><span class="text-info">Manage Report</span></a>
+                    </p>
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header mr-3">
-                    <a href="{{ route('retail-report.store_sale', str_replace(' ', '_', strtolower($t_store))) }}"><button class="btn btn-outline-dark"><i class="fa fa-arrow-left"></i>&nbsp;Back</button></a>
+                  <div class="card-header mr-5">
+                    {{-- <a href="{{ route('retail-report.store_sale', str_replace(' ', '_', strtolower($t_store))) }}"><button class="btn btn-outline-dark" style="border:none"><i class="fa fa-arrow-left"></i>&nbsp;Back</button></a> --}}
                   </div>
-                  {{-- <div class="text-center mr-5">
-                    <a href="/retail-report/generate_pdf" class="btn btn-primary">Send Report</a>
-                  </div> --}}
                   <div class="text-center">
                     @if(session('success'))
                           <div class="alert alert-success" style="width:92%; margin:auto">
@@ -98,9 +103,10 @@
                     <div class="col-12 d-flex justify-content-between mb-2">
                       <div>
                         {{-- <h4>S/N: {{ $report['store_serial'] }}</h4></div> --}}
-                        <h4>Sale: {{ $loop->iteration }}</h4></div>
+                        <h6 class="badge badge-success">Sale: {{ $loop->iteration }}</h6>
+                    </div>
                       <div>
-                        <a href="{{ route('retail-report.edit', $report['id']) }}"><button class="btn btn-outline-info"><i class="far fa-edit"></i>&nbsp;Edit Report</button></a>
+                        <a href="{{ route('retail-report.edit', $report['id']) }}"><button class="btn btn-outline-secondary"><i class="far fa-edit"></i>&nbsp;Edit</button></a>
                       </div>
                     </div>
                       <table class="table table-striped">
@@ -129,7 +135,7 @@
                             <td>{{ $report['address']}}</td>
                             <td>{{ $report['invoice']}}</td>
                             <td>{{ $report['sold_by']}}</td>
-                          </tr>                         
+                          </tr>
                       </table>
                       <table class="table table-striped">
                         <tr>
@@ -149,11 +155,11 @@
                             <td><span>&#x20A6;</span>@money($report['price'])</td>
                             <td><b><span style="color: green">&#x20A6;</span>@money($report['amount'])</b></td>
                             @if (isset($report['payslips']))
-                            <td><img src="{{ $report['payslips']}}" alt="payslip" style="width: 100px;height:100px" class="myImg"></td> 
+                            <td><img src="{{ $report['payslips']}}" alt="payslip" style="width: 100px;height:100px" class="myImg"></td>
                             @else
                             <td>No Payslip Found</td>
                             @endif
-                        </tr>                         
+                        </tr>
                       </table>
                       @endforeach
                     </div>
@@ -163,11 +169,11 @@
             </div>
           </div>
         </section>
-        
+
         {{-- {{ $students->links('pagination::bootstrap-4') }} --}}
             <!-- Modal -->
           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">New Mail</h5>
@@ -201,12 +207,12 @@
                             <div class="form-group">
                               <div class="form-line">
                               <label>Message:</label>
-                              <textarea class="form-control" name="body"></textarea>
+                              <textarea class="form-control" name="body" id="summernote"></textarea>
                               </div>
                             </div>
                             <div class="form-group">
                                 <div class="m-l-8 m-b-20 text-center">
-                                  <button type="submit" class="btn btn-primary btn-border-radius waves-effect">Send Mail</button>
+                                  <button type="submit" class="btn btn-info btn-border-radius waves-effect">Send Mail</button>
                                 </div>
                             </div>
                           </form>
@@ -229,7 +235,7 @@
     <script>
       // Get the modal
       var modal = document.getElementById("myModal");
-      
+
       // Get the image and insert it inside the modal - use its "alt" text as a caption
       var img = document.getElementsByClassName("myImg");
         for(var i=0; i<img.length; i++){
@@ -241,15 +247,14 @@
             captionText.innerHTML = this.alt;
       })
     }
-      
+
       // Get the <span> element that closes the modal
       var button = document.getElementsByClassName("btn-close")[0];
-      
+
       // When the user clicks on <span> (x), close the modal
-      button.onclick = function() { 
+      button.onclick = function() {
         modal.style.display = "none";
       }
     </script>
 @endsection
-      
-      
+

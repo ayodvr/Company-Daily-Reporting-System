@@ -59,7 +59,7 @@ class FacilityController extends Controller
         });
 
         //dd($sales_arr->toArray());
-         
+
         return view("facility.daily_report")->with('report_arr', $report_arr)
                                             ->with('store_report', $store_report)
                                             ->with('activities', $activities);
@@ -72,32 +72,32 @@ class FacilityController extends Controller
         //dd($sales_arr);
         $report_arr = [];
         $report_key = [];
-        
+
         foreach($sales_arr as $key => $value){
             if(str_replace(' ','_', $value['store_id']) == $store_location){
                 array_push($report_arr, $value);
                 array_push($report_key, $key);
             }
         }
-    
+
         //dd($report_arr);
-        
+
         return view("facility.report_detail")->with('record_arr', $report_arr)
                                              ->with('t_date', $report_arr[0]['today_date'])
                                              ->with('t_store', $report_arr[0]['store_id'])
                                              ->with('report_id', $report_arr[0]['id'])
                                              ->with('fac_Serial', $report_arr[0]['store_serial'])
                                              ->with('activities', $activities);
-        
+
     }
 
     public function generate_pdf($report_key, $store_location)
     {
         $sales_arr = Facility::where('today_date', $report_key)->get();
-         
+
         $report_arr = [];
         $report_key = [];
-        
+
         foreach($sales_arr as $key => $value){
             if(str_replace(' ','_', $value['store_id']) == $store_location){
                 array_push($report_arr, $value);
@@ -108,9 +108,9 @@ class FacilityController extends Controller
         //dd($report_arr);
 
         $filename = 'facility_report.pdf';
-        
+
         $mpdf = new \Mpdf\Mpdf();
-        
+
         $html = \View::make('facility.pdf')->with('record_arr', $report_arr)
                                            ->with('t_date', $report_arr[0]['created_at'])
                                            ->with('t_store', $report_arr[0]['store_id'])
@@ -122,6 +122,62 @@ class FacilityController extends Controller
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML($html);
         $mpdf->Output($filename,'I');
+    }
+
+    public function send_pdf(Request $request ,$report_key, $store_location)
+    {
+        $data = [
+            'email'     => $request->get('email'),
+            'subject'   => $request->get('subject'),
+            'body'      => $request->get('body')
+        ];
+
+        $sales_arr = Facility::where('today_date', $report_key)->get();
+
+        $report_arr = [];
+        $report_key = [];
+
+        foreach($sales_arr as $key => $value){
+            if(str_replace(' ','_', $value['store_id']) == $store_location){
+                array_push($report_arr, $value);
+                array_push($report_key, $key);
+            }
+        }
+
+        //dd($report_arr);
+
+        // $filename = 'facility_report.pdf';
+
+        $serial = random_int(10, 99);
+        $filename = 'DW'.'-'. $serial .'-'. 'facility-report.pdf';
+
+        $mpdf = new \Mpdf\Mpdf();
+
+        $html = \View::make('facility.pdf')->with('record_arr', $report_arr)
+                                           ->with('t_date', $report_arr[0]['created_at'])
+                                           ->with('t_store', $report_arr[0]['store_id'])
+                                           ->with('fac_Serial', $report_arr[0]['store_serial']);
+        $html = $html->render();
+
+        $mpdf->setFooter('Dreamworks Integrated Systems');
+        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->WriteHTML(utf8_encode($html));
+        $mpdf->Output('Facility'.'/'.$filename,'F');
+
+        $file = public_path().'/'.'Facility'.'/' . $filename;
+
+            \Mail::send('emails.sendReport',array(
+                'body' => $data['body']
+            ),function($message) use ($data, $file) {
+                foreach($data['email'] as $email){
+                    $message->to($email)
+                        ->subject($data["subject"])
+                        ->attach($file);
+                }
+            });
+
+        return back()->with('success', 'Report successfully sent!');
     }
 
     /**
@@ -143,7 +199,7 @@ class FacilityController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [            
+        $data = [
             'item_details' => $request->get('details'),
             'availability' => $request->get('availability'),
             'condition'    => $request->get('condition'),
@@ -162,7 +218,7 @@ class FacilityController extends Controller
         $store_name = Store::where('store_name', auth()->user()->store)->first();
         $store_abrv = substr($store_name['store_name'], 3, 3);
         $store_isbn = 'DW' . strtoupper($store_abrv) . $serial . 'FAC';
-       
+
         if($array_length ==  1){
             $save_one_rec = array();
             for($x = 0; $x < $array_length; $x++ ){
@@ -186,7 +242,7 @@ class FacilityController extends Controller
                 $facility->store_serial = $store_isbn;
 
                 $facility->save();
-            } 
+            }
 
         }else if($array_length >  1){
             $save_rec = array();
@@ -219,7 +275,7 @@ class FacilityController extends Controller
         notify()->success("Report Created!","");
 
         return back();
-        
+
     }
 
     /**
@@ -239,11 +295,15 @@ class FacilityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $report = Facility::findOrFail($id);
-        //dd($report);
-        return view('facility.edit')->with('report', $report);
+        // $report = Facility::findOrFail($id);
+        // //dd($report);
+        // return view('facility.edit')->with('report', $report);
+        $where = array('id' => $request->id);
+        $company  = Facility::where($where)->first();
+
+        return Response()->json($company);
     }
 
     /**
@@ -256,7 +316,7 @@ class FacilityController extends Controller
     public function update(Request $request, $id)
     {
         $data = [
-                'item_details' => $request->details,
+                'item_details' => $request->item_details,
                 'availability' => $request->availability,
                 'condition'    => $request->condition,
                 'comments'     => $request->comments
@@ -265,10 +325,8 @@ class FacilityController extends Controller
         $facility = Facility::find($id);
 
         $facility->update($data);
-     
-        notify()->success("Report Updated!","");
 
-        return back();
+        return Response()->json($facility);
     }
 
     /**

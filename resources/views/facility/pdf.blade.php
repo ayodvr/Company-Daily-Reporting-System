@@ -54,17 +54,17 @@
                             <table class="table invoice-table">
                                 <thead class="bg-active">
                                     <tr>
-                                        <th>S/N</th>
-                                        <th>Item Details</th>
-                                        <th>Availability</th>
-                                        <th>Condition</th>
-                                        <th>Comments</th>
+                                        <th style="font-family: sans-serif;font-weight:bold">S/N</th>
+                                        <th style="font-family: sans-serif;font-weight:bold">Item Details</th>
+                                        <th style="font-family: sans-serif;font-weight:bold">Availability</th>
+                                        <th style="font-family: sans-serif;font-weight:bold">Condition</th>
+                                        <th style="font-family: sans-serif;font-weight:bold">Comments</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     @foreach ($record_arr as $date => $report)
                                     <tr>
-                                        <td>{{ $fac_Serial }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $report['item_details'] }}</td>
                                         <td>{{ $report['availability'] }}</td>
                                         @if(isset($report['condition']))
@@ -77,7 +77,7 @@
                                         @else
                                         <td>N/A</td>
                                         @endif
-                                    </tr> 
+                                    </tr>
                                     @endforeach
                                   </tbody>
                             </table>

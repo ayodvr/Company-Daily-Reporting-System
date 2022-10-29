@@ -6,55 +6,63 @@
       <br>
       <div class="section-body">
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-              <div class="card-wrap">
-                <div class="padding-20">
-                  <div>
-                    <h3 class="font-light mb-0">
-                      <i class="ti-arrow-up text-success"></i>{{ $t_store . ' Facility Check'}}
-                    </h3>
-                    <h5 class="text-muted"><span style="color: rgb(43, 180, 226)">Daily Report</span></h5>
+            <div class="col-xl-6 col-lg-6">
+                <div class="card">
+                  <div class="card-body card-type-3">
+                    <div class="row">
+                      <div class="col">
+                        <h6 class="text-muted mb-0"><span class="text-nowrap">{{ $t_store . ' Facility Check'}}</span></h6>
+                        <span style="color: rgb(43, 180, 226)">Daily Report</span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card-circle l-bg-cyan text-white">
+                          <i class="fas fa-building"></i>
+                        </div>
+                      </div>
+                    </div>
+                    {{-- <p class="mt-3 mb-0 text-muted text-sm">
+                        <span style="color: rgb(43, 180, 226)">Daily Report</span>
+                    </p> --}}
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-              <div class="card-icon l-bg-green">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <div class="card-wrap">
-                <div class="padding-20">
-                  <div class="text-right">
-                    <h3 class="font-light mb-0">
-                      <a href="#"><button style="margin-left: auto" data-toggle="modal" data-target="#exampleModalCenter"
-                          class="btn btn-success"><i class="fas fa-check-double"></i> Send Report</button></a>
-                    </h3>
-                    {{-- <span class="text-muted">Send Report</span> --}}
+              <div class="col-xl-3 col-lg-6">
+                <div class="card">
+                  <div class="card-body card-type-3">
+                    <div class="row">
+                      <div class="col">
+                        <a href="#"><button style="margin-left: auto" data-toggle="modal" data-target="#exampleModalCenter"
+                            class="btn btn-info">Send Report</button></a>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card-circle l-bg-cyan text-white">
+                          <i class="fas fa-envelope"></i>
+                        </div>
+                      </div>
+                    </div>
+                    {{-- <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 7.8%</span>
+                      <span class="text-nowrap">Since last month</span>
+                    </p> --}}
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-              <div class="card-icon l-bg-orange">
-                <i class="fas fa-download"></i>
-              </div>
-              <div class="card-wrap">
-                <div class="padding-20">
-                  <div class="text-right">
-                    <h3 class="font-light mb-0">
-                      <a href="/facility-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><button style="margin-left: auto" class="btn btn-warning"><i class="fas fa-download"></i> Download Report</button></a>
-                    </h3>
-                    {{-- <span class="text-muted">Send Report</span> --}}
+              <div class="col-xl-3 col-lg-6">
+                <div class="card">
+                  <div class="card-body card-type-3">
+                    <div class="row">
+                      <div class="col">
+                        <a href="/facility-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><button style="margin-left: auto" class="btn btn-success">View Report</button></a>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card-circle l-bg-green text-white">
+                          <i class="fas fa-eye"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
           <div class="col-12">
             <div class="card">
               <div class="card-header">
@@ -67,36 +75,46 @@
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <tr>
-                        {{-- <th>S/N</th> --}}
+                        <th>S/N</th>
                         <th>Item Details</th>
                         <th>Availability</th>
                         <th>Condition</th>
                         <th>Comments</th>
-                        <th>Date Created</th>
+                        {{-- <th>Date Created</th> --}}
+                        @role('admin')
+
+                        @endrole
+                        @role('staff')
                         <th>Actions</th>
+                        @endrole
                     </tr>
                     @foreach ($record_arr as $report)
-                    <tr>
-                        {{-- <td>{{ $fac_Serial }}</td> --}}
+                    <tr id='rid{{ $report['id'] }}'>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $report['item_details'] }}</td>
                         <td>{{ $report['availability'] }}</td>
-                        @if(isset($report['condition']))
+                        @if(!empty($report['condition']))
                         <td>{{ $report['condition'] }}</td>
                         @else
                         <td>N/A</td>
                         @endif
-                        @if(isset($report['comments']))
+                        @if(!empty($report['comments']))
                         <td>{{ $report['comments'] }}</td>
                         @else
                         <td>N/A</td>
                         @endif
-                        <td>{{ $report['created_at']->toDayDateTimeString() }}</td>
+                        {{-- <td>{{ $report['created_at']->toDayDateTimeString() }}</td> --}}
+                        @role('admin')
+
+                        @endrole
+                        @role('staff')
                         <td>
-                        <a href="#edit{{ $report['id'] }}"><button class="btn btn-outline-dark" data-toggle="modal"  data-target=".facilityModal">
+                        <a href="javascript:void(0)"><button class="btn btn-outline-dark" onClick="editFunc({{ $report['id'] }})">
                         <i class="far fa-edit"></i></button></a>
                         </td>
-                      </tr> 
-                    @endforeach                        
+                        @endrole
+                      </tr>
+                    @endforeach
                   </table>
                 </div>
               </div>
@@ -106,5 +124,59 @@
       </div>
     </section>
     {{-- {{ $students->links('pagination::bootstrap-4') }} --}}
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New Mail</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/facility-report/send_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}" method="GET">
+                @csrf
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-auto">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <form class="composeForm">
+                        <div class="form-group">
+                          <div class="form-line">
+                          <label>To:</label>
+                            <select class="form-control selectric" name="email[]" multiple="multiple">
+                              <option></option>
+                              <option value="ayodejiadekunle@gmail.com">Ayodeji Adekunle</option>
+                              <option value="adekunle.s@dreamworksdirect.com">Adekunle Sherif</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-line">
+                            <label>Subject:</label>
+                            <input type="text" name="subject" id="subject" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-line">
+                          <label>Message:</label>
+                          <textarea class="form-control" name="body" id="summernote"></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="m-l-8 m-b-20 text-center">
+                              <button type="submit" class="btn btn-primary btn-border-radius waves-effect">Send Mail</button>
+                            </div>
+                        </div>
+                      </form>
+                    </div>
+              </div>
+            </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- The Modal -->
   </div>
   @endsection
