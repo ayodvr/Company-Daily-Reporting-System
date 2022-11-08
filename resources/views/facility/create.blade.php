@@ -8,7 +8,7 @@
           <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="text-center">Daily Report Form</h4>
+                <h4 class="text-center">Report Form</h4>
               </div>
               <div class="card-body">
                 <form method="POST" action="{{ route('facility-report.store') }}" id="form">
