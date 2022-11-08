@@ -14,17 +14,17 @@ class ReportSender
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $scoop;
+    public $data2;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($scoop)
+    public function __construct($data2)
     {
-        dd($scoop);
-        $this->scoop = $scoop;
+        //dd($data2);
+        $this->data2 = $data2;
     }
 
     /**

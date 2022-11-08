@@ -8,7 +8,7 @@
           <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="text-center">Facility Daily Report Form</h4>
+                <h4 class="text-center">Daily Report Form</h4>
               </div>
               <div class="card-body">
                 <form method="POST" action="{{ route('facility-report.store') }}" id="form">
@@ -41,15 +41,15 @@
                         <td><input type="text" name='details[]'  placeholder='Enter Item Details' class="form-control" required/></td>
                         <td><select id="inputState" name='availability[]' class="form-control" required>
                           <option selected disabled>--Specify Availability--</option>
-                          <option value="Available">Available</option> 
-                          <option value="Not Available">Not Available</option> 
+                          <option value="Available">Available</option>
+                          <option value="Not Available">Not Available</option>
                         </select>
                         </td>
                         <td>
                           <select id="inputState" name='condition[]' class="form-control" required>
                             <option selected disabled>--Specify Condition--</option>
-                            <option value="Good">Good</option> 
-                            <option value="Bad">Bad</option> 
+                            <option value="Good">Good</option>
+                            <option value="Bad">Bad</option>
                           </select>
                         </td>
                         <td><textarea name="comments[]" placeholder='Write Comments' class="form-control" style="margin: 7px"></textarea></td>
@@ -78,4 +78,3 @@
   </div>
   @endsection
 
-  

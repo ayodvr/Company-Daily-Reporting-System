@@ -7,7 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-use App\Models\Retail;
+use App\Models\User;
+
+use App\Models\Staff;
 
 class SendReport extends Mailable
 {
@@ -18,10 +20,12 @@ class SendReport extends Mailable
      *
      * @return void
      */
-    public function __construct($scoop)
+
+    public $data2;
+
+    public function __construct($data2)
     {
-        dd("I got here");
-        $this->scoop = $scoop;
+        $this->data2 = $data2;
     }
 
     /**
@@ -33,10 +37,7 @@ class SendReport extends Mailable
     public function build()
     {
         return $this->markdown('emails.sendReport')->subject('You registration is successful');
-                                                        // ->attach('/path/to/file', [
-                                                        //     'as' => 'name.pdf',
-                                                        //     'mime' => 'application/pdf',
-                                                        // ]);
+
     }
 
 }

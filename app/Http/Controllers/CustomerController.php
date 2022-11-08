@@ -18,7 +18,7 @@ class CustomerController extends Controller
     public function index()
     {
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
-        $customers = Customer::orderBy('created_at', 'DESC')->paginate(10);
+        $customers = Customer::orderBy('created_at', 'DESC')->simplePaginate(10);
         return view('customer.index')->with('customers', $customers)
                                      ->with('activities', $activities);
     }
@@ -46,7 +46,30 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+
+        $request->validate([
+            'customer_name'   => 'required',
+            'customer_phone'  => 'required',
+            'customer_email'  => 'required'
+        ]);
+
+        $data = [
+            'customer_name'     => $request->get('customer_name'),
+            'customer_phone'    => $request->get('customer_phone'),
+            'customer_email'    => $request->get('customer_email')
+        ];
+
+        $check_customer = Customer::where('customer_email', $request->customer_email)->exists();
+
+        if($check_customer){
+
+            return back()->with('error','Customer already exist');
+        }
+
+        Customer::create($data);
+
+        return back()->with('success','Customer created!');
     }
 
     /**

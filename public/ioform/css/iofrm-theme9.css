@@ -39,20 +39,20 @@
 }
 
 .website-logo-inside img {
-    width: 100px;
+    width: 300px;
 }
 
 .website-logo-inside .logo {
-    background-image: url("../images/logo-light.svg");
+    background-image: url("../images/dream-logo.png");
 }
 
 .website-logo-inside .logo img {
-    width: 100px;
+    width: 300px;
 }
 
 .img-holder {
-    width: 550px;
-    background-color: #fff;
+    width: 800px;
+    background-color: #dee7f1;
 }
 
 .img-holder .info-holder h3 {
@@ -104,7 +104,8 @@
 }
 
 .form-content {
-    background-color: #064E89;
+    background-color: #fff;
+    /* background-color: #064E89; */
 }
 
 .form-content .form-group {
@@ -125,12 +126,12 @@
 }
 
 .form-content h3 {
-    color: #fff;
+    color: #000;
     text-align: left;
 }
 
 .form-content p {
-    color: #fff;
+    color: #000;
     text-align: left;
 }
 
@@ -140,7 +141,7 @@
 }
 
 .form-content .page-links a {
-    color: #fff;
+    color: #526489;
 }
 
 .form-content .page-links a:after {
@@ -148,7 +149,7 @@
 }
 
 .form-content .page-links a.active:after {
-    background-color: #fff;
+    background-color: #526489;
 }
 
 .form-content .page-links a:hover:after, .form-content .page-links a:focus:after {
@@ -157,8 +158,10 @@
 
 .form-content input, .form-content .dropdown-toggle.btn-default {
     border: 0;
-    background-color: #fff;
-    color: #8D8D8D;
+    background-color: #f7f7f7;
+    color: #000;
+    /* background-color: #fff;
+    color: #8D8D8D; */
 }
 
 .form-content input:hover, .form-content input:focus, .form-content .dropdown-toggle.btn-default:hover, .form-content .dropdown-toggle.btn-default:focus {
@@ -235,8 +238,10 @@
 }
 
 .form-content .form-button .ibtn {
-    background-color: #fff;
-    color: #064E89;
+    background-color: #0093FF;
+    color: #fff;
+    /* background-color: #fff;
+    color: #064E89; */
     -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0.16);
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.16);
 }
@@ -247,7 +252,7 @@
 }
 
 .form-content .form-button a {
-    color: #fff;
+    color: #526489;
 }
 
 .form-content .other-links span {

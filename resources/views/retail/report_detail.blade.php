@@ -155,7 +155,7 @@
                             <td><span>&#x20A6;</span>@money($report['price'])</td>
                             <td><b><span style="color: green">&#x20A6;</span>@money($report['amount'])</b></td>
                             @if (isset($report['payslips']))
-                            <td><img src="{{ $report['payslips']}}" alt="payslip" style="width: 100px;height:100px" class="myImg"></td>
+                            <td><a href="#"><img src="{{ $report['payslips']}}" alt="payslip" style="width: 100px;height:100px" class="myImg"></a></td>
                             @else
                             <td>No Payslip Found</td>
                             @endif

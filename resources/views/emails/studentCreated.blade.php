@@ -11,7 +11,7 @@
         border-collapse: collapse;
         width: 550px;
       }
-      
+
       th {
         border: 1px solid #dddddd;
         text-align: left;
@@ -23,7 +23,7 @@
         text-align: left;
         padding: 4px;
       }
-            
+
       tr:nth-child(even) {
         background-color: #eeeded;
       }
@@ -61,7 +61,7 @@
 						<td style="padding: 0px 35px; background-color: #ffffff;"><!--body--><!-- PERSONALIZED NAME CODED--
                 <p style="font-size: 1.01rem; color: #000000;">
                   Dear [Name],
-                </p> 
+                </p>
                 <!-- / PERSONALIZED NAME CODED -->
 				<br /><br />
 						<p style="text-align:left; font-size: 1.01rem; color: #000000;">Hello {{ $coupon['description'] }},<br />
@@ -71,7 +71,7 @@
 						Your unique code is: <h3><b>{{ $coupon['code'] }}</b></h3><br />
 						<br />
                         You can use it anytime you shop with Dreamworks Direct for a 5% discount on your favorite products.<br />
-                        
+
                         Shop with us online at www.dreamworksdirect.com or at our Lagos, Abuja, Ibadan, Portharcourt, and Asaba retail stores.<br />
 						<br />
 						If you require any further information kindly visit our FAQ Page or call 09070402009.</p>

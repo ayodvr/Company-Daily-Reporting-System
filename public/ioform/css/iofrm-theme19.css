@@ -31,7 +31,7 @@
 }
 
 .website-logo .logo {
-    background-image: url("../images/logo-dark.svg");
+    background-image: url("../images/dream-logo.png");
 }
 
 .website-logo .logo img {
@@ -43,11 +43,11 @@
 }
 
 .website-logo-inside .logo {
-    background-image: url("../images/logo-dark.svg");
+    background-image: url("../images/dream-logo.png");
 }
 
 .website-logo-inside .logo img {
-    width: 100px;
+    width: 500px;
 }
 
 .img-holder {
@@ -140,7 +140,7 @@
 }
 
 .form-content .page-links a {
-    color: #000;
+    color: #526489;
 }
 
 .form-content .page-links a:after {
@@ -251,7 +251,7 @@
 }
 
 .form-content .other-links span {
-    color: #000;
+    color: #526489;
 }
 
 .form-content .other-links a {

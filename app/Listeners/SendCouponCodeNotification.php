@@ -29,6 +29,7 @@ class SendCouponCodeNotification
      */
     public function handle(StudentCreated $event)
     {
+        dd($event);
         Mail::to($event->coupon['email_restrictions'])->send( new SendCouponCode($event->coupon));
     }
 }

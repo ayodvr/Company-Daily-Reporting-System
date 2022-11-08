@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Dreamworks Integrated Systems</title>
-  <link href="{{asset('assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
   <!-- General CSS Files -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/prism/prism.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -138,21 +140,26 @@
         @include('facility.edit')
     </div>
   </div>
+
+
   <script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>
   <!-- General JS Scripts -->
   <script src="{{ asset('assets/js/app.min.js') }}"></script>
   <!-- JS Libraies -->
+  <script src="{{ asset('assets/bundles/jquery-ui/jquery-ui.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/prism/prism.js') }}"></script>
+  <script src="{{ asset('assets/js/page/advance-table.js') }}"></script>
   <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-  {{-- <script type="text/javascript">
-    $('#summernote').summernote({
-        height: 400
-    });
-</script> --}}
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $( '#basic-usage' ).select2( {
+     theme: "bootstrap-5",
+  });
+   </script>
 <script>
     $('#summernote').summernote({
       placeholder: 'Compose your message',

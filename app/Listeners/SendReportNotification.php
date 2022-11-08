@@ -2,6 +2,8 @@
 
 namespace App\Listeners;
 
+use Mail;
+
 use App\Event\ReportSender;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -22,12 +24,12 @@ class SendReportNotification
     /**
      * Handle the event.
      *
-     * @param  \App\Events\ReportSender  $event
+     * @param  \App\Event\ReportSender  $event
      * @return void
      */
     public function handle(ReportSender $event)
     {
-        dd("I got here");
+        dd($event);
         Mail::to('adekunle.s@dreamworksdirect.com')->send( new SendReportNotification($event->scoop));
     }
 }

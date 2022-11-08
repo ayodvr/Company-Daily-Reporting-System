@@ -6,6 +6,8 @@ use App\Http\Controllers\RetailController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\KserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,12 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::get('forget-password', [ForgotPasswordController::class,'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class,'submitForgetPasswordForm'])->name('forget.password.post');
+
+Route::get('user-reset-password/{token}', [ForgotPasswordController::class,'showResetPasswordForm'])->name('resetpasswordget');
+Route::post('user-reset-password', [ForgotPasswordController::class,'submitResetPasswordForm'])->name('reset.password.post');
+
 
 Route ::group(['middleware' => ['auth']],function(){
     Route::get('/dashboard', [RetailController::class, 'dashboard'])->name('dashboard');
@@ -37,6 +45,7 @@ Route ::group(['middleware' => ['auth']],function(){
     Route::get('/facility-report/store_report/{store_report}', [FacilityController::class, 'store_report'])->name('facility-report.store_report');
     Route::get('/facility-report/fetch_records/{date_created}/{store}', [FacilityController::class, 'fetch_records']);
     Route::get('/retail-customers/export/', [CustomerController::class, 'downloadGroupTemplate'])->name('customer.template');
+    Route::resource('/staffs', StaffController::class);
     Route::resource('/retail-report', RetailController::class);
     Route::resource('/facility-report', FacilityController::class);
     Route::resource('/retail-customers', CustomerController::class);

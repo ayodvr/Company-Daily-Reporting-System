@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'store',
+        'unit',
         'verified',
         'password',
     ];
@@ -59,7 +60,7 @@ class User extends Authenticatable
     protected static $logName = 'user';
 
     public function getDescriptionForEvent(string $eventName): string
-    {        
+    {
         return "A new user has been {$eventName}";
     }
 

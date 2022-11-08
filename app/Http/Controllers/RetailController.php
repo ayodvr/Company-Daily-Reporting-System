@@ -32,7 +32,7 @@ class RetailController extends Controller
      */
     public function dashboard(MonthlySalesChart $chart)
     {
-        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
+        $activities =  Activity::orderBy('created_at','DESC')->take(6)->get();
         $anytime = Carbon::now();
         $daily_date = $anytime->toFormattedDateString();
         return view('admin.admindash')->with('activities', $activities)
@@ -42,7 +42,7 @@ class RetailController extends Controller
 
     public function timeline()
     {
-        $activities =  Activity::orderBy('created_at','DESC')->paginate(4);
+        $activities =  Activity::orderBy('created_at','DESC')->simplePaginate(5);
         $anytime = Carbon::now();
         $daily_date = $anytime->toFormattedDateString();
         return view('retail.timeline')->with('activities', $activities)
@@ -88,7 +88,7 @@ class RetailController extends Controller
         });
 
         //dd($sales_arr->toArray());
-         
+
         return view("retail.daily_sale")->with('sales_arr', $sales_arr)
                                         ->with('activities', $activities)
                                         ->with('store_sale', $store_sale);
@@ -98,10 +98,10 @@ class RetailController extends Controller
     {
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $sales_arr = Retail::where('today_date', $date_created)->get();
-         
+
         $report_arr = [];
         $report_key = [];
-        
+
         foreach($sales_arr as $key => $value){
             if(str_replace(' ','_', $value['store']) == $store_location){
                 array_push($report_arr, $value);
@@ -115,25 +115,25 @@ class RetailController extends Controller
         $total_customers = array_column($report_arr, 'name');
         $count = array_count_values($total_customers);
         $t_count = (count($count));
-    
+
         //dd($report_arr);
-        
+
         return view("retail.report_detail")->with('record_arr', $report_arr)
                                            ->with('activities', $activities)
                                            ->with('t_sum', $t_sum)
                                            ->with('t_count', $t_count)
                                            ->with('t_date', $report_arr[0]['today_date'])
                                            ->with('t_store', $report_arr[0]['store']);
-        
+
     }
 
     public function generate_pdf($report_key, $store_location)
     {
         $sales_arr = Retail::where('today_date', $report_key)->get();
-         
+
         $report_arr = [];
         $report_key = [];
-        
+
         foreach($sales_arr as $key => $value){
             if(str_replace(' ','_', $value['store']) == $store_location){
                 array_push($report_arr, $value);
@@ -147,9 +147,9 @@ class RetailController extends Controller
         $t_sum = array_sum($total_amount);
 
         $filename = 'retail-report.pdf';
-        
+
         $mpdf = new \Mpdf\Mpdf();
-        
+
         $html = \View::make('retail.pdf')->with('record_arr', $report_arr)
                                          ->with('t_sum', $t_sum)
                                          ->with('t_date', $report_arr[0]['created_at'])
@@ -174,10 +174,10 @@ class RetailController extends Controller
         ];
 
         $sales_arr = Retail::where('today_date', $report_key)->get();
-         
+
         $report_arr = [];
         $report_key = [];
-        
+
         foreach($sales_arr as $key => $value){
             if(str_replace(' ','_', $value['store']) == $store_location){
                 array_push($report_arr, $value);
@@ -192,15 +192,15 @@ class RetailController extends Controller
 
         $serial = random_int(10, 99);
         $filename = 'DW'.'-'. $serial .'-'. 'retail-report.pdf';
-        
+
         $mpdf = new \Mpdf\Mpdf();
-        
+
         $html = \View::make('retail.pdf')->with('record_arr', $report_arr)
                                          ->with('t_sum', $t_sum)
                                          ->with('t_date', $report_arr[0]['created_at'])
                                          ->with('t_store', $report_arr[0]['store']);
         $html = $html->render();
-        
+
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
         $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
@@ -212,12 +212,12 @@ class RetailController extends Controller
 
             \Mail::send('emails.sendReport',array(
                 'body' => $data['body']
-            ),function($message) use ($data, $file) { 
+            ),function($message) use ($data, $file) {
                 foreach($data['email'] as $email){
                     $message->to($email)
                         ->subject($data["subject"])
-                        ->attach($file); 
-                }      
+                        ->attach($file);
+                }
             });
 
             return back()->with('success', 'Report successfully sent!');
@@ -325,7 +325,7 @@ class RetailController extends Controller
             $retails->store_serial   = $store_isbn;
             $retails->sold_by        = $request->sold_by;
             $retails->today_date     = $request->today_date;
-    
+
             $retails->save();
 
             $customer_data = [
@@ -337,7 +337,7 @@ class RetailController extends Controller
         Customer::create($customer_data);
 
         notify()->success("Report Created!","");
-        
+
         return back();
     }
 
@@ -449,7 +449,7 @@ class RetailController extends Controller
         $retail->store_serial   = $store_isbn;
         $retail->sold_by        = $request->sold_by;
         // $retail->today_date     = $request->today_date;
-        
+
         if($retail->save()){
 
             notify()->success("Sale Updated!","Success");

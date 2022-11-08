@@ -61,8 +61,8 @@
                     <label for="inputZip">Type Of Customer</label>
                     <select id="inputState" name="customer" class="form-control">
                       <option selected disabled>--Select Answer--</option>
-                      <option value="Yes">New</option> 
-                      <option value="No">Old</option> 
+                      <option value="Yes">New</option>
+                      <option value="No">Old</option>
                     </select>
                   </div>
                 </div>
@@ -92,7 +92,7 @@
                     <input type="text" onkeyup="myFunction_sell()" class="form-control" name="price" id="price">
                     <p style="color: red" class="text:right"><b><span id="ShowSell"></span></b></p>
                     <input type="text" id="InputSell" hidden="hidden" name="amount"/>
-                  </div> 
+                  </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-4">
@@ -103,8 +103,8 @@
                     <label for="inputCity">Mode Of Payment</label>
                     <select id="inputState" name="payment" class="form-control">
                       <option selected disabled>--Select Answer--</option>
-                      <option value="Bank Transfer">Bank Transfer</option> 
-                      <option value="POS">POS</option> 
+                      <option value="Bank Transfer">Bank Transfer</option>
+                      <option value="POS">POS</option>
                     </select>
                   </div>
                   <div class="form-group col-md-2">
@@ -125,8 +125,8 @@
                     <label for="inputCity">Visited Our Website ?</label>
                     <select id="inputState" name="visited" class="form-control">
                       <option selected disabled>--Select Answer--</option>
-                      <option value="Yes">Yes</option> 
-                      <option value="No">No</option> 
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">
@@ -134,11 +134,11 @@
                     <select id="inputState" name="found" class="form-control">
                       <option selected disabled>--Select Answer--</option>
                       <option value="Social Media">Social Media</option>
-                      <option value="Store Activation">Store Activation</option>  
-                      <option value="Blog">Blog</option> 
+                      <option value="Store Activation">Store Activation</option>
+                      <option value="Blog">Blog</option>
                       <option value="Newspaper">Newspaper</option>
                       <option value="Newsletter">Newsletter</option>
-                      <option value="Referral">Referral</option> 
+                      <option value="Referral">Referral</option>
                       <option value="Radio Jingle">Radio Jingle</option>
                     </select>
                   </div>

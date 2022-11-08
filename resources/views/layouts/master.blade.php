@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+  <link rel="stylesheet" href="{{ asset('assets/bundles/owlcarousel2/dist/assets/owl.carousel.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/ng_vmap.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-social/bootstrap-social.css') }}">
@@ -64,14 +66,14 @@
         @include('includes.nav')
         @include('includes.aside')
         @yield('content')
-        @include('includes.footer') 
+        @include('includes.footer')
     </div>
   </div>
 
   <script src="{{ asset('assets/bundles/chartjs/chart.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -85,7 +87,7 @@
   $( '#basic-product' ).select2( {
    theme: "bootstrap-5",
 });
- </script>
+</script>
 
 <script>
   $( '.basic-detail' ).select2( {
@@ -112,6 +114,8 @@
   <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/owlcarousel2/dist/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('assets/js/page/widget-data.js') }}"></script>
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script>
   <script src="{{ asset('assets/bundles/summernote/summernote-bs4.js') }}"></script>
@@ -122,7 +126,7 @@
       $("#add_row").click(function(){b=i-1;
           $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
           $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-          i++; 
+          i++;
       });
       $("#delete_row").click(function(){
         if(i>1){
@@ -134,5 +138,5 @@
   </script>
 </body>
 </html>
- 
-       
+
+
