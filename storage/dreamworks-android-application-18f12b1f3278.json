@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "dreamworks-android-application",
+  "private_key_id": "18f12b1f327869d046e8f5b240f2df375875b0ff",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDdF7p9wykOoOSj\ny1afeSWEZBwbLaGDbd8aGXHVbkAP1hGOFEtNYT9zL0s/kBF+OqaanMLSrI23ele3\n4rAgBHW6U0zsWEjzcgqqZY4O6xDLIhdAjg0HYV2Z2XjJtQDB0OkHi2kcdlYpc0k4\nMoVlcKS3NkBa4v0U+akNFOEzhrFkVPK1EJAuFXE5rmW4E7tTSQAVMIyfkHeDxaGz\nME/+7xLFRD+8hGDZ/AaR9i25dyPMDyJ/1yv4BKFIJiEXhf1Wfzad2MNZ7SljM0Jp\nX0evlreT5DVqPYuUcngfKCD0BwUlFQLoFJnt2Z2QJ4I5mYfqNIVZQcIpAQ62vROb\nQsisT0wbAgMBAAECggEAIp2Qnxhws6/LdxJNgtS6uS0xXKylcTNBGdAqYJ0NM6Le\nXG00qFiq+1OdckYSBGjrZSFZEWy0bX8eqmrit3NApBu0W1FWmU2yz3XsqszxSVSS\nPmhfMCzK37J1tQ2n9jB0DlsslFO6GW2e5PO9VfdacALy9X083E1bGJy7G6WhiCXI\nMLd795fncXzjuz6Xvmkq5IPjPygPOMyIj1aaVX9OBXJHYITWZUWB3SV88+qW3SNs\niV9HCOXYtAP4nXuE1lzJjZjNRsSzlgWpEf5/ip/h+bco/WQJa554l1L0i3hgYiNi\n1UKfrwTpx0iJdUwZmgrW0zjYIzviPAXv5G8aQNNbRQKBgQDvKb0KEuXqw8fhs1Jp\nOR2WyLQHwcto0/zAKEGA2Mfj9bxJ/ypiP2Q8XY7z9S0MmVLZh475lRMna3AA6Lhx\nTJR82Mg67IkIclRqlDeMVDx2KrleYYTW87FEShYUNoYTgVozqlRd6LVoauqpSe8m\nreFKwzfzGrgM3JQ8l+ssQOh3hQKBgQDsqFI9ELsgt1E/SuRRBE/la7yVBiNn7OEG\n776YOZXGKLJECREvvRq0FmfMCLhQQ457cF4KzedT1arP59gL/V5Uf+JK6+jGYt6w\n66H8hW1cJ2kFVZ1Jc0/3ELKycUcD8qIfe44wC4e6EwNBHrsYHCrBlKuSGlS64doi\nrdMeGFJ3HwKBgHDEOFson/n6yCNWfxQYFyiCh8hkivlpgvJDyObs0AtfUaF+S8i5\nZRTFdGL5Bn27SYJB1Zs+vCJJGS2EjXr2hcj8GiUWZGJ0LfN24V4sVbnN2Ut0JcOI\ncdvmJtTvBHbr9dEIjfEdiXOrfevGbZnKQMEUnSvmPEPsOYT8iKl8DWBVAoGASFu2\nuWESNhCW0OlPIc5Vt2nXgSEdVjtBGmPXPKfuuWXcC51SGeyR65omJmZMJI5jVC6p\nMlh+cE2WKndSwWe4ndF0GUBELdQxDpsdLh6Fr3WFUNI6gyi0vG/ok1K7SeO32jRm\n5x2/ZA9IIXMJ9Xc3Q3T3eHaAjZtcnNnVARCitjUCgYEAiwr7RB17kkBYQW24Xjpm\naEYljT1WcHA0UHn1hsOYsEPM38yMkg9LV2O3SqONveE3eeNqlZLfQc2X0Ik3PS1u\n6IQJ4CKtwQ/xM6bEmF0I+N+sNTZ55IeIjna2zu1CL+oiQSzm676kMPVu3esdQBRu\noJdhM53JARr4CBaqwqlwUEU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "dreamworks-updated-price-list@dreamworks-android-application.iam.gserviceaccount.com",
+  "client_id": "101118015663713790159",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dreamworks-updated-price-list%40dreamworks-android-application.iam.gserviceaccount.com"
+}

@@ -11,6 +11,10 @@ use App\Models\Facility;
 use App\Models\Store;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Reader\Exception;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class FacilityController extends Controller
 {
@@ -63,6 +67,78 @@ class FacilityController extends Controller
         return view("facility.daily_report")->with('report_arr', $report_arr)
                                             ->with('store_report', $store_report)
                                             ->with('activities', $activities);
+    }
+
+    public function ExportExcel($customer_data){
+
+        ini_set('max_execution_time', 0);
+
+        ini_set('memory_limit', '4000M');
+
+
+
+
+        try {
+
+            $spreadSheet = new Spreadsheet();
+
+            $spreadSheet->getActiveSheet()->getDefaultColumnDimension()->setWidth(20);
+
+            $spreadSheet->getActiveSheet()->fromArray($customer_data);
+
+
+
+
+            $Excel_writer = new Xls($spreadSheet);
+
+            header('Content-Type: application/vnd.ms-excel');
+
+            header('Content-Disposition: attachment;filename="Customer_ExportedData.xls"');
+
+            header('Cache-Control: max-age=0');
+
+            ob_end_clean();
+
+            $Excel_writer->save('php://output');
+
+            exit();
+
+        } catch (Exception $e) {
+
+            return;
+
+        }
+    }
+
+    public function downloadExcelTemplate($date_created, $store_location)
+    {
+        $activities =  Activity::orderBy('created_at','DESC')->paginate(7);
+        $sales_arr = Facility::where('today_date', $date_created)->get();
+        //dd($sales_arr);
+        $report_arr = [];
+        $report_key = [];
+
+        foreach($sales_arr as $key => $value){
+            if(str_replace(' ','_', $value['store_id']) == $store_location){
+                array_push($report_arr, $value);
+                array_push($report_key, $key);
+            }
+        }
+
+        $data_array [] = array("ITEM DETAILS","AVAILABILITY","CONDITION","COMMENTS");
+
+        foreach($report_arr as $data_item)
+        {
+            $data_array[] = array(
+                'ITEM DETAILS'             => $data_item['item_details'],
+                'AVAILABILITY'             => $data_item['availability'],
+                'CONDITION'                => $data_item['condition'],
+                'COMMENTS'                 => $data_item['comments']
+            );
+        }
+
+        $this->ExportExcel($data_array);
+
     }
 
     public function fetch_records($date_created, $store_location)
@@ -122,6 +198,39 @@ class FacilityController extends Controller
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML($html);
         $mpdf->Output($filename,'I');
+    }
+
+    public function download_pdf($report_key, $store_location)
+    {
+        $sales_arr = Facility::where('today_date', $report_key)->get();
+
+        $report_arr = [];
+        $report_key = [];
+
+        foreach($sales_arr as $key => $value){
+            if(str_replace(' ','_', $value['store_id']) == $store_location){
+                array_push($report_arr, $value);
+                array_push($report_key, $key);
+            }
+        }
+
+        //dd($report_arr);
+
+        $filename = 'facility_report.pdf';
+
+        $mpdf = new \Mpdf\Mpdf();
+
+        $html = \View::make('facility.pdf')->with('record_arr', $report_arr)
+                                           ->with('t_date', $report_arr[0]['created_at'])
+                                           ->with('t_store', $report_arr[0]['store_id'])
+                                           ->with('fac_Serial', $report_arr[0]['store_serial']);
+        $html = $html->render();
+
+        $mpdf->setFooter('Dreamworks Integrated Systems');
+        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($filename,'D');
     }
 
     public function send_pdf(Request $request ,$report_key, $store_location)
@@ -258,17 +367,18 @@ class FacilityController extends Controller
 
             //dd($save_rec);
             foreach($save_rec as $facility){
-                $facility = new Facility;
-                $facility->item_details = $save_rec[0]['item_details'];
-                $facility->availability = $save_rec[0]['availability'];
-                $facility->condition    = $save_rec[0]['condition'];
-                $facility->comments     = $save_rec[0]['comments'];
-                $facility->user_id      = auth()->user()->id;
-                $facility->store_id     = auth()->user()->store;
-                $facility->today_date   = $today_date;
-                $facility->store_serial = $store_isbn;
+                //dd($facility);
+                $facilities = new Facility;
+                $facilities->item_details = $facility['item_details'];
+                $facilities->availability = $facility['availability'];
+                $facilities->condition    = $facility['condition'];
+                $facilities->comments     = $facility['comments'];
+                $facilities->user_id      = auth()->user()->id;
+                $facilities->store_id     = auth()->user()->store;
+                $facilities->today_date   = $today_date;
+                $facilities->store_serial = $store_isbn;
 
-                $facility->save();
+                $facilities->save();
             }
         }
 

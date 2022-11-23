@@ -66,6 +66,11 @@ class User extends Authenticatable
 
     public function stores(){
 
-       return $this->belongsTo('App/Models/Store');
+       return $this->belongsTo('App\Models\Store');
     }
+
+    public function staffs(){
+
+        return $this->hasMany('App\Models\Staff','user_id');
+     }
 }

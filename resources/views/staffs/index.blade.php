@@ -5,7 +5,7 @@
         <section class="section">
           <div class="section-header">
             <h1>Staffs</h1>
-            <div class="section-header-breadcrumb">
+            <div style="margin-left:auto; display:flex">
                 <div class="mr-3">
                     <a href="#"><button class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">
                     <i class="fas fa-plus"></i>&nbsp;Add New Staff</button></a>
@@ -30,8 +30,8 @@
                         @endif
                    </div>
                   <div class="card-header">
-                    <h4></h4>
-                    <div class="card-header-action">
+                    <h4>Staffs Table</h4>
+                    {{-- <div class="card-header-action">
                         <form>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search">
@@ -40,11 +40,11 @@
                             </div>
                         </div>
                         </form>
-                      </div>
+                      </div> --}}
                   </div>
-                  <div class="card-body p-0">
+                  <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped">
+                      <table class="table table-striped" id="table-1">
                         <tr>
                           <!-- <th>
                             <div class="custom-checkbox custom-control">
@@ -56,9 +56,9 @@
                           <th class="text-center">S/N</th>
                           <th>Fullname</th>
                           <th>Email</th>
-                          <th>Store</th>
-                          <th>Phone</th>
                           <th>Unit</th>
+                          <th>Store</th>
+                          {{-- <th>Phone</th> --}}
                           <th>Actions</th>
                         </tr>
                         @foreach ($staffs as $staff)
@@ -66,10 +66,31 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $staff->fullname }}</td>
                             <td>{{ $staff->email }}</td>
-                            <td>{{ $staff->store }}</td>
-                            <td>{{ $staff->phone }}</td>
                             <td>{{ $staff->unit }}</td>
-                            <td>N/A</td>
+                            <td>{{ $staff->store }}</td>
+                            {{-- <td>
+                                <div class="dropdown d-inline">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"
+                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      See more
+                                    </button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item has-icon" href="#"><i class="fas fa-ban"></i> Block</a>
+                                      <a class="dropdown-item has-icon" href="#"><i class="far fa-file"></i> Query</a>
+                                      <a class="dropdown-item has-icon" href="#"><i class="far fa-clock"></i> Something else here</a>
+                                    </div>
+                                  </div>
+                            </td> --}}
+                            {{-- <td>{{ $staff->phone }}</td> --}}
+                            @if ($staff->users['verified'] == 0)
+                            <td><a href="staffs/unblock/{{ $staff->user_id }}"><button class="btn btn-warning">
+                                <i class="fas fa-unlock"></i>&nbsp;Unblock</button></a>
+                            </td>
+                            @elseif($staff->users['verified'] == 1)
+                            <td><a href="staffs/block/{{ $staff->user_id }}"><button class="btn btn-danger">
+                                <i class="fas fa-ban"></i>&nbsp;Block</button></a>
+                            </td>
+                            @endif
                           </tr>
                         @endforeach
                       </table>
@@ -124,6 +145,8 @@
                                     <option>Select Unit</option>
                                     <option value="retail">Retail</option>
                                     <option value="facility">Facility</option>
+                                    <option value="distribution">Distribution</option>
+                                    <option value="service">Customer Service</option>
                                 </select>
                             </div>
                             <div class="form-group float-right">

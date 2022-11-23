@@ -18,6 +18,7 @@ class CreateStaffTable extends Migration
             $table->string('fullname');
             $table->string('phone');
             $table->string('email');
+            $table->string('user_id');
             $table->string('store');
             $table->string('unit');
             $table->timestamps();

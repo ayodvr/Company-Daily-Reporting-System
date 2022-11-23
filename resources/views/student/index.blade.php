@@ -73,7 +73,7 @@
                               <td>{{ $student->phone }}</td>
                             <td>{{ $student['created_at']->toFormattedDateString() }}</td>
                             <td><a href="{{ route('student-biodata.show', $student->id) }}" class="btn btn-primary">View</a></td>
-                          </tr> 
+                          </tr>
                         @endforeach
                       </table>
                     </div>

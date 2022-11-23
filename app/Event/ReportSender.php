@@ -14,17 +14,18 @@ class ReportSender
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $data2;
+    public $data3;
 
     /**
      * Create a new event instance.
-     *
+     *dd($event);
      * @return void
      */
-    public function __construct($data2)
+    public function __construct($data3)
     {
-        //dd($data2);
-        $this->data2 = $data2;
+        $this->data3 = $data3;
+
+        //dd($this->data3);
     }
 
     /**

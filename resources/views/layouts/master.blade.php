@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="{{ asset('assets/css/ng_vmap.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-social/bootstrap-social.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/summernote/summernote-bs4.css') }}">
-
+  <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
   <!-- Web Fonts
 ======================= -->
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' type='text/css'>
@@ -102,6 +103,8 @@
   <!-- Template JS File -->
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/ng_vmap.js') }}"></script>
+  <script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
   <!-- Custom JS File -->
   <script src="{{ asset('assets/bundles/prism/prism.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
@@ -136,6 +139,21 @@
     });
   });
   </script>
+  <script>
+ $(document).ready(function () {
+    $('#dt-multi-checkbox').dataTable({
+        columnDefs: [{
+        orderable: false,
+        className: 'select-checkbox',
+        targets: 0
+        }],
+        select: {
+        style: 'multi',
+        selector: 'td:first-child'
+      }
+    });
+  });
+</script>
 </body>
 </html>
 

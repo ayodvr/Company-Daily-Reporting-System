@@ -6,59 +6,52 @@
       <br>
       <div class="section-body">
         <div class="row">
-            <div class="col-xl-6 col-lg-6">
+              <div class="col-xl-6 col-lg-6">
                 <div class="card">
-                  <div class="card-body card-type-3">
+                    <div class="card-body card-type-3">
                     <div class="row">
-                      <div class="col">
-                        <h6 class="text-muted mb-0"><span class="text-nowrap">{{ $t_store . ' Facility Check'}}</span></h6>
-                        <span style="color: rgb(43, 180, 226)">Daily Report</span>
-                      </div>
-                      <div class="col-auto">
-                        <div class="card-circle l-bg-cyan text-white">
-                          <i class="fas fa-building"></i>
-                        </div>
-                      </div>
-                    </div>
-                    {{-- <p class="mt-3 mb-0 text-muted text-sm">
-                        <span style="color: rgb(43, 180, 226)">Daily Report</span>
-                    </p> --}}
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6">
-                <div class="card">
-                  <div class="card-body card-type-3">
-                    <div class="row">
-                      <div class="col">
-                        <a href="#"><button style="margin-left: auto" data-toggle="modal" data-target="#exampleModalCenter"
-                            class="btn btn-info">Send Report</button></a>
-                      </div>
-                      <div class="col-auto">
-                        <div class="card-circle l-bg-cyan text-white">
-                          <i class="fas fa-envelope"></i>
-                        </div>
-                      </div>
-                    </div>
-                    {{-- <p class="mt-3 mb-0 text-muted text-sm">
-                      <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 7.8%</span>
-                      <span class="text-nowrap">Since last month</span>
-                    </p> --}}
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6">
-                <div class="card">
-                  <div class="card-body card-type-3">
-                    <div class="row">
-                      <div class="col">
-                        <a href="/facility-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><button style="margin-left: auto" class="btn btn-success">View Report</button></a>
-                      </div>
-                      <div class="col-auto">
+                        <div class="col">
+                            <h6 class="text-muted mb-0"><span class="text-nowrap">{{ $t_store . ' Facility Check'}}</span></h6>
+                            <span class="badge badge-light">Daily Report</span>
+                          </div>
+                        <div class="col-auto">
                         <div class="card-circle l-bg-green text-white">
-                          <i class="fas fa-eye"></i>
+                            <i class="fas fa-building"></i>
                         </div>
-                      </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+              <div class="col-xl-6 col-lg-4">
+                <div class="card">
+                  <div class="card-body card-type-3">
+                    {{-- <div class="row">
+                        <div class="col">
+                            <a href="#"><button style="margin-left: auto" data-toggle="modal" data-target="#exampleModalCenter"
+                                class="btn btn-info">Send Report</button></a>
+                          </div>
+                    </div> --}}
+                    <div class="d-flex">
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            {{-- <span class="text-dark mr-2"><i class="fa fa-eye"></i></span> --}}
+                            <a href="/facility-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="badge badge-secondary">View Report</span></a>
+                        </p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            {{-- <span class="text-dark mr-2"><i class="fa fa-file"></i></span> --}}
+                            <a href="/facility-report/download_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="badge badge-warning">Download Pdf</span></a>
+                        </p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            {{-- <span class="text-dark mr-2"><i class="fas fa-file-excel"></i></span> --}}
+                            <a href="/facility-report/generate_excel/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="badge badge-success">Download Excel</span></a>
+                        </p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            {{-- <span class="text-dark mr-2"><i class="fas fa-file-excel"></i></span> --}}
+                            <a href="#"><span class="badge badge-info" data-toggle="modal" data-target="#exampleModalCenter">Send via mail</span></a>
+                        </p>
                     </div>
                   </div>
                 </div>

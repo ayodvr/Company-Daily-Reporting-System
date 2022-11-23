@@ -41,6 +41,10 @@
                             <div class="alert alert-success" style="width:100%; color:black">
                             {{session('success')}}</div>
                             @endif
+                            @if(session('error'))
+                            <div class="alert alert-danger text-danger"  style="width:92%; margin:auto">
+                            {{session('error')}}</div>
+                            @endif
                         </div>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf

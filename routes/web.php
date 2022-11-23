@@ -7,7 +7,12 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\KserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\SaleApiController;
+use App\Http\Controllers\ProductsApiController;
+use App\Http\Controllers\GoogleSheetsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +29,18 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::get('/pos', function () {
+    return view('pos/pos');
+});
+
+Route::get('/add_sale', function () {
+    return view('pos/add_sale');
+});
+
+Route::get('/googlesheet', [GoogleSheetsController::class, 'sheetOperation']);
+
+Route::post('/product/importTemplate', [ProductController::class, 'import'])->name('products.import_Template');
+
 Route::get('forget-password', [ForgotPasswordController::class,'showForgetPasswordForm'])->name('forget.password.get');
 Route::post('forget-password', [ForgotPasswordController::class,'submitForgetPasswordForm'])->name('forget.password.post');
 
@@ -34,13 +51,19 @@ Route::post('user-reset-password', [ForgotPasswordController::class,'submitReset
 Route ::group(['middleware' => ['auth']],function(){
     Route::get('/dashboard', [RetailController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [KserController::class, 'index'])->name('ksers.index');
+    Route::get('/staffs/block/{id}', [StaffController::class, 'block']);
+    Route::get('/staffs/unblock/{id}', [StaffController::class, 'unblock']);
     Route::get('/retail-report/store_locations', [RetailController::class, 'store_locations'])->name('retail-report.store_locations');
     Route::get('/retail-report/timeline', [RetailController::class, 'timeline'])->name('retail-report.timeline');
+    Route::get('/retail-report/generate_excel/{report_key}/{store}', [RetailController::class, 'downloadExcelTemplate']);
     Route::get('/retail-report/generate_pdf/{report_key}/{store}', [RetailController::class, 'generate_pdf']);
     Route::get('/retail-report/send_pdf/{report_key}/{store}', [RetailController::class, 'send_pdf']);
+    Route::get('/retail-report/download_pdf/{report_key}/{store}', [RetailController::class, 'download_pdf']);
     Route::get('/retail-report/store_sale/{store_sale}', [RetailController::class, 'store_sale'])->name('retail-report.store_sale');
     Route::get('/retail-report/fetch_records/{date_created}/{store}', [RetailController::class, 'fetch_records']);
+    Route::get('/facility-report/generate_excel/{report_key}/{store}', [FacilityController::class, 'downloadExcelTemplate']);
     Route::get('/facility-report/send_pdf/{report_key}/{store}', [FacilityController::class, 'send_pdf']);
+    Route::get('/facility-report/download_pdf/{report_key}/{store}', [FacilityController::class, 'download_pdf']);
     Route::get('/facility-report/generate_pdf/{report_key}/{store}', [FacilityController::class, 'generate_pdf']);
     Route::get('/facility-report/store_report/{store_report}', [FacilityController::class, 'store_report'])->name('facility-report.store_report');
     Route::get('/facility-report/fetch_records/{date_created}/{store}', [FacilityController::class, 'fetch_records']);
@@ -50,6 +73,10 @@ Route ::group(['middleware' => ['auth']],function(){
     Route::resource('/facility-report', FacilityController::class);
     Route::resource('/retail-customers', CustomerController::class);
     Route::resource('/student-biodata', StudentRegisterController::class);
+    Route::resource('/products', ProductController::class);
+    Route::resource('/sales',SalesController::class);
+    Route::resource('api/saletemp',SaleApiController::class);
+    Route::resource('api/prodtemp',ProductsApiController::class);
 });
 
 

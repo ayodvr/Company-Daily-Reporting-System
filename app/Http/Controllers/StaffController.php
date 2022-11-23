@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Event\ReportSender;
 use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
-use App\Event\ReportSender;
 use App\Models\Store;
 use App\Models\User;
 use App\Models\Staff;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -23,7 +24,8 @@ class StaffController extends Controller
     {
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $stores = Store::orderBy('id','asc')->get();
-        $staffs = Staff::orderBy('id','desc')->simplePaginate(10);
+        $staffs = Staff::with('users')->simplePaginate(10);
+        //dd($staffs);
         return view('staffs.index')->with('staffs', $staffs)
                                     ->with('activities', $activities)
                                     ->with('stores', $stores);
@@ -39,6 +41,20 @@ class StaffController extends Controller
         //
     }
 
+    public function block($id)
+    {
+        User::find($id)->update(['verified' => 0 ]);
+
+        return back()->with('success','User has been blocked');
+    }
+
+    public function unblock($id)
+    {
+        User::find($id)->update(['verified' => 1 ]);
+
+        return back()->with('success','User has been unblocked');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,7 +65,7 @@ class StaffController extends Controller
     {
         //dd($request->all());
 
-        $random = random_int(10000, 99999);
+        // $random = random_int(10000, 99999);
 
         $request->validate([
             'name'     => ['required', 'string', 'max:255'],
@@ -65,7 +81,9 @@ class StaffController extends Controller
             return back()->with('error', 'User already exists!');
         }
 
-        $data0 = 'DWD' . $random;
+        $data0 = Str::random(10);
+
+        // $data0 = 'DWD' . $random;
 
         $data1 = User::create([
             'name'     => $request->name,
@@ -77,20 +95,22 @@ class StaffController extends Controller
 
         $data1->attachRole('staff');
 
-        $data2 = [
-            'password' => $data0,
-            'email'    => $data1->email
-        ];
-
-        Staff::create([
+        $data2 = Staff::create([
             'fullname' => $data1->name,
             'email'    => $data1->email,
             'store'    => $data1->store,
+            'user_id'  => $data1->id,
             'phone'    => $request->phone,
             'unit'     => $data1->unit
         ]);
 
-        event (new ReportSender($data2));
+        $data3 = [
+            'fullname' => $data2->fullname,
+            'email'    => $data2->email,
+            'password' => $data0
+        ];
+
+        event (new ReportSender($data3));
 
         return back()->with('success','Staff Created!');
 

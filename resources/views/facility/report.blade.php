@@ -12,78 +12,44 @@
           </div>
           <div class="section-body">
             <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>All Reports</h4>
-                    <div class="card-header-action">
-                        <form>
-                          <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search Store">
-                            <div class="input-group-btn">
-                              <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                            </div>
-                          </div>
-                        </form>
+             @foreach ($store_arr as $key => $value )
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="assets/img/blog/store.jpg">
                     </div>
-                    <div class="card-header-form">
-                      <form>
-                        <div class="input-group">
-                          {{-- <input type="text" class="form-control" placeholder="Search"> --}}
-                          {{-- <div class="input-group-btn">
-                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                          </div> --}}
-                        </div>
-                      </form>
+                    <div class="article-title">
+                      {{-- <h2 class="text-center"><a href="#">{{ $value }}</h2> --}}
                     </div>
                   </div>
-                  <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                        <tr>
-                          <th class="text-center">
-                            <th class="text-center">
-                              <i class="fas fa-th"></i>
-                            </th>
-                          </th>
-                          <th>Stores</th>
-                          <th>Action</th>
-                        </tr>
-                        @foreach ($store_arr as $key => $value )
-                        <tr>
-                            <td class="p-0 text-center">
-                              <th class="text-center">
-                                <i class="fas fa-th"></i>
-                              </th>
-                            </td>
-                            @if (isset($value))
-                            <td>{{ $value }}</td>
-                            @else
-                            <td>No Record!</td>
-                            @endif
-                            <td><a href="{{ route('facility-report.store_report', str_replace(' ', '_', strtolower($value))) }}" class="btn btn-outline-dark"><i class="far fa-eye"></i>&nbsp;View Reports</td>
-                          </tr>
-                        @endforeach
-                        @foreach ($staff_arr as $key => $value )
-                        <tr>
-                            <td class="p-0 text-center">
-                              <th class="text-center">
-                                <i class="fas fa-th"></i>
-                              </th>
-                            </td>
-                            @if (isset($value))
-                            <td>{{ $value }}</td>
-                            @else
-                            <td>No Record!</td>
-                            @endif
-                            <td><a href="{{ route('facility-report.store_report', str_replace(' ', '_', strtolower($value))) }}" class="btn btn-outline-dark"><i class="far fa-eye"></i>&nbsp;View Reports</td>
-                          </tr>
-                        @endforeach
-                      </table>
+                  <div class="article-details text-center">
+                    <p><b>{{ strToUpper($value) }}</b></p>
+                    <div class="article-cta">
+                      <a href="{{ route('facility-report.store_report', str_replace(' ', '_', strtolower($value))) }}" class="btn btn-info">View Reports</a>
                     </div>
                   </div>
-                </div>
+                </article>
               </div>
+              @endforeach
+              @foreach ($staff_arr as $key => $value  )
+              <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <article class="article">
+                    <div class="article-header">
+                      <div class="article-image" data-background="assets/img/blog/store.jpg">
+                      </div>
+                      <div class="article-title">
+                        {{-- <h2 class="text-center"><a href="#">{{ $value }}</h2> --}}
+                      </div>
+                    </div>
+                    <div class="article-details text-center">
+                        <p><b>{{ strToUpper($value) }}</b></p>
+                      <div class="article-cta">
+                        <a href="{{ route('facility-report.store_report', str_replace(' ', '_', strtolower($value))) }}" class="btn btn-primary">View Reports</a>
+                      </div>
+                    </div>
+                  </article>
+              </div>
+              @endforeach
             </div>
           </div>
         </section>

@@ -9,5 +9,10 @@ class Staff extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['fullname', 'phone','email','store','unit'];
+    protected $fillable = ['fullname', 'phone','email','user_id','store','unit'];
+
+    public function users(){
+
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

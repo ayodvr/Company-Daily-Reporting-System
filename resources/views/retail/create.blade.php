@@ -73,15 +73,13 @@
                   </div>
                   <div class="form-group col-md-5">
                     <label for="">Product Details</label>
-                    <input type="text" name="product" class="form-control" id="inputCity">
-                    {{-- <select class="form-select" id="basic-product" data-placeholder="Select Product" name="product">
+                    {{-- <input type="text" name="product" class="form-control" id="inputCity"> --}}
+                    <select class="form-select" id="basic-product" data-placeholder="Select Product" name="product">
                       <option></option>
-                      <option>Reactive</option>
-                      <option>Solution</option>
-                      <option>Conglomeration</option>
-                      <option>Algoritm</option>
-                      <option>Holistic</option>
-                    </select> --}}
+                      @foreach ($products as $product)
+                      <option>{{ $product->post_title }}</option>
+                      @endforeach
+                    </select>
                   </div>
                   <div class="form-group col-md-2">
                     <label for="">Units</label>

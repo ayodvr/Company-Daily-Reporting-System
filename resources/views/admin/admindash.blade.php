@@ -13,49 +13,42 @@
           <h1>Staff Dashboard</h1>
         </div>
         @endrole
-        <div class="row">
-            {{-- <div class="col-xl-3 col-lg-6">
+        {{-- <div class="row">
+            <div class="col-xl-6 col-lg-6">
               <div class="card">
-                <div class="card-body card-type-3">
-                  <div class="row">
-                    <div class="col">
-                      <h6 class="text-muted mb-0">Users</h6>
-                      <span class="font-weight-bold mb-0">000000</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="card-circle l-bg-green text-white">
-                        <i class="fas fa-users"></i>
+                <div class="card-body">
+                    <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators3" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators3" data-slide-to="2"></li>
+                      </ol>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img class="d-block w-100" src="{{ asset('assets/img/blog/img11.png') }}" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="{{ asset('assets/img/blog/img07.png') }}" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="{{ asset('assets/img/blog/img08.png') }}" alt="Third slide">
+                        </div>
                       </div>
+                      <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button"
+                        data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button"
+                        data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-right"></i>&nbsp;&nbsp;Retail & Facility</span>
-                  </p>
                 </div>
               </div>
-            </div> --}}
-            {{-- <div class="col-xl-3 col-lg-6">
-              <div class="card">
-                <div class="card-body card-type-3">
-                  <div class="row">
-                    <div class="col">
-                      <h6 class="text-muted mb-0">Customers</h6>
-                      <span class="font-weight-bold mb-0">0000000</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="card-circle l-bg-cyan text-white">
-                        <i class="fas fa-user"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 7.8%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-xl-6 col-lg-6">
+              <div class="col-xl-6 col-lg-6">
                 <div class="card card-info">
                     <div class="card-header">
                       <h4>Users</h4>
@@ -114,8 +107,8 @@
                       </div>
                     </div>
                   </div>
-                </div> --}}
-          </div>
+                </div>
+            </div> --}}
         <div class="row">
           <div class="col-md-6">
             <div class="card">

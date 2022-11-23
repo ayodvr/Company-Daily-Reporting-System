@@ -24,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Event\StudentCreated' => [
             'App\Listeners\SendCouponCodeNotification'
         ],
+        'App\Event\ReportSender' => [
+            'App\Listeners\SendLoginNotification'
+        ],
           'Illuminate\Auth\Events\Login' => [
             'App\Listeners\LoginSuccessful'
           ]

@@ -13,6 +13,7 @@
         "carlos-meneses/laravel-mpdf": "^2.1",
         "codexshaper/laravel-woocommerce": "^3.0",
         "fruitcake/laravel-cors": "^2.0",
+        "google/apiclient": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
@@ -21,13 +22,16 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "laravelcollective/html": "^6.3",
         "livewire/livewire": "^2.10",
         "maatwebsite/excel": "^3.1",
         "mpdf/mpdf": "^8.1",
         "nesbot/carbon": "^2.58",
         "phpoffice/phpspreadsheet": "^1.21",
         "santigarcor/laratrust": "^6.3",
-        "spatie/laravel-activitylog": "^3.17"
+        "sheetdb/sheetdb-php": "^1.0",
+        "spatie/laravel-activitylog": "^3.17",
+        "spatie/laravel-json-api-paginate": "^1.12"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

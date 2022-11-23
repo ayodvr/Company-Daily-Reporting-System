@@ -22,6 +22,7 @@ class MonthlySalesChart
             DB::raw("(monthname(created_at)) as month_name")
             )
             ->whereYear('created_at',date('Y'))
+            ->orderBy('created_at', 'asc')
             ->groupBy('month_name')
             ->get();
         //dd($visitors);
@@ -34,6 +35,8 @@ class MonthlySalesChart
                 array_push($month_arr, $value->month_name);
             }
         }
+
+        //dd($month_arr);
         return $this->chart->areaChart()
         // ->setTitle('Monthly Sales Chart')
         // ->setSubtitle('Monthly Sales')

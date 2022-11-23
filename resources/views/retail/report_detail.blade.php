@@ -26,7 +26,7 @@
                     </p>
                     </div>
                 </div>
-                  </div>
+            </div>
               <div class="col-xl-3 col-lg-6">
                 <div class="card">
                   <div class="card-body card-type-3">
@@ -57,8 +57,8 @@
                                 class="btn btn-outline-success"><i class="fa fa-inbox"></i>&nbsp;Send Report</button></a>
                           </div>
                       <div class="col">
-                        <a href="/retail-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}">
-                        <button style="margin-left: auto" class="btn btn-outline-info"><i class="fa fa-eye"></i>&nbsp;View Report</button></a>
+                        <a href="{{ route('retail-report.store_sale', str_replace(' ', '_', strtolower($t_store))) }}">
+                        <button style="margin-left: auto" class="btn btn-outline-info"><i class="fa fa-eye"></i>&nbsp;Manage Report</button></a>
                       </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
@@ -71,18 +71,30 @@
               <div class="col-xl-2 col-lg-6">
                 <div class="card">
                   <div class="card-body card-type-3">
-                    <div class="row">
+                    <div class="dropdown d-inline">
+                        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton2"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          See more
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item has-icon" href="/retail-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><i class="fas fa-eye"></i> View Report</a>
+                          <a class="dropdown-item has-icon" href="/retail-report/download_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><i class="far fa-file"></i> Export as Pdf</a>
+                          <a class="dropdown-item has-icon" href="/retail-report/generate_excel/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><i class="fas fa-file-excel"></i>Export as Excel</a>
+                        </div>
+                      </div>
+                    {{-- <div class="row">
                         <div class="col-auto">
                             <div>
-                                <span class="text-success mr-2"><i class="fa fa-plus"></i></span>
-                                <a href="{{ route('retail-report.create') }}"><span class="text-success">Create Report</span></a>
+                                <span class="text-success mr-2"><i class="fa fa-eye"></i></span>
+                                <a href="/retail-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="text-success">View Report</span></a>
                             </div>
                           </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        <span class="text-info mr-2"><i class="fa fa-tasks"></i></span>
-                        <a href="{{ route('retail-report.store_sale', str_replace(' ', '_', strtolower($t_store))) }}"><span class="text-info">Manage Report</span></a>
-                    </p>
+                        <span class="text-info mr-2"><i class="fa fa-download"></i></span>
+                        {{-- <a href="/retail-report/download_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="text-info">Download</span></a> --}}
+                        {{-- <a href="/retail-report/generate_excel/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="text-info">Download</span></a>
+                    </p> --}}
                   </div>
                 </div>
               </div>
@@ -141,16 +153,15 @@
                         <tr>
                           <th>Product Details</th>
                           <th>Mode Of Payment</th>
-                          <th>Confirm By</th>
                           <th>Units</th>
                           <th>Price</th>
                           <th>Total Amount</th>
                           <th>Payslip</th>
+                          <th>Confirmed By</th>
                         </tr>
                         <tr>
                             <td>{{ $report['product']}}</td>
                             <td>{{ $report['payment']}}</td>
-                            <td>{{ $report['confirm']}}</td>
                             <td>{{ $report['unit']}}</td>
                             <td><span>&#x20A6;</span>@money($report['price'])</td>
                             <td><b><span style="color: green">&#x20A6;</span>@money($report['amount'])</b></td>
@@ -159,6 +170,7 @@
                             @else
                             <td>No Payslip Found</td>
                             @endif
+                            <td>{{ $report['confirm']}}</td>
                         </tr>
                       </table>
                       @endforeach
@@ -193,7 +205,8 @@
                               <label>To:</label>
                                 <select class="form-control selectric" name="email[]" multiple="multiple">
                                   <option></option>
-                                  <option value="ayodejiadekunle@gmail.com">Ayodeji Adekunle</option>
+                                  <option value="chuksaylor@dreamworksdirect.com">MD</option>
+                                  <option value="catheryn@dreamworksdirect.com">GMP</option>
                                   <option value="adekunle.s@dreamworksdirect.com">Adekunle Sherif</option>
                                 </select>
                               </div>

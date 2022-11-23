@@ -5,7 +5,7 @@
         <section class="section">
           <div class="section-header">
             <h1>Customers</h1>
-            <div class="section-header-breadcrumb">
+            <div style="margin-left:auto; display:flex">
                 <div class="mr-3">
                     <a href="#"><button class="btn btn-outline-info" data-toggle="modal" data-target="#customerModalCenter"><i class="fas fa-plus"></i>&nbsp;Add Customer</button></a>
                   </div>
@@ -30,8 +30,8 @@
                         @endif
                    </div>
                   <div class="card-header">
-                    <h4></h4>
-                    <div class="card-header-action">
+                    <h4>Customers Table</h4>
+                    {{-- <div class="card-header-action">
                         <form>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search">
@@ -40,11 +40,11 @@
                             </div>
                         </div>
                         </form>
-                      </div>
+                      </div> --}}
                   </div>
-                  <div class="card-body p-0">
+                  <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped">
+                      <table class="table table-striped" id="table-1">
                         <tr>
                           <!-- <th>
                             <div class="custom-checkbox custom-control">

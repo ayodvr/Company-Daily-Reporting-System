@@ -8,7 +8,6 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 use App\Models\User;
-
 use App\Models\Staff;
 
 class SendReport extends Mailable
@@ -21,11 +20,11 @@ class SendReport extends Mailable
      * @return void
      */
 
-    public $data2;
+    public $data3;
 
-    public function __construct($data2)
+    public function __construct($data3)
     {
-        $this->data2 = $data2;
+        $this->data3 = $data3;
     }
 
     /**
@@ -36,7 +35,7 @@ class SendReport extends Mailable
 
     public function build()
     {
-        return $this->markdown('emails.sendReport')->subject('You registration is successful');
+        return $this->markdown('emails.sendLogin')->subject('You registration is successful');
 
     }
 

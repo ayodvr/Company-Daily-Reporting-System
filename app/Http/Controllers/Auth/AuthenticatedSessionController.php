@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -28,12 +29,21 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $user = User::where('email', $request->email)->first();
+        //dd($user);
+        if($user['verified'] == 0){
 
-        $request->session()->regenerate();
+            return redirect()->back()->with('error','Sorry you cant login, Please contact admin!');
 
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
+        }else{
+
+            $request->authenticate();
+
+            $request->session()->regenerate();
+
+         return redirect()->intended(RouteServiceProvider::HOME);
+      }
+}
 
     /**
      * Destroy an authenticated session.

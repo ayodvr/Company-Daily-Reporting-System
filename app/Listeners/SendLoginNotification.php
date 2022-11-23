@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Mail\SendReport;
 
-class SendReportNotification
+class SendLoginNotification
 {
     /**
      * Create the event listener.
@@ -24,12 +24,12 @@ class SendReportNotification
     /**
      * Handle the event.
      *
-     * @param  \App\Event\ReportSender  $event
+     * @param  \App\Events\ReportSender  $event
      * @return void
      */
     public function handle(ReportSender $event)
     {
-        dd($event);
-        Mail::to('adekunle.s@dreamworksdirect.com')->send( new SendReportNotification($event->scoop));
+        //dd($event);
+        Mail::to($event->data3['email'])->send( new SendReport($event->data3));
     }
 }
