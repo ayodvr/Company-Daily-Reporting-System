@@ -13,102 +13,96 @@
           <h1>Staff Dashboard</h1>
         </div>
         @endrole
-        {{-- <div class="row">
-            <div class="col-xl-6 col-lg-6">
+        <div class="row">
+            <div class="col-xl-3 col-lg-6">
               <div class="card">
-                <div class="card-body">
-                    <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
-                      <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators3" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators3" data-slide-to="2"></li>
-                      </ol>
-                      <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img class="d-block w-100" src="{{ asset('assets/img/blog/img11.png') }}" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="{{ asset('assets/img/blog/img07.png') }}" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="{{ asset('assets/img/blog/img08.png') }}" alt="Third slide">
-                        </div>
+                <div class="card-body card-type-3">
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="text-muted mb-0">Products</h6>
+                      @if (isset($count))
+                      <span class="font-weight-bold mb-0">{{ number_format($count) }}</span>
+                      @else
+                      <span class="font-weight-bold mb-0">0000</span>
+                      @endif
+                    </div>
+                    <div class="col-auto">
+                      <div class="card-circle l-bg-orange text-white">
+                        <i class="fas fa-list-alt"></i>
                       </div>
-                      <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button"
-                        data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
                     </div>
                   </div>
+                  {{-- <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p> --}}
                 </div>
               </div>
-              <div class="col-xl-6 col-lg-6">
-                <div class="card card-info">
-                    <div class="card-header">
-                      <h4>Users</h4>
-                      <div class="card-header-action">
-                        <a href="#" class="btn btn-info btn-icon icon-right">View All <i
-                            class="fas fa-chevron-right"></i></a>
-                      </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card">
+                <div class="card-body card-type-3">
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="text-muted mb-0">Customers</h6>
+                      <span class="font-weight-bold mb-0">0000</span>
                     </div>
-                    <div class="card-body">
-                      <div class="owl-carousel owl-theme" id="users-carousel">
-                        <div>
-                          <div class="user-item">
-                            <img alt="image" src="assets/img/users/user-1.png" class="img-fluid">
-                            <div class="user-details">
-                              <div class="user-name">Sarah Smith</div>
-                              <div class="text-job text-muted">Web Developer</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="user-item">
-                            <img alt="image" src="assets/img/users/user-2.png" class="img-fluid">
-                            <div class="user-details">
-                              <div class="user-name">John Doe</div>
-                              <div class="text-job text-muted">Mobile Developer</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="user-item">
-                            <img alt="image" src="assets/img/users/user-3.png" class="img-fluid">
-                            <div class="user-details">
-                              <div class="user-name">Cara Stevens</div>
-                              <div class="text-job text-muted">UI Designer</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="user-item">
-                            <img alt="image" src="assets/img/users/user-4.png" class="img-fluid">
-                            <div class="user-details">
-                              <div class="user-name">Ashton Cox</div>
-                              <div class="text-job text-muted">Project Manager</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="user-item">
-                            <img alt="image" src="assets/img/users/user-5.png" class="img-fluid">
-                            <div class="user-details">
-                              <div class="user-name">Angelica Ramos</div>
-                              <div class="text-job text-muted">IT Support</div>
-                            </div>
-                          </div>
-                        </div>
+                    <div class="col-auto">
+                      <div class="card-circle l-bg-cyan text-white">
+                        <i class="fas fa-users"></i>
                       </div>
                     </div>
                   </div>
+                  {{-- <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 7.8%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p> --}}
                 </div>
-            </div> --}}
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card">
+                <div class="card-body card-type-3">
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="text-muted mb-0">Staffs</h6>
+                      <span class="font-weight-bold mb-0">0000</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="card-circle l-bg-green text-white">
+                        <i class="fas fa-user"></i>
+                      </div>
+                    </div>
+                  </div>
+                  {{-- <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 15%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p> --}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card">
+                <div class="card-body card-type-3">
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="text-muted mb-0">Enquiries</h6>
+                      <span class="font-weight-bold mb-0">0000</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="card-circle l-bg-purple text-white">
+                        <i class="fas fa-question-circle"></i>
+                      </div>
+                    </div>
+                  </div>
+                  {{-- <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 5.4%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p> --}}
+                </div>
+              </div>
+            </div>
+          </div>
         <div class="row">
           <div class="col-md-6">
             <div class="card">

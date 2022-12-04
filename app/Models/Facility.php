@@ -12,10 +12,11 @@ class Facility extends Model
     use HasFactory, LogsActivity;
 
     protected $fillable = [
-        'item_details', 
+        'item_details',
         'availability',
         'condition',
-        'comments', 
+        'status',
+        'comments',
         'user_id',
         'store_id',
         'today_Date',
@@ -33,7 +34,7 @@ class Facility extends Model
     protected static $logName = 'facility report';
 
     public function getDescriptionForEvent(string $eventName): string
-    {        
+    {
         $user = auth()->user()->name;
 
         if($eventName == 'created'){

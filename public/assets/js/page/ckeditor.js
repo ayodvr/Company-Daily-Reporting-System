@@ -1,7 +1,7 @@
 'use strict';
 $(function () {
     //CKEditor
-    CKEDITOR.replace('ckeditor.html');
+    CKEDITOR.replace('ckeditor');
     CKEDITOR.config.height = 300;
     
       if (window.CodeMirror) {

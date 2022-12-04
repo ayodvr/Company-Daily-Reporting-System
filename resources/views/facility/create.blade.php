@@ -35,27 +35,60 @@
                       <tr>
                         <th class="text-center">S/N</th>
                         <th class="text-center"> Item Details </th>
-                        <th class="text-center">Availability</th>
-                        <th class="text-center">Condition</th>
-                        <th class="text-center">Comments</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Status(Yes/No)</th>
+                        <th class="text-center">Condition(Good/Fair/Bad)</th>
+                        <th class="text-center">Comments / Recommendation</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr id='addr0'>
                         <td>1</td>
-                        <td><input type="text" name='details[]'  placeholder='Enter Item Details' class="form-control" required/></td>
-                        <td><select id="inputState" name='availability[]' class="form-control" required>
-                          <option selected disabled>--Specify Availability--</option>
-                          <option value="Available">Available</option>
-                          <option value="Not Available">Not Available</option>
-                        </select>
+                        <td><select name='details[]' class="form-control" required>
+                            <option selected disabled>--Specify Details--</option>
+                            <option value="BULB">BULB</option>
+                            <option value="METER CHECK">METER CHECK</option>
+                            <option value="GENERAL ELECTRICITY">GENERAL ELECTRICITY</option>
+                            <option value="LADDER">LADDER</option>
+                            <option value="CCTV / CAMERA">CCTV / CAMERA</option>
+                            <option value="PRINTER">PRINTER</option>
+                            <option value="PRINTER TONER">PRINTER TONER</option>
+                            <option value="SYSTEMS/LAPTOP/MOUSE">SYSTEMS/LAPTOP/MOUSE</option>
+                            <option value="UPS">UPS</option>
+                            <option value="OFFICE STATIONERY">OFFICE STATIONERY</option>
+                            <option value="CLEANING & SUPPLIES">CLEANING & SUPPLIES</option>
+                            <option value="FILE CABINET">FILE CABINET</option>
+                            <option value="INTERNET SERVER">INTERNET SERVER</option>
+                            <option value="BARCODE SCANNER">BARCODE SCANNER</option>
+                            <option value="SECURITY ISSUES">SECURITY ISSUES</option>
+                            <option value="GENERAL ISSUE ON THE ENVIRONMENT">GENERAL ISSUE ON THE ENVIRONMENT</option>
+                            <option value="DREAMWORKS SIGNAGE">DREAMWORKS SIGNAGE</option>
+                            <option value="WATER DISPENSER">WATER DISPENSER</option>
+                            <option value="LED LIGHTS ON DISPLAY SHELVES">LED LIGHTS ON DISPLAY SHELVES</option>
+                            <option value="PRODUCTS STAND">PRODUCTS STAND</option>
+                            <option value="EXPOSED WIRE">EXPOSED WIRE</option>
+                            <option value="FIRE EXTINGUISHER">FIRE EXTINGUISHER</option>
+                            <option value="CLEANING & SUPPLIES">CLEANING & SUPPLIES</option>
+                            <option value="UNSTOCKED ITEMS">UNSTOCKED ITEMS</option>
+                            <option value="AIR CONDITIONER">AIR CONDITIONER</option>
+                            <option value="PETROL GENERATOR">PETROL GENERATOR</option>
+                            <option value="CLEANERS PRESENT">CLEANERS PRESENT</option>
+                            <option value="SECURITY PERSONNELS">SECURITY PERSONNELS</option>
+                          </select>
+                          </td>
+                        {{-- <td><input type="text" name='details[]'  placeholder='Enter Item Details' class="form-control" required/></td> --}}
+                        <td>
+                            <input type="text" name='availability[]'  placeholder='Enter Description' class="form-control" required/>
                         </td>
                         <td>
-                          <select id="inputState" name='condition[]' class="form-control" required>
-                            <option selected disabled>--Specify Condition--</option>
-                            <option value="Good">Good</option>
-                            <option value="Bad">Bad</option>
-                          </select>
+                            <select id="inputState" name='status[]' class="form-control" required>
+                              <option selected disabled>--Specify Status--</option>
+                              <option value="yes">Yes</option>
+                              <option value="no">No</option>
+                            </select>
+                          </td>
+                        <td>
+                            <input type="text" name='condition[]'  placeholder='Specify Condition' class="form-control" required/>
                         </td>
                         <td><textarea name="comments[]" placeholder='Write Comments' class="form-control" style="margin: 7px"></textarea></td>
                       </tr>

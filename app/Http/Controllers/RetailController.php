@@ -7,11 +7,13 @@ use DB;
 use Mail;
 use Carbon\Carbon;
 use App\Models\User;
+use SheetDB\SheetDB;
 use App\Models\Store;
 use App\Models\Retail;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Reports\MyReport;
+use App\Models\Enquiry;
 use App\Event\ReportSender;
 use Illuminate\Http\Request;
 use App\Charts\MonthlySalesChart;
@@ -44,11 +46,15 @@ class RetailController extends Controller
 
     public function dashboard(MonthlySalesChart $chart)
     {
-        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
+        $activities =  Activity::orderBy('created_at','DESC')->take(4)->get();
         $anytime = Carbon::now();
         $daily_date = $anytime->toFormattedDateString();
+        $sheetdb = new SheetDB('832xror5om6j2','ALL');
+        $products = $sheetdb->get();
+        $count = count($products);
         return view('admin.admindash')->with('activities', $activities)
                                       ->with('daily_date',$daily_date)
+                                      ->with('count',$count)
                                       ->with(['chart' => $chart->build()]);
     }
 
@@ -99,9 +105,16 @@ class RetailController extends Controller
             return $item;
         });
 
-        //dd($sales_arr->toArray());
+        //dd($sales_arr);
+        $sales_arr1 = [];
 
-        return view("retail.daily_sale")->with('sales_arr', $sales_arr)
+        foreach($sales_arr as $key => $value){
+            if(isset($key)){
+                array_push($sales_arr1,$value[0]['store']);
+            }
+        }
+
+        return view("retail.daily_sale")->with('sales_arr', $sales_arr1[0])
                                         ->with('activities', $activities)
                                         ->with('store_sale', $store_sale);
     }
@@ -112,9 +125,6 @@ class RetailController extends Controller
 
         ini_set('memory_limit', '4000M');
 
-
-
-
         try {
 
             $spreadSheet = new Spreadsheet();
@@ -122,9 +132,6 @@ class RetailController extends Controller
             $spreadSheet->getActiveSheet()->getDefaultColumnDimension()->setWidth(20);
 
             $spreadSheet->getActiveSheet()->fromArray($customer_data);
-
-
-
 
             $Excel_writer = new Xls($spreadSheet);
 
@@ -190,17 +197,18 @@ class RetailController extends Controller
 
     }
 
-
-    public function fetch_records($date_created, $store_location)
+    public function fetch_records(Request $request)
     {
+        //dd($request->all());
+
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
-        $sales_arr = Retail::where('today_date', $date_created)->get();
+        $sales_arr = Retail::where('today_date', $request->date)->get();
 
         $report_arr = [];
         $report_key = [];
 
         foreach($sales_arr as $key => $value){
-            if(str_replace(' ','_', $value['store']) == $store_location){
+            if(str_replace(' ','_', $value['store']) == $request->store){
                 array_push($report_arr, $value);
                 array_push($report_key, $key);
             }
@@ -213,16 +221,55 @@ class RetailController extends Controller
         $count = array_count_values($total_customers);
         $t_count = (count($count));
 
-        //dd($report_arr);
-
-        return view("retail.report_detail")->with('record_arr', $report_arr)
+        if(!empty($report_arr)){
+            return view("retail.report_detail")->with('record_arr', $report_arr)
                                            ->with('activities', $activities)
                                            ->with('t_sum', $t_sum)
                                            ->with('t_count', $t_count)
                                            ->with('t_date', $report_arr[0]['today_date'])
                                            ->with('t_store', $report_arr[0]['store']);
+        }else{
+
+            notify()->error("No report found for selected date!","");
+
+            return back();
+        }
 
     }
+
+
+    // public function fetch_records($date_created, $store_location)
+    // {
+    //     $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
+    //     $sales_arr = Retail::where('today_date', $date_created)->get();
+
+    //     $report_arr = [];
+    //     $report_key = [];
+
+    //     foreach($sales_arr as $key => $value){
+    //         if(str_replace(' ','_', $value['store']) == $store_location){
+    //             array_push($report_arr, $value);
+    //             array_push($report_key, $key);
+    //         }
+    //     }
+
+    //     $total_amount = array_column($report_arr, 'amount');
+    //     $t_sum = array_sum($total_amount);
+
+    //     $total_customers = array_column($report_arr, 'name');
+    //     $count = array_count_values($total_customers);
+    //     $t_count = (count($count));
+
+    //     //dd($report_arr);
+
+    //     return view("retail.report_detail")->with('record_arr', $report_arr)
+    //                                        ->with('activities', $activities)
+    //                                        ->with('t_sum', $t_sum)
+    //                                        ->with('t_count', $t_count)
+    //                                        ->with('t_date', $report_arr[0]['today_date'])
+    //                                        ->with('t_store', $report_arr[0]['store']);
+
+    // }
 
 
 
@@ -343,6 +390,18 @@ class RetailController extends Controller
         $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output('Reports'.'/'.$filename,'F');
 
+        $temp_slip = array();
+
+        foreach($report_arr as $paysarry){
+            array_push($temp_slip, $paysarry['payslips']);
+        }
+
+       // dd($temp_slip);
+
+        $temp_slip = public_path() . $temp_slip[0];
+
+        dd($temp_slip);
+
         $file = public_path().'/'.'Reports'.'/' . $filename;
 
             \Mail::send('emails.sendReport',array(
@@ -370,10 +429,15 @@ class RetailController extends Controller
         $anytime = Carbon::now();
         $daily_date = $anytime->format('Y-m-d');
         $products = Product::orderBy('id', 'desc')->get();
-        //dd($products);
-        return view('retail.create')->with('daily_date', $daily_date)
+        $sheetdb = new SheetDB('832xror5om6j2','ALL');
+        $customers = Customer::orderBy('id', 'asc')->get();
+        $sheetfile = $sheetdb->get();
+        //dd($sheetfile);
+        return view('pos.add_sale')->with('daily_date', $daily_date)
                                     ->with('activities', $activities)
-                                    ->with('products', $products);
+                                    ->with('products', $products)
+                                    ->with('all_products', $sheetfile)
+                                    ->with('customers', $customers);
     }
 
     public function store_locations()
@@ -392,113 +456,102 @@ class RetailController extends Controller
     {
         //dd($request->all());
 
-        $data = [
-            'name'       => $request->get('name'),
-            'phone'      => $request->get('phone'),
-            'email'      => $request->get('email'),
-            'dob'        => $request->get('dob'),
-            'invoice'    => $request->get('invoice'),
-            'product'    => $request->get('product'),
-            'unit'       => $request->get('unit'),
-            'price'      => $request->get('price'),
-            'store'      => $request->get('store'),
-            'customer'   => $request->get('customer'),
-            'address'    => $request->get('address'),
-            'payment'    => $request->get('payment'),
-            'confirm'    => $request->get('confirm'),
-            'amount'     => $request->get('amount'),
-            'visited'    => $request->get('visited'),
-            'found'      => $request->get('found'),
-            'cash_hand'  => $request->get('cash_hand'),
-            'cash_bank'  => $request->get('cash_bank'),
-            'bank_paid'  => $request->get('bank_paid'),
+        $request->validate([
+            'name'       => 'required',
+            // 'phone'      => 'nullable',
+            // 'email'      => 'nullable',
+            // 'dob'        => 'nullable',
+            'invoice'    => 'nullable',
+            'product'    => 'nullable',
+            'unit'       => 'nullable',
+            'store'      => 'nullable',
+            'customer'   => 'nullable',
+            // 'address'    => 'nullable',
+            'payment'    => 'nullable',
+            'confirm'    => 'nullable',
+            'amount'     => 'nullable',
+            'visited'    => 'nullable',
+            'found'      => 'nullable',
+            'cash_hand'  => 'nullable',
+            'cash_bank'  => 'nullable',
+            'bank_paid'  => 'nullable',
             'payslips'   => 'nullable|mimes:jpeg,jpg,png,gif,pdf|max:1999',
             // 'pro_details'=> 'nullable',
-            'serial_no'  => $request->get('serial_no'),
-            // 'qty_sold'   => 'nullable',
-            'sys_qty'    => $request->get('sys_qty'),
-            'phy_qty'    => $request->get('phy_qty'),
-            'inv_paid'   => $request->get('inv_paid')
-        ];
+            'serial_no'  => 'nullable',
+            'qty_sold'   => 'nullable',
+            'sys_qty'    => 'nullable',
+            'phy_qty'    => 'nullable',
+            'inv_paid'   => 'nullable'
+        ]);
 
-        dd($data);
+            $serial = random_int(1000, 9999);
+            $store_name = Store::where('store_name',$request->get('store'))->first();
+            $store_abrv = substr($store_name['store_name'], 3, 3);
+            $store_isbn = 'DW' . strtoupper($store_abrv) . $serial;
 
-        $array_length = is_array($data["product"]) ? count($data["product"]) : 1;
-        $array_length = is_array($data["unit"])    ? count($data["unit"])    : 1;
-        $array_length = is_array($data["price"])   ? count($data["price"])   : 1;
-        $array_length = is_array($data["amount"])  ? count($data["amount"])  : 1;
-
-        if($array_length ==  1){
-            $save_one_rec = array();
-            for($x = 0; $x < $array_length; $x++ ){
-                $arr_item = array(
-                    "item_details" => $data["item_details"][$x],
-                    "availability" => $data["availability"][$x],
-                    "condition"    => $data["condition"][$x],
-                    "comments"     => $data["comments"][$x],
-                );
-
-                array_push($save_one_rec ,$arr_item);
-
-                $retails = new Retail;
-                $retails->name           = $request->name;
-                $retails->phone          = $request->phone;
-                $retails->email          = $request->email;
-                $retails->dob            = $request->dob;
-                $retails->invoice        = $request->invoice;
-                $retails->product        = $save_one_rec[0]['product'];
-                $retails->unit           = $save_one_rec[0]['unit'];
-                $retails->price          = $save_one_rec[0]['price'];
-                $retails->store          = $request->store;
-                $retails->customer       = $request->customer;
-                $retails->address        = $request->address;
-                $retails->payment        = $request->payment;
-                $retails->confirm        = $request->confirm;
-                $retails->amount         = $save_one_rec[0]['amount'];
-                $retails->visited        = $request->visited;
-                $retails->found          = $request->found;
-                $retails->cash_hand      = $request->cash_hand;
-                $retails->cash_bank      = $request->cash_bank;
-                $retails->bank_paid      = $request->bank_paid;
-                $retails->payslips       = $data['payslips'];
-                $retails->serial_no      = $request->serial_no;
-                $retails->sys_qty        = $request->sys_qty;
-                $retails->phy_qty        = $request->phy_qty;
-                $retails->user_id        = auth()->user()->id;
-                $retails->store_serial   = $store_isbn;
-                $retails->sold_by        = $request->sold_by;
-                $retails->today_date     = $request->today_date;
-
-                dd($retails);
-
-                $serial = random_int(1000, 9999);
-                $store_name = Store::where('store_name',$request->get('store'))->first();
-                $store_abrv = substr($store_name['store_name'], 3, 3);
-                $store_isbn = 'DW' . strtoupper($store_abrv) . $serial;
-
-                if ($request->has(['payslips'])) {
-                    $name = time().$request->file('payslips')->getClientOriginalName();
-                    $destination = public_path().'/Payslips';
-                    $path='/Payslips/'.$name;
-                    $request->file('payslips')->move($destination, $name);
-                    $data['payslips'] = $path;
-                }
-
-                $retails->save();
-
-                $customer_data = [
-                    'customer_name' => $retails->name,
-                    'customer_phone' => $retails->phone,
-                    'customer_email' => $retails->email
-                ];
-
-            Customer::create($customer_data);
-
-            notify()->success("Report Created!","");
-
-            return back();
+            if ($request->has(['payslips'])) {
+                $name = time().$request->file('payslips')->getClientOriginalName();
+                $destination = public_path().'/Payslips';
+                $path='/Payslips/'.$name;
+                $request->file('payslips')->move($destination, $name);
+                $data['payslips'] = $path;
             }
-        }
+
+            $cust_detail = Customer::where('id', $request->name)->get();
+
+            //dd($cust_detail);
+
+            $retails = new Retail;
+            $retails->name           = $cust_detail[0]['customer_name'];
+            $retails->phone          = $cust_detail[0]['customer_phone'];
+            $retails->email          = $cust_detail[0]['customer_email'];
+            $retails->dob            = $cust_detail[0]['customer_birthday'];
+            $retails->invoice        = $request->invoice;
+            $retails->product        = $request->product;
+            $retails->unit           = $request->unit;
+            $retails->price          = $request->price;
+            $retails->store          = $request->store;
+            $retails->customer       = $request->customer;
+            $retails->address        = $cust_detail[0]['customer_address'];
+            $retails->payment        = $request->payment;
+            $retails->confirm        = $request->confirm;
+            $retails->amount         = $request->amount;
+            $retails->visited        = $request->visited;
+            $retails->found          = $request->found;
+            $retails->status         = $request->status;
+            $retails->cash_hand      = $request->cash_hand;
+            $retails->cash_bank      = $request->cash_bank;
+            $retails->bank_paid      = $request->bank_paid;
+            $retails->payslips       = $data['payslips'];
+            $retails->serial_no      = $request->serial_no;
+            $retails->qty_sold       = $request->qty_sold;
+            $retails->sys_qty        = $request->sys_qty;
+            $retails->phy_qty        = $request->phy_qty;
+            $retails->user_id        = auth()->user()->id;
+            $retails->store_serial   = $store_isbn;
+            $retails->sales_unit     = "retail";
+            $retails->sold_by        = $request->sold_by;
+            $retails->today_date     = $request->today_date;
+
+            //dd($retails);
+
+            $retails->save();
+
+            $customer_enquiries = [
+                'customer_name'   => $retails->name,
+                'customer_phone'  => $retails->phone,
+                'customer_email'  => $retails->email,
+                'Product_detail'  => $retails->product_detail,
+                'customer_status' => $retails->status,
+                'sales_unit'      => $retails->unit,
+                'sales_rep_id'    => $retails->user_id
+            ];
+
+            Enquiry::create($customer_enquiries);
+
+        // notify()->success("Report Created!","");
+
+        return back()->with('success', 'Report Created!');
 
     }
 

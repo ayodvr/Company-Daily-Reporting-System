@@ -39,150 +39,70 @@
     <header class="pos-header bg-white">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="col-xl-12 col-lg-12 col-md-6">
                     <div class="greeting-text">
-                     <h3 class="card-label mb-0 font-weight-bold text-primary">WELCOME
-                     </h3>
-                     <h3 class="card-label mb-0 ">
-                        {{ strToUpper(Auth::user()->name) }}
-                     </h3>
+                        <a href="{{ route('retail-report.store_sale', str_replace(' ', '_', strtolower(auth()->user()['store']))) }}"><button class="btn-primary btn mr-5 white pt-1 pb-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-angle-left"></i>&nbsp;&nbsp;Manage Reports</button></a>
+                     <a href="#"><button data-toggle="modal" data-target="#exampleModalCenter" class="btn-secondary btn white pt-1 pb-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-comments"></i>&nbsp;&nbsp;Feedback Form</button></a>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-5 col-md-6  clock-main">
-                 <div class="clock">
-                   <div class="datetime-content">
-                     <ul>
-                         <li id="hours"></li>
-                         <li id="point1">:</li>
-                         <li id="min"></li>
-                         <li id="point">:</li>
-                         <li id="sec"></li>
-                     </ul>
-                   </div>
-                  <div class="datetime-content">
-                     <div id="Date"  class=""></div>
-                  </div>
-                 </div>
-                </div>
-                <div class="col-xl-4 col-lg-3 col-md-12  order-lg-last order-second">
-
-                 <div class="topbar justify-content-end">
-                  <div class="dropdown mega-dropdown">
-                      <div id="id2" class="topbar-item "  data-toggle="dropdown" data-display="static">
-                          <div class="btn btn-icon w-auto h-auto btn-clean d-flex align-items-center py-0 mr-3">
-
-                              <span class="symbol symbol-35 symbol-light-success">
-                                  <span class="symbol-label bg-primary  font-size-h5 ">
-
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="#fff" class="bi bi-calculator-fill" viewBox="0 0 16 16">
-                                          <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z"/>
-                                        </svg>
-                                  </span>
-                              </span>
-                          </div>
-                      </div>
-
-                      <div class="dropdown-menu dropdown-menu-right calu" style="min-width: 248px;">
-                          <div class="calculator">
-                              <div class="input" id="input"></div>
-                              <div class="buttons">
-                                <div class="operators">
-                                  <div>+</div>
-                                  <div>-</div>
-                                  <div>&times;</div>
-                                  <div>&divide;</div>
-                                </div>
-                                 <div class="d-flex justify-content-between">
-                                  <div class="leftPanel">
-                                      <div class="numbers">
-                                        <div>7</div>
-                                        <div>8</div>
-                                        <div>9</div>
-                                      </div>
-                                      <div class="numbers">
-                                        <div>4</div>
-                                        <div>5</div>
-                                        <div>6</div>
-                                      </div>
-                                      <div class="numbers">
-                                        <div>1</div>
-                                        <div>2</div>
-                                        <div>3</div>
-                                      </div>
-                                      <div class="numbers">
-                                        <div>0</div>
-                                        <div>.</div>
-                                        <div id="clear">C</div>
-                                      </div>
-                                    </div>
-                                    <div class="equal" id="result">=</div>
-                                 </div>
-                              </div>
-                            </div>
-                      </div>
-
-                  </div>
-
-                  <div class="dropdown">
-                      <div class="topbar-item" data-toggle="dropdown" data-display="static">
-                          <div class="btn btn-icon w-auto h-auto btn-clean d-flex align-items-center py-0">
-
-                              <span class="symbol symbol-35 symbol-light-success">
-                                  <span class="symbol-label font-size-h5 ">
-                                      <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                          <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
-                                      </svg>
-                                  </span>
-                              </span>
-                          </div>
-                      </div>
-
-                      <div class="dropdown-menu dropdown-menu-right" style="min-width: 150px;">
-
-
-                          <a href="#" class="dropdown-item">
-                              <span class="svg-icon svg-icon-xl svg-icon-primary mr-2">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power">
-                                      <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
-                                      <line x1="12" y1="2" x2="12" y2="12"></line>
-                                  </svg>
-                              </span>
-                              Logout
-                          </a>
-                      </div>
-
-                  </div>
-                 </div>
-
-                 </div>
             </div>
         </div>
     </header>
-    <div class="contentPOS mb-5" id="tc_content">
+
+    <div class="contentPOS" id="tc_content">
         <!--begin::Entry-->
         <div class="d-flex flex-column-fluid">
             <!--begin::Container-->
             <div class="container-fluid">
-                <div class="row">
-                    {{-- <div class="col-lg-2 col-xl-2">
+                {{-- <div class="row">
+                    <div class="col-lg-2 col-xl-2">
                     </div>
                     <div class="col-lg-8 col-xl-8">
                         <div class="card card-custom gutter-b bg-transparent shadow-none border-0" >
                             <div class="card-header align-items-center   border-bottom-dark px-0">
-                                <div class="card-title mb-0">
-                                    <h3 class="card-label mb-0 font-weight-bold text-body">Add Sale
-                                    </h3>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        @if(count($errors) > 0)
+                                            @foreach($errors->all() as $error)
+                                            <div class="alert alert-danger" style="width:92%; margin:auto">
+                                                {{$error}}</div>
+                                            @endforeach
+                                        @endif
+                                        @if(session('error'))
+                                        <div class="alert alert-danger" style="width:92%; margin:auto">
+                                        {{session('error')}}</div>
+                                        @endif
+                                   </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-xl-2">
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
                 <div class="row">
                     <div class="col-lg-2 col-xl-2">
                     </div>
                     <div class="col-lg-8 col-xl-8">
+                        <div class="text-center">
+                            @if(count($errors) > 0)
+                                @foreach($errors->all() as $error)
+                                <div class="alert alert-danger" style="width:92%; margin:auto">
+                                    {{$error}}</div>
+                                @endforeach
+                            @endif
+                            @if(session('error'))
+                            <div class="alert alert-danger" style="width:92%; margin:auto">
+                            {{session('error')}}</div>
+                            @endif
+                            @if(session('success'))
+                            <div class="alert alert-success" style="width:92%; margin:auto">
+                            {{session('success')}}</div>
+                            @endif
+                       </div>
+                       <br>
                         <div class="card card-custom gutter-b bg-white border-0" >
                             <div class="card-body">
                                 {!! Form::open(['route'=> ['retail-report.store'], 'method'=> 'POST', 'enctype'=>'multipart/form-data']) !!}
@@ -191,12 +111,18 @@
                                     <input type="text" name="today_date" value="{{ $daily_date }}" class="form-control" hidden>
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label  class="text-body">Customer Name</label>
-                                            <fieldset class="form-group mb-3">
-                                                <input type="text" class="form-control" name="customer" id="basicInput">
+                                            <label  class="text-body">Select existing customer</label>
+                                            <fieldset class="form-group mb-3 d-flex">
+                                                <select class="js-example-basic-single form-control bg-transparents" data-placeholder="Select Customer" name="name">
+                                                    <option selected></option>
+                                                    @foreach ($customers as $customer )
+                                                        <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            <input type="button" data-toggle="modal" data-target="#choosecustomer" value="Add" class="btn-success btn ml-2 white pt-1 pb-1 d-flex align-items-center justify-content-center"/>
                                             </fieldset>
                                         </div>
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <label  class="text-body">Phone</label>
                                             <fieldset class="form-group mb-3">
                                                 <input type="text" class="form-control" name="phone" id="basicInput">
@@ -213,7 +139,7 @@
                                             <fieldset class="form-group mb-3">
                                                 <input type="date" name="dob" class="form-control datepicker mb-3" >
                                             </fieldset>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-4">
                                             <label  class="text-body">Type of customer</label>
                                             <fieldset class="form-group mb-3">
@@ -225,11 +151,27 @@
                                             </fieldset>
                                         </div>
                                         <div class="col-md-4">
+                                            <label  class="text-body">Transaction Status</label>
+                                            <fieldset class="form-group mb-3">
+                                                <select class="js-example-basic-single js-states form-control bg-transparent" name="status">
+                                                    <option></option>
+                                                    <option value="old">Sale Successful</option>
+                                                    <option value="old">Awaiting Products(GIT)</option>
+                                                    <option value="new">Engagement Ongoing</option>
+                                                    {{-- <option value="new">Unconcluded</option> --}}
+                                                    {{-- <option value="new">Awaiting Payment</option> --}}
+                                                    <option value="new">Asking for competitive price</option>
+                                                    <option value="new">Price challenge</option>
+                                                    <option value="new">Awaiting products</option>
+                                                    </select>
+                                            </fieldset>
+                                        </div>
+                                        {{-- <div class="col-md-4">
                                             <label  class="text-body">Customer Address</label>
                                             <fieldset class="form-group mb-3">
                                                 <input type="text" class="form-control" name="address" id="basicInput">
                                             </fieldset>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-12">
@@ -256,21 +198,21 @@
                                                               <tr id='addr0'>
                                                                 <td hidden>1</td>
                                                                 <td>
-                                                                <select class="js-example-basic-single form-control bg-transparents">
+                                                                <select class="js-example-basic-single form-control bg-transparents" name="product">
                                                                     <option selected>Select Product</option>
-                                                                    @if (isset($products))
-                                                                        @foreach ($products as $product)
+                                                                    @if (isset($all_products))
+                                                                        @foreach ($all_products as $product)
                                                                         <option>{{ $product->PRODUCT_NAME }}</option>
                                                                         @endforeach
                                                                     @endif
                                                                 </select>
                                                                 </td>
-                                                                <td>Readonly</td>
-                                                                <td><input type="number" style="width:70px" class="form-control" id="basicInput2" name='units[]' placeholder="Enter Units" value="0"></td>
-                                                                <td>Readonly</td>
+                                                                <td><input type="text" onkeyup="myFunction_sell()" class="form-control" name="price" id="price"></td>
+                                                                <td><input type="number" onclick="myFunction_sell()" name="unit" class="form-control" id="unit" style="width: 70px"></td>
+                                                                <td><h5 style="color: red" class="text:right"><b><span id="ShowSell"></span></b></h5></td>
                                                                 <td></td>
                                                               </tr>
-                                                              <tr id='addr1'></tr>
+                                                              <tr id='addr1'><input type="text" id="InputSell" hidden="hidden" name="amount"/></tr>
                                                             </tbody>
                                                           </table>
                                                     </div>
@@ -280,12 +222,12 @@
                                         <div class="col-md-12">
                                             <div class="card card-custom gutter-b bg-white border-0" >
                                                 <div class="card-body">
-                                                    <div class="row">
+                                                    {{-- <div class="row">
                                                         <div class="col-md-12">
                                                             <a href="javascript:void(0)" id="add_row"><i class="fas fa-plus" style="color:blue"></i></a>
                                                             <a href="javascript:void(0)" id="delete_row"><i class="fas fa-trash-alt float-right" style="color:red"></i></a>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -293,7 +235,7 @@
                                         <div class="col-md-4">
                                             <label  class="text-body">Invoice Number</label>
                                             <fieldset class="form-group mb-3">
-                                                <input type="text" class="form-control" class="invoice" id="basicInput">
+                                                <input type="text" class="form-control" name="invoice" id="basicInput">
                                             </fieldset>
                                         </div>
                                         <div class="col-md-4">
@@ -404,7 +346,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <input type="submit" class="btn btn-success btn-block font-weight-bold mr-1  mb-1" value="Save Report">
+                                        <input type="submit" class="btn btn-info btn-block font-weight-bold mr-1  mb-1" value="Save Report">
                                     </div>
                                 {!! Form::close() !!}
                             </div>
@@ -414,9 +356,144 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+    <div class="modal fade text-left" id="choosecustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg " role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel13">Add Customer</h3>
+                <button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0" data-dismiss="modal" aria-label="Close">
+                  <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="{{ route('retail-customers.store') }}" method="POST">
+                    @csrf
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label  class="text-body">Customer Name</label>
+                            <fieldset class="form-group mb-3">
+                                <input type="text" name="customer_name"  class="form-control"/>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                            <label  class="text-body">Customer Address</label>
+                            <fieldset class="form-group mb-3">
+                                <input type="text" name="customer_address"  class="form-control" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label  class="text-body">Customer Phone</label>
+                            <fieldset class="form-group mb-3">
+                                <input type="text" name="customer_phone"  class="form-control"/>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-4">
+                            <label  class="text-body">Date Of Birth</label>
+                            <fieldset class="form-group mb-3">
+                                <input type="date" name="customer_birthday" class="form-control datepicker mb-3" >
+                            </fieldset>
+                        </div>
+                        <div class="col-md-4">
+                            <label  class="text-body">Customer Email</label>
+                            <fieldset class="form-group mb-3">
+                                <input type="text" name="customer_email"  class="form-control" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-end mb-0">
+                        <div class="modal-footer bg-whitesmoke br">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+        <!-- Vertically Centered modal Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Customer Feedback Form</h5>
+                <button type="button" class="close rounded-pill btn btn-sm btn-icon btn-light btn-hover-primary m-0" data-dismiss="modal" aria-label="Close">
+                    <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                    </svg>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('retail-customers.store') }}" method="POST">
+                        @csrf
+                        <!-- Name -->
+                        <div class="form-group">
+                            <label  class="text-body">Customer Name</label>
+                            <fieldset class="form-group mb-3 d-flex">
+                                <input type="text" name="customer_name"  class="form-control" placeholder="" required/>
+                            </fieldset>
+                        </div>
+                        <!-- Name -->
+                        <div class="form-group">
+                            <label>On scale of 1-10 how would you rate our service ?</label>
+                            <fieldset class="form-group mb-3">
+                                <input type="number" name="feedback"  class="form-control" placeholder="0 - 10" required/>
+                            </fieldset>
+                        </div>
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            <fieldset class="form-group mb-3">
+                                <label>Are you satisfied with our products ?</label>
+                                <select class="js-example-basic-single js-states form-control bg-transparent" name="satisfaction" required>
+                                    <option selected disabled></option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Maybe">Maybe</option>
+                                    <option value="Maybe Not">Maybe Not</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <!-- Email Address -->
+                        <div class="form-group">
+                            <fieldset class="form-group mb-3">
+                                <label>Would you refer a Family/Friend to Dreamworks ?</label>
+                                <select class="js-example-basic-single js-states form-control bg-transparent" name="reference" required>
+                                    <option selected disabled></option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Maybe">Maybe</option>
+                                    <option value="Maybe Not">Maybe Not</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="form-group">
+                            <label>How would you like us to serve you better ?</label>
+                            <fieldset class="form-group mb-3">
+                                <input type="text" name="service"  class="form-control" required/>
+                            </fieldset>
+                        </div>
+
+                        <div class="modal-footer bg-whitesmoke br">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
     <script type="text/javascript">
 
         var i = 0;
@@ -477,6 +554,19 @@
 	  <script src="{{ asset('assets/pos_assets/js/script-slick.js') }}"></script>
       <script  src="{{ asset('assets/api/daterange-picker/moment.min.js') }}"></script>
 	  <script  src="{{ asset('assets/api/daterange-picker/daterangepicker.min.js') }}"></script>
+      <script>
+        function myFunction_sell() {
+        first = Number($('#unit').val());
+        second = Number($('#price').val());
+        if(first && second && !isNaN(first) && !isNaN(second)){
+            $('span#ShowSell').text( "₦" + first * second + ".00");
+            $('input#InputSell').val(first * second);
+        }
+        else {
+            $('span#ShowSell').text(" ");
+        }
+      }
+      </script>
 	  <script>
 		  ClassicEditor
 		  .create( document.querySelector( '#editor' ) )

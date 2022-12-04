@@ -13,6 +13,8 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SaleApiController;
 use App\Http\Controllers\ProductsApiController;
 use App\Http\Controllers\GoogleSheetsController;
+use App\Http\Controllers\DistributionController;
+use App\Http\Controllers\VoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,14 +62,21 @@ Route ::group(['middleware' => ['auth']],function(){
     Route::get('/retail-report/send_pdf/{report_key}/{store}', [RetailController::class, 'send_pdf']);
     Route::get('/retail-report/download_pdf/{report_key}/{store}', [RetailController::class, 'download_pdf']);
     Route::get('/retail-report/store_sale/{store_sale}', [RetailController::class, 'store_sale'])->name('retail-report.store_sale');
+    Route::get('/retail-report/staff_sale/{staff_sale}', [DistributionController::class, 'staff_sale'])->name('distribution.staff_sale');
+    Route::get('/distribution/fetch_records', [DistributionController::class, 'fetch_records']);
+    Route::get('/retail-report/fetch_records', [RetailController::class, 'fetch_records']);
     Route::get('/retail-report/fetch_records/{date_created}/{store}', [RetailController::class, 'fetch_records']);
     Route::get('/facility-report/generate_excel/{report_key}/{store}', [FacilityController::class, 'downloadExcelTemplate']);
     Route::get('/facility-report/send_pdf/{report_key}/{store}', [FacilityController::class, 'send_pdf']);
     Route::get('/facility-report/download_pdf/{report_key}/{store}', [FacilityController::class, 'download_pdf']);
     Route::get('/facility-report/generate_pdf/{report_key}/{store}', [FacilityController::class, 'generate_pdf']);
     Route::get('/facility-report/store_report/{store_report}', [FacilityController::class, 'store_report'])->name('facility-report.store_report');
-    Route::get('/facility-report/fetch_records/{date_created}/{store}', [FacilityController::class, 'fetch_records']);
+    Route::get('/facility-report/fetch_records', [FacilityController::class, 'fetch_records']);
     Route::get('/retail-customers/export/', [CustomerController::class, 'downloadGroupTemplate'])->name('customer.template');
+    Route::get('/retail-customers/enquiries', [CustomerController::class,'enquiries'])->name('customer.enquiries');
+    Route::get('/retention/make_call', [VoiceController::class, 'makeCall'])->name('make_call');
+    Route::post('/retention/initiate_call', [VoiceController::class, 'initiateCall'])->name('initiate_call');
+    Route::resource('/distribution',DistributionController::class);
     Route::resource('/staffs', StaffController::class);
     Route::resource('/retail-report', RetailController::class);
     Route::resource('/facility-report', FacilityController::class);

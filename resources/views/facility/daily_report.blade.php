@@ -13,7 +13,38 @@
           </div>
           <div class="section-body">
             <div class="row">
-              <div class="col-12">
+                <div class="col-12">
+                    <form action="/facility-report/fetch_records" method="get">
+                        @csrf
+                    <div class="row">
+                        <div class="col-12 col-md-3 col-lg-3">
+                            <div class="card">
+
+                            </div>
+                          </div>
+                      <div class="col-12 col-md-6 col-lg-6">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4>Select Date</h4>
+                          </div>
+                          <div class="card-body">
+                              <div class="form-group d-flex">
+                                <input type="text" name="store" class="form-control" value="{{ str_replace(' ','_', $facility_arr) }}" hidden/>
+                                <input type="text" name="date" class="form-control datepicker">
+                                <button type="submit" class="btn btn-primary ml-2">Search</button>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-3 col-lg-3">
+                        <div class="card">
+
+                        </div>
+                      </div>
+                    </div>
+                </form>
+                  </div>
+              {{-- <div class="col-12">
                 <div class="card">
                   <div class="card-header">
                     <h4>All Reports</h4>
@@ -30,17 +61,17 @@
                     <div class="card-header-form">
                       <form>
                         <div class="input-group">
-                          {{-- <input type="text" class="form-control" placeholder="Search"> --}}
-                          {{-- <div class="input-group-btn">
+                          <input type="text" class="form-control" placeholder="Search">
+                          <div class="input-group-btn">
                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                          </div> --}}
+                          </div>
                         </div>
                       </form>
                     </div>
                   </div>
-                  <div class="card-body p-0">
+                  <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped">
+                      <table class="table table-striped" id="table-1">
                         <tr>
                           <th class="text-center">
                             <th class="text-center">
@@ -51,8 +82,8 @@
                           <th>Action</th>
                         </tr>
                         @foreach ($report_arr as $key => $date )
-                          {{-- <input type="text" name="store_sale" value="{{ $store_sale }}" class="form-control" hidden>
-                          <input type="text" name="created_date" value="{{ $key }}" class="form-control" hidden> --}}
+                          <input type="text" name="store_sale" value="{{ $store_sale }}" class="form-control" hidden>
+                          <input type="text" name="created_date" value="{{ $key }}" class="form-control" hidden>
                             <td class="p-0 text-center">
                               <th class="text-center">
                                 <i class="fas fa-th"></i>
@@ -72,10 +103,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
         </section>
-        {{-- {{ $students->links('pagination::bootstrap-4') }} --}}
       </div>
       @endsection
+
+

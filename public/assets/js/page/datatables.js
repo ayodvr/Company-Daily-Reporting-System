@@ -28,20 +28,17 @@ $("[data-checkboxes]").each(function() {
   });
 });
 
-$(document).ready(function(){
-
 $("#table-1").dataTable({
-    "columnDefs": [
-        { "sortable": false, "targets": [2,3] }
-    ]
+  "columnDefs": [
+    { "sortable": false, "targets": [2,3] }
+  ]
 });
-
 $("#table-2").dataTable({
  "columnDefs": [
     { "sortable": false, "targets": [0,2,3] }
   ],
   order: [[ 1, "asc" ]] //column indexes is zero based
-
+  
 });
 $('#save-stage').DataTable({
 		"scrollX": true,
@@ -53,4 +50,4 @@ $('#tableExport').DataTable({
 			'copy', 'csv', 'excel', 'pdf', 'print'
 		]
 	});
-});
+	

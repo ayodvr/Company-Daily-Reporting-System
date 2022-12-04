@@ -44,23 +44,17 @@
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped" id="table-1">
-                        <tr>
-                          <!-- <th>
-                            <div class="custom-checkbox custom-control">
-                              <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                class="custom-control-input" id="checkbox-all">
-                              <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                            </div>
-                          </th> -->
-                          <th class="text-center">S/N</th>
-                          <th>Fullname</th>
-                          <th>Email</th>
-                          <th>Unit</th>
-                          <th>Store</th>
-                          {{-- <th>Phone</th> --}}
-                          <th>Actions</th>
-                        </tr>
+                        <table class="table table-striped table-hover" id="tableExport">
+                        <thead>
+                         <tr>
+                            <th class="text-center">S/N</th>
+                            <th>Fullname</th>
+                            <th>Email</th>
+                            <th>Unit</th>
+                            <th>Store</th>
+                            <th>Actions</th>
+                         </tr>
+                        </thead>
                         @foreach ($staffs as $staff)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
@@ -68,26 +62,12 @@
                             <td>{{ $staff->email }}</td>
                             <td>{{ $staff->unit }}</td>
                             <td>{{ $staff->store }}</td>
-                            {{-- <td>
-                                <div class="dropdown d-inline">
-                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      See more
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item has-icon" href="#"><i class="fas fa-ban"></i> Block</a>
-                                      <a class="dropdown-item has-icon" href="#"><i class="far fa-file"></i> Query</a>
-                                      <a class="dropdown-item has-icon" href="#"><i class="far fa-clock"></i> Something else here</a>
-                                    </div>
-                                  </div>
-                            </td> --}}
-                            {{-- <td>{{ $staff->phone }}</td> --}}
                             @if ($staff->users['verified'] == 0)
-                            <td><a href="staffs/unblock/{{ $staff->user_id }}"><button class="btn btn-warning">
+                            <td><a href="staffs/unblock/{{ $staff->user_id }}"><button class="badge badge-warning" style="border:none">
                                 <i class="fas fa-unlock"></i>&nbsp;Unblock</button></a>
                             </td>
                             @elseif($staff->users['verified'] == 1)
-                            <td><a href="staffs/block/{{ $staff->user_id }}"><button class="btn btn-danger">
+                            <td><a href="staffs/block/{{ $staff->user_id }}"><button class="badge badge-danger" style="border:none">
                                 <i class="fas fa-ban"></i>&nbsp;Block</button></a>
                             </td>
                             @endif
@@ -101,7 +81,7 @@
             </div>
           </div>
         </section>
-        {{ $staffs->links() }}
+        {{-- {{ $staffs->links() }} --}}
              <!-- Modal -->
      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -132,7 +112,7 @@
                             </div>
                             <!-- Store Location -->
                             <div class="form-group">
-                                <select class="form-select" id="basic-reg" data-placeholder="Select Store" name="store">
+                                <select class="form-select" id="basic-usage" data-placeholder="Select Store" name="store">
                                     <option>Select Store</option>
                                     @foreach ($stores as $store)
                                     <option value="{{ $store->store_name }}">{{ $store->store_name }}</option>
@@ -141,12 +121,13 @@
                             </div>
                             <!-- Unit -->
                             <div class="form-group">
-                                <select class="form-select" id="basic-reg" name="unit">
+                                <select class="form-select" id="basic-usage" name="unit">
                                     <option>Select Unit</option>
                                     <option value="retail">Retail</option>
                                     <option value="facility">Facility</option>
                                     <option value="distribution">Distribution</option>
-                                    <option value="service">Customer Service</option>
+                                    {{-- <option value="service">Customer Service</option>
+                                    <option value="service">Human Resource</option> --}}
                                 </select>
                             </div>
                             <div class="form-group float-right">

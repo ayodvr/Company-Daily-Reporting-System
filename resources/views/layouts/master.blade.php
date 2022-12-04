@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="{{ asset('assets/bundles/summernote/summernote-bs4.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-daterangepicker/daterangepicker.css') }}">
   <!-- Web Fonts
 ======================= -->
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' type='text/css'>
@@ -30,18 +31,17 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('website/vendor/bootstrap/css/bootstrap.min.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('website/vendor/font-awesome/css/all.min.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('website/css/stylesheet.css') }}"/>
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-  <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-daterangepicker/daterangepicker.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/select2/dist/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/jquery-selectric/selectric.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+    <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
   <link rel='shortcut icon' type='image/x-icon' href='{{ asset('assets/img/favicon.ico') }}' />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
@@ -105,13 +105,19 @@
   <script src="{{ asset('assets/js/ng_vmap.js') }}"></script>
   <script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/jquery-ui/jquery-ui.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script>
+    <script src="{{ asset('assets/js/page/datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/page/index2.js') }}"></script>
   <!-- Custom JS File -->
   <script src="{{ asset('assets/bundles/prism/prism.js') }}"></script>
+  <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
   <script src="{{ asset('assets/bundles/cleave-js/dist/cleave.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/cleave-js/dist/addons/cleave-phone.us.js') }}"></script>
   <script src="{{ asset('assets/bundles/jquery-pwstrength/jquery.pwstrength.min.js') }}"></script>
-  <script src="{{ asset('assets/bundles/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
@@ -119,10 +125,8 @@
   <script src="{{ asset('assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/owlcarousel2/dist/owl.carousel.min.js') }}"></script>
   <script src="{{ asset('assets/js/page/widget-data.js') }}"></script>
-  <!-- Page Specific JS File -->
-  <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script>
   <script src="{{ asset('assets/bundles/summernote/summernote-bs4.js') }}"></script>
-  <script src="{{ asset('assets/js/page/index2.js') }}"></script>
+
   <script>
     $(document).ready(function(){
       var i=1;

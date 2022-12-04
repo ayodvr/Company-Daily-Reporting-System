@@ -62,12 +62,22 @@ class FacilityController extends Controller
             return $item;
         });
 
-        //dd($sales_arr->toArray());
+        //dd($report_arr);
+        $facility_arr1 = [];
 
-        return view("facility.daily_report")->with('report_arr', $report_arr)
+        foreach($report_arr as $key => $value){
+            if(isset($key)){
+                array_push($facility_arr1,$value[0]['store_id']);
+            }
+        }
+
+        //dd($facility_arr1);
+
+        return view("facility.daily_report")->with('facility_arr', $facility_arr1[0])
                                             ->with('store_report', $store_report)
                                             ->with('activities', $activities);
     }
+
 
     public function ExportExcel($customer_data){
 
@@ -125,13 +135,14 @@ class FacilityController extends Controller
             }
         }
 
-        $data_array [] = array("ITEM DETAILS","AVAILABILITY","CONDITION","COMMENTS");
+        $data_array [] = array("ITEM DETAILS","AVAILABILITY","STATUS","CONDITION","COMMENTS");
 
         foreach($report_arr as $data_item)
         {
             $data_array[] = array(
                 'ITEM DETAILS'             => $data_item['item_details'],
                 'AVAILABILITY'             => $data_item['availability'],
+                'STATUS'                   => $data_item['status'],
                 'CONDITION'                => $data_item['condition'],
                 'COMMENTS'                 => $data_item['comments']
             );
@@ -141,16 +152,16 @@ class FacilityController extends Controller
 
     }
 
-    public function fetch_records($date_created, $store_location)
+    public function fetch_records(Request $request)
     {
         $activities =  Activity::orderBy('created_at','DESC')->paginate(7);
-        $sales_arr = Facility::where('today_date', $date_created)->get();
+        $sales_arr = Facility::where('today_date', $request->date)->get();
         //dd($sales_arr);
         $report_arr = [];
         $report_key = [];
 
         foreach($sales_arr as $key => $value){
-            if(str_replace(' ','_', $value['store_id']) == $store_location){
+            if(str_replace(' ','_', $value['store_id']) == $request->store){
                 array_push($report_arr, $value);
                 array_push($report_key, $key);
             }
@@ -158,12 +169,21 @@ class FacilityController extends Controller
 
         //dd($report_arr);
 
-        return view("facility.report_detail")->with('record_arr', $report_arr)
+        if(!empty($report_arr)){
+            return view("facility.report_detail")->with('record_arr', $report_arr)
                                              ->with('t_date', $report_arr[0]['today_date'])
                                              ->with('t_store', $report_arr[0]['store_id'])
                                              ->with('report_id', $report_arr[0]['id'])
                                              ->with('fac_Serial', $report_arr[0]['store_serial'])
                                              ->with('activities', $activities);
+        }else{
+
+            notify()->error("No report found for selected date!","");
+
+            return back();
+        }
+
+
 
     }
 
@@ -311,12 +331,14 @@ class FacilityController extends Controller
         $data = [
             'item_details' => $request->get('details'),
             'availability' => $request->get('availability'),
+            'status'       => $request->get('status'),
             'condition'    => $request->get('condition'),
             'comments'     => $request->get('comments')
         ];
 
         $array_length = is_array($data["item_details"]) ? count($data["item_details"]) : 1;
         $array_length = is_array($data["availability"]) ? count($data["availability"]) : 1;
+        $array_length = is_array($data["status"])       ? count($data["status"])       : 1;
         $array_length = is_array($data["condition"])    ? count($data["condition"])    : 1;
         $array_length = is_array($data["comments"])     ? count($data["comments"])     : 1;
 
@@ -334,6 +356,7 @@ class FacilityController extends Controller
                 $arr_item = array(
                     "item_details" => $data["item_details"][$x],
                     "availability" => $data["availability"][$x],
+                    "status"       => $data["status"][$x],
                     "condition"    => $data["condition"][$x],
                     "comments"     => $data["comments"][$x],
                 );
@@ -343,6 +366,7 @@ class FacilityController extends Controller
                 $facility = new Facility;
                 $facility->item_details = $save_one_rec[0]['item_details'];
                 $facility->availability = $save_one_rec[0]['availability'];
+                $facility->status       = $save_one_rec[0]['status'];
                 $facility->condition    = $save_one_rec[0]['condition'];
                 $facility->comments     = $save_one_rec[0]['comments'];
                 $facility->user_id      = auth()->user()->id;
@@ -359,8 +383,9 @@ class FacilityController extends Controller
                 $arr_item = array(
                     "item_details" => $data["item_details"][$x],
                     "availability" => $data["availability"][$x],
+                    "status"       => $data["status"][$x],
                     "condition"    => $data["condition"][$x],
-                    "comments"     => $data["comments"][$x]
+                    "comments"     => $data["comments"][$x],
                 );
                     array_push($save_rec ,$arr_item);
             }
@@ -371,6 +396,7 @@ class FacilityController extends Controller
                 $facilities = new Facility;
                 $facilities->item_details = $facility['item_details'];
                 $facilities->availability = $facility['availability'];
+                $facilities->status       = $facility['status'];
                 $facilities->condition    = $facility['condition'];
                 $facilities->comments     = $facility['comments'];
                 $facilities->user_id      = auth()->user()->id;

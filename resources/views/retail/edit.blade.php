@@ -8,7 +8,12 @@
           <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="text-center">Edit Report</h3>
+                <div class="col-12 d-flex justify-content-between mb-2">
+                    <div><h4 class="text-center">Edit Report</h4></div>
+                    {{-- <div>
+                      <a href="/retail-report"><button class="btn btn-outline-secondary"><i class="far fa-eye"></i>&nbsp;Manage Report</button></a>
+                    </div> --}}
+                  </div>
               </div>
             <form method="POST" action="{{ route('retail-report.update', $report->id) }}" enctype="multipart/form-data" class="register-form" id="register-form">
               {{method_field('PUT')}}
@@ -75,8 +80,8 @@
                     <label for="inputZip">Type Of Customer</label>
                     <select id="inputState" name="customer" class="form-control">
                       <option selected value="{{ $report->customer }}">{{ $report->customer }}</option>
-                      <option value="Yes">New</option> 
-                      <option value="No">Old</option> 
+                      <option value="Yes">New</option>
+                      <option value="No">Old</option>
                     </select>
                   </div>
                 </div>
@@ -107,8 +112,8 @@
                     <label for="inputCity">Visited Our Website ?</label>
                     <select id="inputState" name="visited" class="form-control">
                       <option selected value="{{ $report->visited }}">{{ $report->visited }}</option>
-                      <option value="Yes">Yes</option> 
-                      <option value="No">No</option> 
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">
@@ -116,11 +121,11 @@
                     <select id="inputState" name="found" class="form-control">
                       <option selected value="{{ $report->found }}">{{ $report->found }}</option>
                       <option value="Social Media">Social Media</option>
-                      <option value="Store Activation">Store Activation</option>  
-                      <option value="Blog">Blog</option> 
+                      <option value="Store Activation">Store Activation</option>
+                      <option value="Blog">Blog</option>
                       <option value="Newspaper">Newspaper</option>
                       <option value="Newsletter">Newsletter</option>
-                      <option value="Referral">Referral</option> 
+                      <option value="Referral">Referral</option>
                       <option value="Radio Jingle">Radio Jingle</option>
                     </select>
                   </div>
@@ -169,4 +174,3 @@
     </section>
   </div>
   @endsection
-  

@@ -82,19 +82,6 @@
                           <a class="dropdown-item has-icon" href="/retail-report/generate_excel/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><i class="fas fa-file-excel"></i>Export as Excel</a>
                         </div>
                       </div>
-                    {{-- <div class="row">
-                        <div class="col-auto">
-                            <div>
-                                <span class="text-success mr-2"><i class="fa fa-eye"></i></span>
-                                <a href="/retail-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="text-success">View Report</span></a>
-                            </div>
-                          </div>
-                    </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                        <span class="text-info mr-2"><i class="fa fa-download"></i></span>
-                        {{-- <a href="/retail-report/download_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="text-info">Download</span></a> --}}
-                        {{-- <a href="/retail-report/generate_excel/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><span class="text-info">Download</span></a>
-                    </p> --}}
                   </div>
                 </div>
               </div>
@@ -111,15 +98,18 @@
                </div>
                   <div class="card-body p-0">
                     <div class="table-responsive">
+                    @if($record_arr)
                     @foreach ($record_arr as $report)
                     <div class="col-12 d-flex justify-content-between mb-2">
-                      <div>
+                      {{-- <div> --}}
                         {{-- <h4>S/N: {{ $report['store_serial'] }}</h4></div> --}}
                         <h6 class="badge badge-success">Sale: {{ $loop->iteration }}</h6>
+                        @role('staff')
+                        <div>
+                          <a href="{{ route('retail-report.edit', $report['id']) }}"><button class="btn btn-outline-secondary"><i class="far fa-edit"></i>&nbsp;Edit</button></a>
+                        </div>
+                      @endrole
                     </div>
-                      <div>
-                        <a href="{{ route('retail-report.edit', $report['id']) }}"><button class="btn btn-outline-secondary"><i class="far fa-edit"></i>&nbsp;Edit</button></a>
-                      </div>
                     </div>
                       <table class="table table-striped">
                         <tr>
@@ -174,6 +164,7 @@
                         </tr>
                       </table>
                       @endforeach
+                      @endif
                     </div>
                   </div>
                 </div>
@@ -199,18 +190,16 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-auto">
                       <div class="row">
                         <div class="col-lg-12">
-                          <form class="composeForm">
                             <div class="form-group">
-                              <div class="form-line">
-                              <label>To:</label>
-                                <select class="form-control selectric" name="email[]" multiple="multiple">
-                                  <option></option>
-                                  <option value="chuksaylor@dreamworksdirect.com">MD</option>
-                                  <option value="catheryn@dreamworksdirect.com">GMP</option>
-                                  <option value="adekunle.s@dreamworksdirect.com">Adekunle Sherif</option>
-                                </select>
+                                <div class="form-line">
+                                <label>To:</label>
+                                  <select class="form-control select2" name="email[]" multiple="" style="width: 100%">
+                                    <option></option>
+                                    <option value="ayodejiadekunle@gmail.com">Ayodeji Adekunle</option>
+                                    <option value="adekunle.s@dreamworksdirect.com">Adekunle Sherif</option>
+                                  </select>
+                                </div>
                               </div>
-                            </div>
                             <div class="form-group">
                               <div class="form-line">
                                 <label>Subject:</label>

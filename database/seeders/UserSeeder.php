@@ -16,7 +16,8 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'admin',
             'email' => 'admin@test.com',
-            'store'=>    'DW Experience Center',
+            'store'=>    'Admin',
+            'unit'=>    'All Units',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -27,7 +28,8 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'Managing Director',
             'email' => 'md@test.com',
-            'store'=>    'DW Experience Center',
+            'store'=>    'MD',
+            'unit'=>    'All Units',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -38,7 +40,8 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'Human Resources',
             'email' => 'hr@test.com',
-            'store'=>    'DW Experience Center',
+            'store'=>    'HR',
+            'unit'=>    'All Units',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -49,7 +52,8 @@ class UserSeeder extends Seeder
         $admin =  \App\Models\User::create([
             'name' => 'Finance',
             'email' => 'finance@test.com',
-            'store'=>    'DW Experience Center',
+            'store'=>    'Finance',
+            'unit'=>    'All Units',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -61,6 +65,7 @@ class UserSeeder extends Seeder
             'name' => 'General Manager',
             'email' => 'gm@test.com',
             'store'=>    'DW Experience Center',
+            'unit'=>    'GM',
             'verified'=> 1,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

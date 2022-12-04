@@ -14,54 +14,35 @@
           <div class="section-body">
             <div class="row">
               <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Daily Reports</h4>
-                    <div class="card-header-form">
-                      <form>
-                        <div class="input-group">
-                          <input type="text" class="form-control" placeholder="Filter by date">
-                          <div class="input-group-btn">
-                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                          </div>
+                <form action="/retail-report/fetch_records" method="get">
+                    @csrf
+                <div class="row">
+                    <div class="col-12 col-md-3 col-lg-3">
+                        <div class="card">
+
                         </div>
-                      </form>
+                      </div>
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <h4>Select Date</h4>
+                      </div>
+                      <div class="card-body">
+                          <div class="form-group d-flex">
+                            <input type="text" name="store" class="form-control" value="{{ str_replace(' ','_', $sales_arr) }}" hidden/>
+                            <input type="text" name="date" class="form-control datepicker">
+                            <button type="submit" class="btn btn-primary ml-2">Search</button>
+                          </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                        <tr>
-                          <th class="text-center">
-                            <th class="text-center">
-                              <i class="fas fa-th"></i>
-                            </th>
-                          </th>
-                          <th>Date</th>
-                          <th>Action</th>
-                        </tr>
-                        @foreach ($sales_arr as $key => $date )
-                          {{-- <input type="text" name="store_sale" value="{{ $store_sale }}" class="form-control" hidden>
-                          <input type="text" name="created_date" value="{{ $key }}" class="form-control" hidden> --}}
-                            <td class="p-0 text-center">
-                              <th class="text-center">
-                                <i class="fas fa-th"></i>
-                              </th>
-                            </td>
-                            @if (isset($key))
-                            <td>{{ $date[0]['created_at']->toDayDateTimeString() }}</td>
-                            @else
-                            <td>No Record!</td>
-                            @endif
-                            <td>
-                            <a href="/retail-report/fetch_records/{{ $date[0]['today_date'] }}/{{ str_replace(' ','_', $date[0]['store']) }}/"><button name="submit" class="btn btn-outline-dark"><i class="far fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                          </tr>
-                        @endforeach
-                      </table>
+                  <div class="col-12 col-md-3 col-lg-3">
+                    <div class="card">
+
                     </div>
                   </div>
                 </div>
+            </form>
               </div>
             </div>
           </div>

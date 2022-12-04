@@ -35,7 +35,8 @@ class CreateRetailsTable extends Migration
             $table->string('cash_bank')->nullable();
             $table->string('bank_paid')->nullable();
             $table->string('payslips')->nullable();
-            // $table->string('pro_details')->nullable();
+            $table->string('status')->nullable();
+            $table->string('sales_unit')->nullable();
             $table->string('serial_no')->nullable();
             $table->string('qty_sold')->nullable();
             $table->string('sys_qty')->nullable();

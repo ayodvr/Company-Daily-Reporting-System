@@ -26,8 +26,9 @@
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i><span>Distribution</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="#">Create Report</a></li>
-              <li><a class="nav-link" href="#">Manage Reports</a></li>
+              <li><a class="nav-link" href="{{ route('distribution.create') }}">Create Report</a></li>
+              <li><a class="nav-link" href="/distribution">Manage Reports</a></li>
+              {{-- <li><a class="nav-link" href="#"></a></li> --}}
             </ul>
         </li>
         @endif
@@ -44,11 +45,16 @@
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-question-circle"></i><span>Customer Service</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="#">Customers Feedback</a></li>
-              <li><a class="nav-link" href="#">Enquiries</a></li>
+              <li><a class="nav-link" href="{{ route('customer.enquiries') }}">Enquiries</a></li>
             </ul>
         </li>
         @endif
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-list-alt"></i><span>Products</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('products.index') }}" class="nav-link">Price List</a></li>
+              </ul>
+        </li>
         @role('admin')
         <li class="menu-header">Directory</li>
         <li class="dropdown">
@@ -63,19 +69,15 @@
             <li><a href="{{ route('staffs.index') }}" class="nav-link">Manage Staffs</a></li>
           </ul>
         @endrole
-        {{-- <li class="menu-header">Settings</li>
-        <li class="dropdown">
-        <a href="#" class="nav-link has-dropdown"><i class="fas fa-product"></i><span>Products</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ route('products.index') }}" class="nav-link">Manage Products</a></li>
-          </ul>
-        </li>
+        @role('staff')
+        <li class="menu-header">Settings</li>
         <li class="dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-users-cog"></i><span>Profile</span></a>
           <ul class="dropdown-menu">
             <li><a href="#" class="nav-link">Manage Profile</a></li>
           </ul>
-        </li> --}}
+        </li>
+        @endrole
        {{-- <li class="dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-tag"></i><span>Roles</span></a>
           <ul class="dropdown-menu">

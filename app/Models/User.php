@@ -73,4 +73,9 @@ class User extends Authenticatable
 
         return $this->hasMany('App\Models\Staff','user_id');
      }
+
+     public function customers(){
+
+        return $this->hasMany('App\Models\Customer','user_id');
+     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Enquiry;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CustomerTemplateExport;
 use Spatie\Activitylog\Models\Activity;
@@ -38,6 +39,14 @@ class CustomerController extends Controller
         //
     }
 
+    public function enquiries()
+    {
+        $enquiries = Enquiry::orderBy('created_at', 'asc')->get();
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
+        return view('customer.enquiries')->with('activities', $activities)
+                                         ->with('enquiries', $enquiries);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,15 +58,21 @@ class CustomerController extends Controller
         //dd($request->all());
 
         $request->validate([
-            'customer_name'   => 'required',
-            'customer_phone'  => 'required',
-            'customer_email'  => 'required'
+            'customer_name'     => 'required',
+            'customer_phone'    => 'required',
+            'customer_email'    => 'required',
+            'customer_birthday'    => 'required',
+            'customer_address'  => 'required'
         ]);
 
         $data = [
-            'customer_name'     => $request->get('customer_name'),
-            'customer_phone'    => $request->get('customer_phone'),
-            'customer_email'    => $request->get('customer_email')
+            'customer_name'       => $request->get('customer_name'),
+            'customer_phone'      => $request->get('customer_phone'),
+            'customer_email'      => $request->get('customer_email'),
+            'customer_address'    => $request->get('customer_address'),
+            'customer_birthday'    => $request->get('customer_birthday'),
+            'sales_unit'          => auth()->user()->unit,
+            'user_id'             => auth()->user()->id
         ];
 
         $check_customer = Customer::where('customer_email', $request->customer_email)->exists();

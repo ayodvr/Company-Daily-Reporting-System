@@ -183,7 +183,7 @@ function barChartWithImg() {
   image.verticalCenter = "bottom";
   image.dy = 20;
   image.y = am4core.percent(100);
-  image.propertyFields.href = "bullet.html";
+  image.propertyFields.href = "bullet";
   image.tooltipText = series.columns.template.tooltipText;
   image.propertyFields.fill = "color";
   image.filters.push(new am4core.DropShadowFilter());

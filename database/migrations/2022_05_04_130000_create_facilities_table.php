@@ -17,6 +17,7 @@ class CreateFacilitiesTable extends Migration
             $table->id();
             $table->string('item_details');
             $table->string('availability');
+            $table->string('status')->nullable();
             $table->string('condition')->nullable();
             $table->string('comments')->nullable();
             $table->string('user_id');

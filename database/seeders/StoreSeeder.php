@@ -15,84 +15,93 @@ class StoreSeeder extends Seeder
     public function run()
     {
         Store::create([
-            'store_name' => 'DW Experience Center',
-            'store_code' => 'dw00000000001'
-        ]);
-
-        Store::create([
-            'store_name' => 'DW Ikeja',
-            'store_code' => 'dw00000000002'
-        ]);
-
-        Store::create([
+            'code_name' => 'November',
             'store_name' => 'DW Lekki',
-            'store_code' => 'dw00000000003'
+            'store_code' => 'dw0001'
         ]);
 
         Store::create([
-            'store_name' => 'DW Lakowe',
-            'store_code' => 'dw00000000004'
-        ]);
-
-        Store::create([
-            'store_name' => 'DW Abuja 1',
-            'store_code' => 'dw00000000005'
-        ]);
-
-        Store::create([
-            'store_name' => 'DW Abuja 2',
-            'store_code' => 'dw00000000006'
-        ]);
-
-        Store::create([
-            'store_name' => 'DW Ibadan 1',
-            'store_code' => 'dw00000000007'
-        ]);
-
-        Store::create([
-            'store_name' => 'DW Ibadan 2',
-            'store_code' => 'dw00000000008'
-        ]);
-
-        Store::create([
+            'code_name' => 'Romeo',
             'store_name' => 'DW Surulere',
-            'store_code' => 'dw00000000009'
+            'store_code' => 'dw0002'
         ]);
 
         Store::create([
-            'store_name' => 'DW Festac',
-            'store_code' => 'dw00000000010'
-        ]);
-
-        Store::create([
-            'store_name' => 'DW Aromire',
-            'store_code' => 'dw00000000011'
-        ]);
-
-        Store::create([
+            'code_name' => 'papa',
             'store_name' => 'DW Ogudu',
-            'store_code' => 'dw00000000012'
+            'store_code' => 'dw0003'
         ]);
 
         Store::create([
+            'code_name' => 'Oscar 2',
+            'store_name' => 'HQ GROUND FLOOR',
+            'store_code' => 'dw0004'
+        ]);
+
+        Store::create([
+            'code_name' => 'Oscar 1',
+            'store_name' => 'HQ FIRST FLOOR',
+            'store_code' => 'dw0005'
+        ]);
+
+        Store::create([
+            'code_name' => 'India',
+            'store_name' => 'DW AROMIRE',
+            'store_code' => 'dw0006'
+        ]);
+
+        Store::create([
+            'code_name' => 'Kilo',
+            'store_name' => 'DW FESTAC',
+            'store_code' => 'dw0007'
+        ]);
+
+        Store::create([
+            'code_name' => 'Juliet',
+            'store_name' => 'DW IBADAN 1',
+            'store_code' => 'dw0008'
+        ]);
+
+        Store::create([
+            'code_name' => 'Lima',
+            'store_name' => 'DW IBADAN 2',
+            'store_code' => 'dw0009'
+        ]);
+
+        Store::create([
+            'code_name' => 'Mike',
+            'store_name' => 'DW Lakowe',
+            'store_code' => 'dw00010'
+        ]);
+
+        Store::create([
+            'code_name' => 'Hotel 1',
+            'store_name' => 'DW Abuja 1',
+            'store_code' => 'dw00011'
+        ]);
+
+        Store::create([
+            'code_name' => 'Hotel 2',
+            'store_name' => 'DW Abuja 2',
+            'store_code' => 'dw00012'
+        ]);
+
+        Store::create([
+            'code_name' => 'Victor',
+            'store_name' => 'DW Portharcourt 1',
+            'store_code' => 'dw00013'
+        ]);
+
+        Store::create([
+            'code_name' => 'Xray',
+            'store_name' => 'DW Portharcourt 2',
+            'store_code' => 'dw00014'
+        ]);
+
+        Store::create([
+            'code_name' => 'Uniform',
             'store_name' => 'DW Asaba',
-            'store_code' => 'dw00000000013'
+            'store_code' => 'dw00015'
         ]);
-
-        Store::create([
-            'store_name' => 'DW Phortharcourt 1',
-            'store_code' => 'dw00000000014'
-        ]);
-
-        Store::create([
-            'store_name' => 'DW Phortharcourt 2',
-            'store_code' => 'dw00000000015'
-        ]);
-
-        Store::create([
-            'store_name' => 'DW Phortharcourt Annex',
-            'store_code' => 'dw00000000016'
-        ]);
-
     }
 }

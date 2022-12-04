@@ -6,7 +6,7 @@
       <br>
       <div class="section-body">
         <div class="row">
-              <div class="col-xl-6 col-lg-6">
+              <div class="col-xl-5 col-lg-6">
                 <div class="card">
                     <div class="card-body card-type-3">
                     <div class="row">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-              <div class="col-xl-6 col-lg-4">
+              <div class="col-xl-7 col-lg-4">
                 <div class="card">
                   <div class="card-body card-type-3">
                     {{-- <div class="row">
@@ -52,6 +52,11 @@
                             {{-- <span class="text-dark mr-2"><i class="fas fa-file-excel"></i></span> --}}
                             <a href="#"><span class="badge badge-info" data-toggle="modal" data-target="#exampleModalCenter">Send via mail</span></a>
                         </p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            {{-- <span class="text-dark mr-2"><i class="fas fa-file-excel"></i></span> --}}
+                            <a href="http://127.0.0.1:8000/facility-report/create"><span class="badge badge-light">Add New Report</span></a>
+                        </p>
                     </div>
                   </div>
                 </div>
@@ -59,14 +64,11 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                {{-- <h4>Advanced Table</h4> --}}
+                <h4>Facility Data</h4>
               </div>
-              {{-- <div class="text-right mr-5">
-                <a href="/retail-report/generate_pdf" class="btn btn-primary">Send Report</a>
-              </div> --}}
-              <div class="card-body p-0">
+              <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table table-striped">
+                  <table class="table table-striped" id="table-1">
                     <tr>
                         <th>S/N</th>
                         <th>Item Details</th>
@@ -117,6 +119,7 @@
       </div>
     </section>
     {{-- {{ $students->links('pagination::bootstrap-4') }} --}}
+  </div>
      <!-- Modal -->
      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -133,11 +136,10 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-auto">
                   <div class="row">
                     <div class="col-lg-12">
-                      <form class="composeForm">
                         <div class="form-group">
                           <div class="form-line">
                           <label>To:</label>
-                            <select class="form-control selectric" name="email[]" multiple="multiple">
+                            <select class="form-control select2" name="email[]" multiple="" style="width: 100%">
                               <option></option>
                               <option value="ayodejiadekunle@gmail.com">Ayodeji Adekunle</option>
                               <option value="adekunle.s@dreamworksdirect.com">Adekunle Sherif</option>
@@ -163,13 +165,12 @@
                         </div>
                       </form>
                     </div>
-              </div>
-            </div>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
         </div>
       </div>
       <!-- The Modal -->
-  </div>
   @endsection

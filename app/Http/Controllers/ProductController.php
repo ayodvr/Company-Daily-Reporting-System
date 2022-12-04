@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use DB;
+use SheetDB\SheetDB;
 use Illuminate\Support\Arr;
 
 class ProductController extends Controller
@@ -22,8 +23,11 @@ class ProductController extends Controller
     {
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
         $products = Product::orderBy('id', 'asc')->paginate(20);
+        $sheetdb = new SheetDB('832xror5om6j2','ALL');
+        $all_products = $sheetdb->get();
         return view('product.index')->with('products', $products)
-                                    ->with('activities', $activities);
+                                    ->with('activities', $activities)
+                                    ->with('all_products', $all_products);
     }
 
     public function import()

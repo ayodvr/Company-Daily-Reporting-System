@@ -44,32 +44,19 @@
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped" id="table-1">
+                        <table class="table table-striped table-hover" id="tableExport">
+                        <thead>
                         <tr>
-                          <!-- <th>
-                            <div class="custom-checkbox custom-control">
-                              <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                class="custom-control-input" id="checkbox-all">
-                              <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                            </div>
-                          </th> -->
-                          <th class="text-center">
-                            <th class="text-center">
-                              <i class="fas fa-th"></i>
-                            </th>
-                          </th>
-                          <th>Customer Name</th>
-                          <th>Customer Phone</th>
-                          <th>Customer Email</th>
-                          <th>Date Created</th>
-                        </tr>
+                            <th class="text-center">S/N</th>
+                            <th>Customer Name</th>
+                            <th>Customer Phone</th>
+                            <th>Customer Email</th>
+                            <th>Date Created</th>
+                            </tr>
+                        </thead>
                         @foreach ($customers as $customer )
                         <tr>
-                            <td class="p-0 text-center">
-                              <th class="text-center">
-                                <i class="fas fa-th"></i>
-                              </th>
-                            </td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $customer->customer_name }}</td>
                             <td>{{ $customer->customer_phone }}</td>
                             <td>{{ $customer->customer_email }}</td>
@@ -84,7 +71,7 @@
             </div>
           </div>
         </section>
-        {{ $customers->links() }}
+        {{-- {{ $customers->links() }} --}}
 
         <div class="modal fade" id="customerModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -112,6 +99,13 @@
                                 <!-- Email Address -->
                                 <div class="form-group">
                                     <input id="email" class="form-control" type="email" name="customer_email" placeholder="Email" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Date of Birth</label>
+                                    <input type="text" class="form-control datepicker" type="birthday" name="customer_birthday" placeholder="Date of Birth" />
+                                </div>
+                                <div class="form-group">
+                                    <input id="email" class="form-control" type="address" name="customer_address" placeholder="Address" />
                                 </div>
                                 <div class="modal-footer bg-whitesmoke br">
                                     <button type="submit" class="btn btn-primary">Save</button>

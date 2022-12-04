@@ -17,8 +17,12 @@
           <div class="breadcrumb-item">Blog</div>
         </div>
       </div>
+        {{-- <div class="card-header">
+          <h4>Date &amp; Time Picker</h4>
+        </div> --}}
       <div class="section-body">
         <div class="row">
+        @role('admin')
          @foreach ($store_arr as $key => $value )
           <div class="col-12 col-sm-6 col-md-6 col-lg-3">
             <article class="article">
@@ -38,14 +42,12 @@
             </article>
           </div>
           @endforeach
-          @foreach ($staff_arr as $key => $value  )
+          @endrole
+          {{-- @foreach ($staff_arr as $key => $value  )
           <div class="col-12 col-sm-6 col-md-6 col-lg-3">
             <article class="article">
                 <div class="article-header">
                   <div class="article-image" data-background="assets/img/blog/store.jpg">
-                  </div>
-                  <div class="article-title">
-                    {{-- <h2 class="text-center"><a href="#">{{ $value }}</h2> --}}
                   </div>
                 </div>
                 <div class="article-details text-center">
@@ -56,9 +58,42 @@
                 </div>
               </article>
           </div>
-          @endforeach
+          @endforeach --}}
         </div>
       </div>
+      @role('staff')
+          <div class="col-12">
+            <form action="/retail-report/fetch_records" method="get">
+                @csrf
+            <div class="row">
+                <div class="col-12 col-md-3 col-lg-3">
+                    <div class="card">
+
+                    </div>
+                  </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Select Date</h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="form-group d-flex">
+                        <input type="text" name="store" class="form-control" value="{{ str_replace(' ','_', auth()->user()['store']) }}" hidden/>
+                        <input type="text" name="date" class="form-control datepicker">
+                        <button type="submit" class="btn btn-primary ml-2">Search</button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3 col-lg-3">
+                <div class="card">
+
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+    @endrole
     </section>
   </div>
 @endsection

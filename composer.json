@@ -31,7 +31,8 @@
         "santigarcor/laratrust": "^6.3",
         "sheetdb/sheetdb-php": "^1.0",
         "spatie/laravel-activitylog": "^3.17",
-        "spatie/laravel-json-api-paginate": "^1.12"
+        "spatie/laravel-json-api-paginate": "^1.12",
+        "twilio/sdk": "^6.43"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
