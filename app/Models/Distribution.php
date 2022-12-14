@@ -16,6 +16,7 @@ class Distribution extends Model
         'account_address',
         'account_birthday',
         'account_type',
+        'location',
         'date',
         'product_detail',
         'status',

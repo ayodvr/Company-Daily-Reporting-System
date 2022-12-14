@@ -103,7 +103,7 @@ class FacilityController extends Controller
 
             header('Content-Type: application/vnd.ms-excel');
 
-            header('Content-Disposition: attachment;filename="Customer_ExportedData.xls"');
+            header('Content-Disposition: attachment;filename="Facility_Report.xls"');
 
             header('Cache-Control: max-age=0');
 
@@ -214,7 +214,7 @@ class FacilityController extends Controller
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
-        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        // $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML($html);
         $mpdf->Output($filename,'I');
@@ -247,7 +247,7 @@ class FacilityController extends Controller
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
-        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        // $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML($html);
         $mpdf->Output($filename,'D');
@@ -289,7 +289,7 @@ class FacilityController extends Controller
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
-        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        // $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output('Facility'.'/'.$filename,'F');

@@ -48,9 +48,9 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-4 col-lg-4">
+              <div class="col-xl-6 col-lg-6">
                 <div class="card">
-                  <div class="card-body card-type-3">
+                  <div class="card-body card-type-3 d-flex">
                     <div class="row">
                         <div class="col-auto">
                             <a href="#"><button style="margin-left: auto" data-toggle="modal" data-target="#exampleModalCenter"
@@ -65,10 +65,23 @@
                         {{-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
                         <span class="text-nowrap">Since last month</span> --}}
                     </p>
+                    <div class="row ml-2">
+                        <div class="dropdown d-inline">
+                            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton2"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              See more
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item has-icon" href="/retail-report/generate_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><i class="fas fa-eye"></i> View Report</a>
+                              <a class="dropdown-item has-icon" href="/retail-report/download_pdf/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><i class="far fa-file"></i> Export as Pdf</a>
+                              <a class="dropdown-item has-icon" href="/retail-report/generate_excel/{{ $t_date }}/{{ str_replace(' ','_', $t_store )}}"><i class="fas fa-file-excel"></i>Export as Excel</a>
+                            </div>
+                          </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-xl-2 col-lg-6">
+              {{-- <div class="col-xl-2 col-lg-6">
                 <div class="card">
                   <div class="card-body card-type-3">
                     <div class="dropdown d-inline">
@@ -84,7 +97,7 @@
                       </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
               <div class="col-12">
                 <div class="card">
                   <div class="card-header mr-5">
@@ -96,9 +109,9 @@
                           {{session('success')}}</div>
                     @endif
                </div>
-                  <div class="card-body p-0">
+                  <div class="card-body">
                     <div class="table-responsive">
-                    @if($record_arr)
+                    @if(isset($record_arr))
                     @foreach ($record_arr as $report)
                     <div class="col-12 d-flex justify-content-between mb-2">
                       {{-- <div> --}}
@@ -111,13 +124,8 @@
                       @endrole
                     </div>
                     </div>
-                      <table class="table table-striped">
+                      <table class="table table-striped" id="table-1">
                         <tr>
-                          {{-- <th class="text-center">
-                            <th class="text-center">
-                              <i class="fas fa-th"></i>
-                            </th>
-                          </th> --}}
                           <th>Customer Name</th>
                           <th>Phone</th>
                           <th>Email</th>
@@ -126,11 +134,6 @@
                           <th>Sold By</th>
                         </tr>
                         <tr>
-                            {{-- <td class="p-0 text-center">
-                              <th class="text-center">
-                                <i class="fas fa-th"></i>
-                              </th>
-                            </td> --}}
                             <td>{{ $report['name']}}</td>
                             <td>{{ $report['phone']}}</td>
                             <td>{{ $report['email']}}</td>
@@ -139,7 +142,7 @@
                             <td>{{ $report['sold_by']}}</td>
                           </tr>
                       </table>
-                      <table class="table table-striped">
+                      <table class="table table-striped" id="table-1">
                         <tr>
                           <th>Product Details</th>
                           <th>Mode Of Payment</th>

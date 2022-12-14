@@ -51,11 +51,17 @@ class RetailController extends Controller
         $daily_date = $anytime->toFormattedDateString();
         $sheetdb = new SheetDB('832xror5om6j2','ALL');
         $products = $sheetdb->get();
-        $count = count($products);
-        return view('admin.admindash')->with('activities', $activities)
+        if(isset($products)){
+            $count = count($products);
+            return view('admin.admindash')->with('activities', $activities)
                                       ->with('daily_date',$daily_date)
                                       ->with('count',$count)
                                       ->with(['chart' => $chart->build()]);
+        }else{
+            return view('admin.admindash')->with('activities', $activities)
+                                      ->with('daily_date',$daily_date)
+                                      ->with(['chart' => $chart->build()]);
+        }
     }
 
     public function timeline()
@@ -137,7 +143,7 @@ class RetailController extends Controller
 
             header('Content-Type: application/vnd.ms-excel');
 
-            header('Content-Disposition: attachment;filename="Customer_ExportedData.xls"');
+            header('Content-Disposition: attachment;filename="Retail_Report.xls"');
 
             header('Cache-Control: max-age=0');
 
@@ -303,7 +309,7 @@ class RetailController extends Controller
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
-        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        // $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output($filename,'I');
@@ -339,7 +345,7 @@ class RetailController extends Controller
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
-        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        // $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output($filename,'D');
@@ -383,9 +389,8 @@ class RetailController extends Controller
                                          ->with('t_store', $report_arr[0]['store']);
         $html = $html->render();
 
-
         $mpdf->setFooter('Dreamworks Integrated Systems');
-        $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
+        // $mpdf->SetWatermarkImage('assets/luma/img/img003.png');
         $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output('Reports'.'/'.$filename,'F');
@@ -393,26 +398,24 @@ class RetailController extends Controller
         $temp_slip = array();
 
         foreach($report_arr as $paysarry){
-            array_push($temp_slip, $paysarry['payslips']);
+            array_push($temp_slip, public_path() . $paysarry['payslips']);
         }
-
-       // dd($temp_slip);
-
-        $temp_slip = public_path() . $temp_slip[0];
-
-        dd($temp_slip);
 
         $file = public_path().'/'.'Reports'.'/' . $filename;
 
-            \Mail::send('emails.sendReport',array(
-                'body' => $data['body']
-            ),function($message) use ($data, $file) {
-                foreach($data['email'] as $email){
-                    $message->to($email)
-                        ->subject($data["subject"])
-                        ->attach($file);
-                }
-            });
+        \Mail::send('emails.sendReport',array(
+            'body' => $data['body']
+        ),function($message) use ($data, $file, $temp_slip) {
+            foreach($data['email'] as $email){
+                $message->to($email)
+                    ->subject($data["subject"])
+                    ->attach($file);
+                    foreach($temp_slip as $temp_slips){
+                        $message->attach($temp_slips);
+
+                    }
+            }
+        });
 
             return back()->with('success', 'Report successfully sent!');
     }

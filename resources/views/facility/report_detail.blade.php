@@ -83,6 +83,7 @@
                         <th>Actions</th>
                         @endrole
                     </tr>
+                    @if (isset($record_arr))
                     @foreach ($record_arr as $report)
                     <tr id='rid{{ $report['id'] }}'>
                         <td>{{ $loop->iteration }}</td>
@@ -110,6 +111,7 @@
                         @endrole
                       </tr>
                     @endforeach
+                    @endif
                   </table>
                 </div>
               </div>

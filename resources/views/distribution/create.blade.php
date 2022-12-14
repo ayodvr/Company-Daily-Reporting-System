@@ -41,11 +41,11 @@
             <div class="row align-items-center">
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="greeting-text">
-                        <a href="/dashboard"><button class="btn-primary btn ml-2 white pt-1 pb-1 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-angle-left"></i>&nbsp;&nbsp;Dashboard</button></a>
-                     <h3 class="card-label mb-0 ">
+                        <a href="/distribution"><button class="btn-primary btn ml-2 white pt-1 pb-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-angle-left"></i>&nbsp;&nbsp;Search Reports</button></a>
+                     {{-- <h3 class="card-label mb-0 ">
                          {{ auth()->user()->unit }}
-                     </h3>
+                     </h3> --}}
                     </div>
 
                 </div>
@@ -223,19 +223,19 @@
                                             <input type="button" data-toggle="modal" data-target="#choosecustomer" value="Add" class="btn-success btn ml-2 white pt-1 pb-1 d-flex align-items-center justify-content-center"/>
                                             </fieldset>
                                         </div>
-                                        {{-- <div class="col-md-4">
+                                        <div class="col-md-4">
                                             <label  class="text-body">Location</label>
                                             <fieldset class="form-group mb-3">
                                                 <input type="text" class="form-control" name="location" id="basicInput">
                                             </fieldset>
-                                        </div> --}}
+                                        </div>
                                         <div class="col-md-4">
                                             <label  class="text-body">Type of Account</label>
                                             <fieldset class="form-group mb-3">
                                                 <select class="js-example-basic-single js-states form-control bg-transparent" name="account_type">
                                                     <option></option>
-                                                    <option value="old">Active</option>
-                                                    <option value="new">Inactive</option>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
                                                     </select>
                                             </fieldset>
                                         </div>

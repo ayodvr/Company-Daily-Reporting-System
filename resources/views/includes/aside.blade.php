@@ -24,7 +24,7 @@
         @endif
         @if (auth()->user()->name == 'admin' || auth()->user()->unit == 'distribution')
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i><span>Distribution</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-basket"></i><span>Distribution</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ route('distribution.create') }}">Create Report</a></li>
               <li><a class="nav-link" href="/distribution">Manage Reports</a></li>
@@ -49,24 +49,34 @@
             </ul>
         </li>
         @endif
+        @if (auth()->user()->name == 'admin' || auth()->user()->unit == 'hr')
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-list-alt"></i><span>Products</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="far fa-lightbulb"></i><span>Human Resource</span></a>
             <ul class="dropdown-menu">
-                <li><a href="{{ route('products.index') }}" class="nav-link">Price List</a></li>
+              <li><a class="nav-link" href="{{ route('human-resource.create') }}">Add Job</a></li>
+              <li><a class="nav-link" href="{{ route('human-resource.index') }}">Modify Jobs</a></li>
+              <li><a class="nav-link" href="#">View Candidates</a></li>
+            </ul>
+        </li>
+        @endif
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-list-alt"></i><span>Price List</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('products.index') }}" class="nav-link">All Products</a></li>
               </ul>
         </li>
         @role('admin')
         <li class="menu-header">Directory</li>
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="far fa-address-card"></i><span>Customers</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-friends"></i><span>Customers</span></a>
             <ul class="dropdown-menu">
               <li><a href="{{ route('retail-customers.index') }}" class="nav-link">Manage Customers</a></li>
             </ul>
           </li>
         <li class="dropdown">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-friends"></i><span>Staffs</span></a>
+          <a href="#" class="nav-link has-dropdown"><i class="far fa-address-card"></i><span>Employee</span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('staffs.index') }}" class="nav-link">Manage Staffs</a></li>
+            <li><a href="{{ route('staffs.index') }}" class="nav-link">Manage Employee</a></li>
           </ul>
         @endrole
         @role('staff')

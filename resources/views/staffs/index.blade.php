@@ -55,6 +55,7 @@
                             <th>Actions</th>
                          </tr>
                         </thead>
+                        @if (isset($staffs))
                         @foreach ($staffs as $staff)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
@@ -73,6 +74,7 @@
                             @endif
                           </tr>
                         @endforeach
+                        @endif
                       </table>
                     </div>
                   </div>
@@ -126,8 +128,8 @@
                                     <option value="retail">Retail</option>
                                     <option value="facility">Facility</option>
                                     <option value="distribution">Distribution</option>
-                                    {{-- <option value="service">Customer Service</option>
-                                    <option value="service">Human Resource</option> --}}
+                                    <option value="hr">Human Resource</option>
+                                    <option value="service">Customer Service</option>
                                 </select>
                             </div>
                             <div class="form-group float-right">

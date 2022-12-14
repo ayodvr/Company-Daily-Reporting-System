@@ -60,7 +60,7 @@
                             <td>{{ $customer->customer_phone }}</td>
                             <td>{{ $customer->customer_email }}</td>
                             <td>{{ $customer['created_at']->toDayDateTimeString() }}</td>
-                          </tr> 
+                          </tr>
                         @endforeach
                       </table>
                     </div>

@@ -4,7 +4,7 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Products</h1>
+            <h1>Price List</h1>
           </div>
           <div class="section-body">
             <div class="row">
@@ -52,6 +52,7 @@
                                     <th>RETAIL PRICE</th>
                                     </tr>
                                 </thead>
+                                @if (isset($all_products))
                                 @foreach ($all_products as $product )
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -63,6 +64,7 @@
                                     <td>{{ $product->RETAIL_PRICE }}</td>
                                   </tr>
                                 @endforeach
+                                @endif
                               </table>
                             </div>
                           </div>

@@ -13,7 +13,7 @@ class HumanresourceController extends Controller
      */
     public function index()
     {
-        //
+        return view('human_resource.job-layout-one');
     }
 
     /**
@@ -23,7 +23,7 @@ class HumanresourceController extends Controller
      */
     public function create()
     {
-        //
+        return view('human_resource.add-job');
     }
 
     /**

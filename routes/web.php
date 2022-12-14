@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductsApiController;
 use App\Http\Controllers\GoogleSheetsController;
 use App\Http\Controllers\DistributionController;
 use App\Http\Controllers\VoiceController;
+use App\Http\Controllers\HumanresourceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,11 @@ Route ::group(['middleware' => ['auth']],function(){
     Route::get('/retail-customers/enquiries', [CustomerController::class,'enquiries'])->name('customer.enquiries');
     Route::get('/retention/make_call', [VoiceController::class, 'makeCall'])->name('make_call');
     Route::post('/retention/initiate_call', [VoiceController::class, 'initiateCall'])->name('initiate_call');
+    Route::get('/distribution/generate_excel/{report_key}/{store}', [DistributionController::class, 'downloadExcelTemplate']);
+    Route::get('/distribution/generate_pdf/{report_key}/{store}', [DistributionController::class, 'generate_pdf']);
+    Route::get('/distribution/send_pdf/{report_key}/{store}', [DistributionController::class, 'send_pdf']);
+    Route::get('/distribution/download_pdf/{report_key}/{store}', [DistributionController::class, 'download_pdf']);
+    Route::resource('/human-resource',HumanresourceController::class);
     Route::resource('/distribution',DistributionController::class);
     Route::resource('/staffs', StaffController::class);
     Route::resource('/retail-report', RetailController::class);

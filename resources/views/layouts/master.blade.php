@@ -6,8 +6,8 @@
   <title>Dreamworks Integrated Systems</title>
   <!-- General CSS Files -->
   <!-- Styles -->
-  <script src="https://code.highcharts.com/maps/highmaps.js"></script>
-  <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+  {{-- <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+  <script src="https://code.highcharts.com/maps/modules/exporting.js"></script> --}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
@@ -101,15 +101,15 @@
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/index.js') }}"></script>
   <!-- Template JS File -->
-  <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/ng_vmap.js') }}"></script>
   <script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/jquery-ui/jquery-ui.min.js') }}"></script>
+  <script src="{{ asset('assets/js/page/datatables.js') }}"></script>
   <script src="{{ asset('assets/bundles/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script>
-    <script src="{{ asset('assets/js/page/datatables.js') }}"></script>
+
     <script src="{{ asset('assets/js/page/index2.js') }}"></script>
   <!-- Custom JS File -->
   <script src="{{ asset('assets/bundles/prism/prism.js') }}"></script>

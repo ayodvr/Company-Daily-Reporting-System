@@ -54,6 +54,7 @@
                             <th>Date Created</th>
                             </tr>
                         </thead>
+                        @if (isset($customers))
                         @foreach ($customers as $customer )
                         <tr>
                             <td>{{ $loop->iteration }}</td>
@@ -63,6 +64,7 @@
                             <td>{{ $customer['created_at']->toDayDateTimeString() }}</td>
                           </tr>
                         @endforeach
+                        @endif
                       </table>
                     </div>
                   </div>
