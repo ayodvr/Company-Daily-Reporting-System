@@ -106,9 +106,9 @@
         <div class="row">
           <div class="col-md-6">
             <div class="card">
-              <div class="card-header">
+              {{-- <div class="card-header">
                 <h4>Revenue Chart</h4>
-              </div>
+              </div> --}}
               <div class="card-body">
                 <div>{!! $chart->container() !!}</div>
               </div>

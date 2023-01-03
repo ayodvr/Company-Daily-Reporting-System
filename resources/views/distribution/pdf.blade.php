@@ -64,9 +64,9 @@
                                     <td style="font-family: sans-serif;font-weight:bold"><span>&#x20A6;</span>68,181,816.00</td>
                                     <td style="font-family: sans-serif;font-weight:bold"><span>&#x20A6;</span>250,000,000.00</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td style="font-family: sans-serif;font-weight:bold">Achievement</td>
-                                    <td></td>
+                                    <td style="font-weight:bold"><span>&#x20A6;</span>@money($amount)</td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -75,7 +75,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                </tr>
+                                </tr> --}}
                         </table>
                     </div>
                     <br>

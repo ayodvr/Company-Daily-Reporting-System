@@ -46,9 +46,9 @@
               {{-- <a href="{{ route('retail-report.timeline') }}" class="dropdown-item has-icon">
                 <i class="fas fa-bolt"></i> Activities
               </a> --}}
-              {{-- <a href="{{ route('retail-report.timeline') }}" class="dropdown-item has-icon">
+              <a href="{{ route('staff_profile') }}" class="dropdown-item has-icon">
                 <i class="fas fa-cog"></i> Settings
-              </a> --}}
+              </a>
               <div class="dropdown-divider"></div>
                 <form method="POST" action="{{ route('logout') }}">
                   @csrf

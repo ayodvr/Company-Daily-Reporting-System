@@ -81,6 +81,7 @@ Route ::group(['middleware' => ['auth']],function(){
     Route::get('/distribution/generate_pdf/{report_key}/{store}', [DistributionController::class, 'generate_pdf']);
     Route::get('/distribution/send_pdf/{report_key}/{store}', [DistributionController::class, 'send_pdf']);
     Route::get('/distribution/download_pdf/{report_key}/{store}', [DistributionController::class, 'download_pdf']);
+    Route::get('/staffs/profile', [StaffController::class, 'staff_profile'])->name('staff_profile');
     Route::resource('/human-resource',HumanresourceController::class);
     Route::resource('/distribution',DistributionController::class);
     Route::resource('/staffs', StaffController::class);

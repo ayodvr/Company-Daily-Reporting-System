@@ -5,13 +5,11 @@
   <div class="container">
     <div class="page-caption text-center">
       <h2>All Jobs</h2>
-      {{-- <p><a href="#" title="Home">Home</a> <i class="ti-angle-double-right"></i> Job Layout One</p> --}}
+      <p><a href="#">Go Back</a> <i class="ti-angle-double-right"></i>Jobs</p>
     </div>
   </div>
 </div>
-<!-- ======================= End Page Title ===================== -->
 
-<!-- ======================= Search Filter ===================== -->
 {{-- <section class="padd-0 padd-top-20 jov_search_block_inner">
   <div class="row">
     <div class="container">
@@ -60,9 +58,7 @@
     </div>
   </div>
 </section> --}}
-<!-- ======================= Search Filter ===================== -->
 
-<!-- ====================== Start Job Detail 2 ================ -->
 <section class="padd-top-20 padd-bot-80">
   <div class="container">
     <div class="row">

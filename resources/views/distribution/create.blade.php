@@ -255,13 +255,12 @@
                                                 <select class="js-example-basic-single js-states form-control bg-transparent" name="status">
                                                     <option></option>
                                                     <option value="successfull">Sale Successful</option>
-                                                    <option value="awaiting">Awaiting Products(GIT)</option>
-                                                    <option value="ongoing">Engagement Ongoing</option>
-                                                    <option value="unconcluded">Unconcluded</option>
-                                                    <option value="awaiting_pay">Awaiting Payment</option>
-                                                    <option value="competitive">Asking for competitive price</option>
-                                                    <option value="pricing">Price challenge</option>
-                                                    <option value="awaiting_prod">Awaiting products</option>
+                                                    <option value="Awaiting Products(GIT)">Awaiting Products(GIT)</option>
+                                                    <option value="Engagement Ongoing">Engagement Ongoing</option>
+                                                    <option value="Unconcluded">Unconcluded</option>
+                                                    <option value="Awaiting Payment">Awaiting Payment</option>
+                                                    <option value="Asking for competitive price">Asking for competitive price</option>
+                                                    <option value="Pricing Challenge">Price challenge</option>
                                                     </select>
                                             </fieldset>
                                         </div>

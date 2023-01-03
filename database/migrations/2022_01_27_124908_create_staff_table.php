@@ -20,7 +20,9 @@ class CreateStaffTable extends Migration
             $table->string('email');
             $table->string('user_id');
             $table->string('store');
-            $table->string('unit');
+            $table->string('daily_target')->nullable();
+            $table->string('weekly_target')->nullable();
+            $table->string('monthly_target')->nullable();
             $table->timestamps();
         });
     }

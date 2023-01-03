@@ -43,6 +43,7 @@ class CustomerController extends Controller
     {
         $enquiries = Enquiry::orderBy('created_at', 'asc')->get();
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
+        //dd($enquiries);
         return view('customer.enquiries')->with('activities', $activities)
                                          ->with('enquiries', $enquiries);
     }

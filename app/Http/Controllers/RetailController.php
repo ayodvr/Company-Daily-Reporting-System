@@ -133,13 +133,15 @@ class RetailController extends Controller
 
         try {
 
-            $spreadSheet = new Spreadsheet();
+            // $spreadSheet = new Spreadsheet();
 
-            $spreadSheet->getActiveSheet()->getDefaultColumnDimension()->setWidth(20);
+            // $spreadSheet->getActiveSheet()->getDefaultColumnDimension()->setWidth(20);
 
-            $spreadSheet->getActiveSheet()->fromArray($customer_data);
+            // $spreadSheet->getActiveSheet()->fromArray($customer_data);
 
-            $Excel_writer = new Xls($spreadSheet);
+            // $Excel_writer = new Xls($spreadSheet);
+
+            $Excel_writer = $customer_data;
 
             header('Content-Type: application/vnd.ms-excel');
 
@@ -162,44 +164,102 @@ class RetailController extends Controller
 
     public function downloadExcelTemplate($report_key, $store_location)
     {
-        $sales_arr = Retail::where('today_date', $report_key)->get();
+        // $sales_arr = Retail::where('today_date', $report_key)->get();
 
-        $report_arr = [];
-        $report_key = [];
+        // $report_arr = [];
+        // $report_key = [];
 
-        foreach($sales_arr as $key => $value){
-            if(str_replace(' ','_', $value['store']) == $store_location){
-                array_push($report_arr, $value);
-                array_push($report_key, $key);
-            }
-        }
+        // foreach($sales_arr as $key => $value){
+        //     if(str_replace(' ','_', $value['store']) == $store_location){
+        //         array_push($report_arr, $value);
+        //         array_push($report_key, $key);
+        //     }
+        // }
+
+        // $total_amount = array_column($report_arr, 'amount');
+        // $t_sum = array_sum($total_amount);
+
+        // $data_array [] = array("Date","Customer Name","Phone","Email","Address","Invoice No","Sold By",
+        //                        "Product Details","Mode Of Payment","Units","Price","Total Amount","Confirmed By");
+
+        // foreach($report_arr as $data_item)
+        // {
+        //     $data_array[] = array(
+        //         'Date'             => $data_item['today_date'],
+        //         'Customer Name'    => $data_item['name'],
+        //         'Phone'            => $data_item['address'],
+        //         'Email'            => $data_item['email'],
+        //         'Address'          => $data_item['address'],
+        //         'Invoice No'       => $data_item['invoice'],
+        //         'Sold By'          => $data_item['sold_by'],
+        //         'Product Details'  => $data_item['product'],
+        //         'Mode Of Payment'  => $data_item['payment'],
+        //         'Units'            => $data_item['unit'],
+        //         'Price'            => $data_item['price'],
+        //         'Total Amount'     => $data_item['amount'],
+        //         'Confirmed By'     => $data_item['confirm']
+        //     );
+        // }
+
+        // $this->ExportExcel($data_array);
+
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
+         $disty_arr = Retail::where('today_date', $report_key)->get();
+         //dd($disty_arr);
+
+         $auth = auth()->user()->id;
+
+         $report_arr = [];
+         $report_key = [];
+
+         foreach($disty_arr as $key => $value){
+
+             if(str_replace(' ','_', $value['store']) == ($store_location)){
+                 //dd($value);
+                 array_push($report_arr, $value);
+                 array_push($report_key, $key);
+             }
+         }
+
+        //  $serial = random_int(10, 99);
+        //  $filename = 'Distribution' . '/'.'DW'.'-'. $store_location .'-'. $serial .'-'. 'distribution-report.xls';
 
         $total_amount = array_column($report_arr, 'amount');
         $t_sum = array_sum($total_amount);
 
-        $data_array [] = array("Date","Customer Name","Phone","Email","Address","Invoice No","Sold By",
-                               "Product Details","Mode Of Payment","Units","Price","Total Amount","Confirmed By");
+        $total_customers = array_column($report_arr, 'name');
+        $count = array_count_values($total_customers);
+        $t_count = (count($count));
 
-        foreach($report_arr as $data_item)
-        {
-            $data_array[] = array(
-                'Date'             => $data_item['today_date'],
-                'Customer Name'    => $data_item['name'],
-                'Phone'            => $data_item['address'],
-                'Email'            => $data_item['email'],
-                'Address'          => $data_item['address'],
-                'Invoice No'       => $data_item['invoice'],
-                'Sold By'          => $data_item['sold_by'],
-                'Product Details'  => $data_item['product'],
-                'Mode Of Payment'  => $data_item['payment'],
-                'Units'            => $data_item['unit'],
-                'Price'            => $data_item['price'],
-                'Total Amount'     => $data_item['amount'],
-                'Confirmed By'     => $data_item['confirm']
-            );
-        }
+         $total_customers = array_column($report_arr, 'name');
+         $count = array_count_values($total_customers);
+         $t_count = (count($count));
+         $temp = $store_location;
 
-        $this->ExportExcel($data_array);
+        $html = \View::make('retail.excel')->with('record_arr', $report_arr)
+                                                ->with('sales_reps', $temp)
+                                                ->with('activities', $activities)
+                                                ->with('t_sum', $t_sum)
+                                                ->with('t_count', $t_count)
+                                                ->with('bank_paid', $report_arr[0]['bank_paid'])
+                                                ->with('cash_bank', $report_arr[0]['cash_bank'])
+                                                ->with('cash_hand', $report_arr[0]['cash_hand'])
+                                                ->with('t_date', $report_arr[0]['created_at'])
+                                                ->with('amount', $report_arr[0]['amount'])
+                                                ->with('t_count', $t_count)
+                                                ->with('t_store', $report_arr[0]['store']);
+        $htmlString = $html->render();
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
+
+        $spreadsheet = $reader->loadFromString($htmlString);
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
+
+        // $writer->save($filename);
+
+        $this->ExportExcel($writer);
+
 
     }
 
@@ -298,12 +358,20 @@ class RetailController extends Controller
         $total_amount = array_column($report_arr, 'amount');
         $t_sum = array_sum($total_amount);
 
+        $total_customers = array_column($report_arr, 'name');
+        $count = array_count_values($total_customers);
+        $t_count = (count($count));
+
         $filename = 'retail-report.pdf';
 
         $mpdf = new \Mpdf\Mpdf();
 
         $html = \View::make('retail.pdf')->with('record_arr', $report_arr)
                                          ->with('t_sum', $t_sum)
+                                         ->with('t_count', $t_count)
+                                         ->with('bank_paid', $report_arr[0]['bank_paid'])
+                                         ->with('cash_bank', $report_arr[0]['cash_bank'])
+                                         ->with('cash_hand', $report_arr[0]['cash_hand'])
                                          ->with('t_date', $report_arr[0]['created_at'])
                                          ->with('t_store', $report_arr[0]['store']);
         $html = $html->render();
@@ -334,12 +402,20 @@ class RetailController extends Controller
         $total_amount = array_column($report_arr, 'amount');
         $t_sum = array_sum($total_amount);
 
+        $total_customers = array_column($report_arr, 'name');
+        $count = array_count_values($total_customers);
+        $t_count = (count($count));
+
         $filename = 'retail-report.pdf';
 
         $mpdf = new \Mpdf\Mpdf();
 
         $html = \View::make('retail.pdf')->with('record_arr', $report_arr)
                                          ->with('t_sum', $t_sum)
+                                         ->with('t_count', $t_count)
+                                         ->with('bank_paid', $report_arr[0]['bank_paid'])
+                                         ->with('cash_bank', $report_arr[0]['cash_bank'])
+                                         ->with('cash_hand', $report_arr[0]['cash_hand'])
                                          ->with('t_date', $report_arr[0]['created_at'])
                                          ->with('t_store', $report_arr[0]['store']);
         $html = $html->render();

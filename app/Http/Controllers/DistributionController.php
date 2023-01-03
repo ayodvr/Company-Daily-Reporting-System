@@ -132,7 +132,8 @@ class DistributionController extends Controller
                                                 ->with('t_sum', $t_sum)
                                                 ->with('t_count', $t_count)
                                                 ->with('t_date', $report_arr[0]['today_date'])
-                                                ->with('t_store', $report_arr[0]['store']);
+                                                ->with('t_store', $report_arr[0]['store'])
+                                                ->with('amount', $report_arr[0]['amount']);
         }else{
             notify()->error("No report found for selected date!","");
 
@@ -284,7 +285,8 @@ class DistributionController extends Controller
                                                 ->with('activities', $activities)
                                                 ->with('t_sum', $t_sum)
                                                 ->with('t_date', $report_arr[0]['created_at'])
-                                                ->with('t_count', $t_count);
+                                                ->with('t_count', $t_count)
+                                                ->with('amount', $report_arr[0]['amount']);
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
@@ -332,7 +334,8 @@ class DistributionController extends Controller
                                                 ->with('activities', $activities)
                                                 ->with('t_sum', $t_sum)
                                                 ->with('t_date', $report_arr[0]['created_at'])
-                                                ->with('t_count', $t_count);
+                                                ->with('t_count', $t_count)
+                                                ->with('amount', $report_arr[0]['amount']);
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
@@ -350,7 +353,6 @@ class DistributionController extends Controller
             'email'     => $request->get('email'),
             'subject'   => $request->get('subject'),
             'body'      => $request->get('body'),
-            'files'     => $this->ExcelTemplate($report_key, $store_location)
         ];
 
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
@@ -383,7 +385,8 @@ class DistributionController extends Controller
                                                 ->with('activities', $activities)
                                                 ->with('t_sum', $t_sum)
                                                 ->with('t_date', $report_arr[0]['created_at'])
-                                                ->with('t_count', $t_count);
+                                                ->with('t_count', $t_count)
+                                                ->with('amount', $report_arr[0]['amount']);
         $html = $html->render();
 
         $mpdf->setFooter('Dreamworks Integrated Systems');
@@ -392,19 +395,15 @@ class DistributionController extends Controller
         $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output('Distributions'.'/'.$filename,'F');
 
-        $excel = $this->ExcelTemplate($report_key, $store_location);
-        dd($excel);
-
         $file = public_path().'/'.'Distributions'.'/' . $filename;
 
         \Mail::send('emails.sendReport',array(
             'body' => $data['body']
-        ),function($message) use ($data, $file, $excel) {
+        ),function($message) use ($data, $file) {
             foreach($data['email'] as $email){
                 $message->to($email)
                     ->subject($data["subject"])
-                    ->attach($file)
-                    ->attach($excel);
+                    ->attach($file);
             }
         });
 
@@ -442,60 +441,6 @@ class DistributionController extends Controller
         }
     }
 
-    public function ExcelTemplate($report_key, $store_location)
-    {
-        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
-         $disty_arr = Distribution::where('today_date', $report_key)->get();
-         //dd($disty_arr);
-
-         $auth = auth()->user()->id;
-
-         $report_arr = [];
-         $report_key = [];
-
-         foreach($disty_arr as $key => $value){
-
-             if(str_replace(' ','_', $value['sold_by']) == ($store_location)){
-                 //dd($value);
-                 array_push($report_arr, $value);
-                 array_push($report_key, $key);
-             }
-         }
-
-         $serial = random_int(10, 99);
-         $filename = 'FIle' . '/'.'DW'.'-'. $store_location .'-'. $serial .'-'. 'distribution-report.xls';
-
-         $total_amount = array_column($report_arr, 'amount');
-         $t_sum = array_sum($total_amount);
-
-         $total_customers = array_column($report_arr, 'name');
-         $count = array_count_values($total_customers);
-         $t_count = (count($count));
-         $temp = $store_location;
-
-        $html = \View::make('distribution.excel')->with('record_arr', $report_arr)
-                                                ->with('sales_reps', $temp)
-                                                ->with('activities', $activities)
-                                                ->with('t_sum', $t_sum)
-                                                // ->with('t_date', $report_arr[0]['created_at'])
-                                                ->with('t_count', $t_count);
-        $htmlString = $html->render();
-
-        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
-
-        $spreadsheet = $reader->loadFromString($htmlString);
-
-        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
-
-        $writer->save($filename);
-
-        $file = public_path().'/'.'Distributions'.'/' . $filename;
-
-        return $file;
-
-    }
-
-
     public function downloadExcelTemplate($report_key, $store_location)
     {
         $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
@@ -532,6 +477,7 @@ class DistributionController extends Controller
                                                 ->with('activities', $activities)
                                                 ->with('t_sum', $t_sum)
                                                 ->with('t_date', $report_arr[0]['created_at'])
+                                                ->with('amount', $report_arr[0]['amount'])
                                                 ->with('t_count', $t_count);
         $htmlString = $html->render();
 

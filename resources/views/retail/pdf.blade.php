@@ -50,6 +50,7 @@
                     <br>
                     <div class="order-summary">
                         <div class="table-responsive">
+                          @if (!empty($record_arr))
                             @foreach ($record_arr as $date => $report)
                             {{-- <h4 class="text-4 mt-2"> <span>Sale: {{ $report['store_serial'] }}</span></h4> --}}
                             <h4 class="text-4 mt-2"> <span>Sale: {{ $loop->iteration }}</span></h4>
@@ -96,6 +97,68 @@
                                   </tbody>
                             </table>
                             @endforeach
+                            @endif
+                            {{-- <br>
+                            <h5>Accounts Analysis:</h5>
+                          <table class="table invoice-table">
+                              <tr>
+                                  <td style="font-family: sans-serif">Number of walking customer</td>
+                                  <td style="font-family: sans-serif">{{ $t_count }}</td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif">S/N</td>
+                                  <td style="font-family: sans-serif">Cash paid in bank analysis(PLEASE STATE BANK MONEY WAS PAID INTO WITH ATTACHMENT OF PAYMENT SLIP)</td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif">Amount</td>
+                              </tr>
+                              <tr>
+                                  <td style="font-family: sans-serif">Cash at hand</td>
+                                  <td style="font-family: sans-serif"><span style="color: #000">&#x20A6;</span><b>@money($cash_hand)</b></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif">{{ $bank_paid }}</td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"><span style="color: #000">&#x20A6;</span><b>@money($cash_bank)</b></td>
+                              </tr>
+                              <tr>
+                                  <td style="font-family: sans-serif">Amount paid in bank</td>
+                                  <td style="font-family: sans-serif"><span style="color: #000">&#x20A6;</span><b>@money($cash_bank)</b></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"></td>
+                                  <td style="font-family: sans-serif"></td>
+                              </tr>
+                          </table> --}}
+                          <h5>Inventory Analysis:</h5>
+                          <table class="table invoice-table">
+                              <thead class="bg-active">
+                                  <tr>
+                                      <th style="font-family: sans-serif">S/N</th>
+                                      <th style="font-family: sans-serif">Product Details</th>
+                                      <th style="font-family: sans-serif">Qty Sold</th>
+                                      <th style="font-family: sans-serif">Serial Number</th>
+                                      <th style="font-family: sans-serif">SYS QTY</th>
+                                      <th style="font-family: sans-serif">PHY QTY</th>
+                                      {{-- <th style="font-family: sans-serif">Variance</th> --}}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($record_arr as $date => $report)
+                                <tr>
+                                  <td style="font-family: sans-serif">{{ $loop->iteration }}</td>
+                                  <td style="font-family: sans-serif">{{ $report['name']}}</td>
+                                  <td style="font-family: sans-serif">{{ $report['unit']}}</td>
+                                  <td style="font-family: sans-serif">{{ $report['serial_no']}}</td>
+                                  <td style="font-family: sans-serif">{{ $report['sys_qty']}}</td>
+                                  <td style="font-family: sans-serif">{{ $report['phy_qty']}}</td>
+                                  {{-- <td style="font-family: sans-serif">{{ $report['sys_qty']}}</td> --}}
+                                </tr>
+                                @endforeach
+                                </tbody>
+                          </table>
                         </div>
                     </div>
                 </div>

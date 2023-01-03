@@ -13,9 +13,9 @@
                 <td>68,181,816.00</td>
                 <td>250,000,000.00</td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <td>Achievement</td>
-                <td></td>
+                <td>@money($amount)</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -24,7 +24,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-            </tr>
+            </tr> --}}
         </table>
         <h5>CLosed Transactions</h5>
         <table>

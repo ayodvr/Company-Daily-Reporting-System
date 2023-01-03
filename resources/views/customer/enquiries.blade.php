@@ -63,8 +63,8 @@
                                 <td>{{ $enquiry->customer_name }}</td>
                                 <td>{{ $enquiry->customer_phone }}</td>
                                 <td>{{ $enquiry->customer_email }}</td>
-                                <td>{{ $enquiry->product_detail }}</td>
-                                <td>{{ $enquiry->status }}</td>
+                                <td>{{ $enquiry->Product_detail }}</td>
+                                <td>{{ $enquiry->customer_status }}</td>
                                 <td>{{ $enquiry->sales_unit }}</td>
                                 <td>{{ $enquiry['created_at']->toFormattedDateString() }}</td>
                               </tr>

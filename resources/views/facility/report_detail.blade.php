@@ -6,7 +6,7 @@
       <br>
       <div class="section-body">
         <div class="row">
-              <div class="col-xl-5 col-lg-6">
+              <div class="col-xl-4 col-lg-6">
                 <div class="card">
                     <div class="card-body card-type-3">
                     <div class="row">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-              <div class="col-xl-7 col-lg-4">
+              <div class="col-xl-8 col-lg-4">
                 <div class="card">
                   <div class="card-body card-type-3">
                     {{-- <div class="row">

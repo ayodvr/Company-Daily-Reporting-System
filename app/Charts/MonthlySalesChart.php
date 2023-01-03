@@ -25,7 +25,7 @@ class MonthlySalesChart
             ->orderBy('created_at', 'asc')
             ->groupBy('month_name')
             ->get();
-        //dd($visitors);
+        // dd($visitors);
         $total_amt_arr = [];
         $month_arr = [];
 
@@ -36,7 +36,7 @@ class MonthlySalesChart
             }
         }
 
-        //dd($month_arr);
+        //($total_amt_arr);
         return $this->chart->areaChart()
         // ->setTitle('Monthly Sales Chart')
         // ->setSubtitle('Monthly Sales')

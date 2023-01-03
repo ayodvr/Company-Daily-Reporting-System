@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/dropzonejs/dropzone.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/prism/prism.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/select2/dist/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/jquery-selectric/selectric.css') }}">
@@ -161,6 +162,8 @@
   <script src="{{ asset('assets/bundles/jquery-ui/jquery-ui.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/prism/prism.js') }}"></script>
   <script src="{{ asset('assets/js/page/advance-table.js') }}"></script>
+  <script src="{{ asset('assets/bundles/dropzonejs/min/dropzone.min.js') }}"></script>
+  <script src="{{ asset('assets/js/page/multiple-upload.js') }}"></script>
   <script src="{{ asset('assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/jquery-selectric/jquery.selectric.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>

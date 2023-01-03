@@ -138,6 +138,15 @@ class StaffController extends Controller
         //
     }
 
+    public function staff_profile()
+    {
+        $auth = auth()->user()->id;
+        $activities =  Activity::orderBy('created_at','DESC')->take(5)->get();
+        $staff = Staff::where('user_id',$auth)->first();
+        return view('staffs.settings')->with('staff', $staff)
+                                      ->with('activities', $activities);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -147,7 +156,41 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         //dd($request->all());
+
+         $request->validate([
+            'fullname'       => 'required',
+            'email'          => 'nullable',
+            'store'          => 'nullable',
+            'user_id'        => 'nullable',
+            'phone'          => 'nullable',
+            'unit'           => 'nullable',
+            'daily_target'   => 'nullable',
+            'weekly_target'  => 'nullable',
+            'monthly_target' => 'nullable'
+        ]);
+
+        $staff                         = Retail::find($id);
+        $staff->fullname               = $request->fullname;
+        $staff->email                  = $request->email;
+        $staff->store                  = $request->store;
+        $staff->user_id                = $staff['id'];
+        $staff->phone                  = $request->phone;
+        $staff->unit                   = $request->unit;
+        $staff->daily_target           = $request->daily_target;
+        $staff->weekly_target          = $request->weekly_target;
+        $staff->monthly_target         = $request->monthly_target;
+
+        if($staff->save()){
+
+            notify()->success("Profile Updated!","Success");
+
+        }else{
+
+            notify()->error("There was a problem updating your Profile!","Error");
+        }
+
+        return redirect()->back();
     }
 
     /**

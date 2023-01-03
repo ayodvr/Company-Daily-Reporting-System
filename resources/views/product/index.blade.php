@@ -47,9 +47,9 @@
                                     <th>ITEM CODE</th>
                                     <th>PRODUCT NAME</th>
                                     <th>PART NUMBER</th>
-                                    <th>PRODUCT QUANTITY</th>
-                                    <th>DISTRIBUTION PRICE</th>
                                     <th>RETAIL PRICE</th>
+                                    <th>PRODUCT QUANTITY</th>
+                                    {{-- <th>DISTRIBUTION PRICE</th> --}}
                                     </tr>
                                 </thead>
                                 @if (isset($all_products))
@@ -59,9 +59,9 @@
                                     <td>{{ $product->ITEM_CODE }}</td>
                                     <td>{{ $product->PRODUCT_NAME }}</td>
                                     <td>{{ $product->PART_NUMBER }}</td>
-                                    <td>{{ $product->Product_Quantity }}</td>
-                                    <td>{{ $product->DISTRIBUTION_PRICE }}</td>
                                     <td>{{ $product->RETAIL_PRICE }}</td>
+                                    <td>{{ $product->Product_Quantity }}</td>
+                                    {{-- <td>{{ $product->DISTRIBUTION_PRICE }}</td> --}}
                                   </tr>
                                 @endforeach
                                 @endif
