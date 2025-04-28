@@ -23,35 +23,10 @@ class StudentRegisterController extends Controller
     {
         $activities =  Activity::orderBy('created_at','DESC')->take(6)->get();
         $students = StudentRegister::orderBy('id','desc')->paginate(5);
-        // $products = Product::orderBy('id', 'asc')->paginate(20)->toArray();
-        // dd($products);
-
-        // $inventories = [];
-        // foreach($products as $key => $value){
-        //     if($key == 'data'){
-        //         foreach($value as $try => $catch){
-        //             array_push($inventories, $catch);
-        //         };
-        //     }
-        // }
-
-        // $products = $this->paginate($products, 2);
-        // $products->path('');
-
         //dd($products);
         return view('student.index')->with('students', $students)
                                     ->with('activities', $activities);
     }
-
-    // public function paginate($items, $perPage = 4, $page = null)
-    // {
-    //     $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-    //     $total = count($items);
-    //     $currentpage = $page;
-    //     $offset = ($currentpage * $perPage) - $perPage ;
-    //     $itemstoshow = array_slice($items , $offset , $perPage);
-    //     return new LengthAwarePaginator($itemstoshow ,$total ,$perPage);
-    // }
 
     /**
      * Show the form for creating a new resource.

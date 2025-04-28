@@ -162,7 +162,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
-        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
 
         /*

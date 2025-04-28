@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -10,7 +13,6 @@
         "arielmejiadev/larapex-charts": "^2.1",
         "aws/aws-sdk-php": "^3.220",
         "barryvdh/laravel-snappy": "^1.0",
-        "carlos-meneses/laravel-mpdf": "^2.1",
         "codexshaper/laravel-woocommerce": "^3.0",
         "fruitcake/laravel-cors": "^2.0",
         "google/apiclient": "^2.0",
@@ -25,7 +27,6 @@
         "laravelcollective/html": "^6.3",
         "livewire/livewire": "^2.10",
         "maatwebsite/excel": "^3.1",
-        "mpdf/mpdf": "^8.1",
         "nesbot/carbon": "^2.58",
         "phpoffice/phpspreadsheet": "^1.21",
         "santigarcor/laratrust": "^6.3",
